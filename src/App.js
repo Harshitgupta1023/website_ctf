@@ -1,7 +1,7 @@
 import "./App.css";
 
 function App() {
-    return <div className="App">Simple Page</div>;
+    return <div className="App">Dummy Text</div>;
 }
 
 export default App;
