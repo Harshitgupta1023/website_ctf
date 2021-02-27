@@ -6,8 +6,8 @@ import Reverseengineering from "../pages/Reverseengineering";
 import Binaryexploitation from "../pages/Binaryexploitation";
 
 export const colors = {
-  backgroundPrimary: "#252525",
-  backgroundSecondary: "#592f9e",
+  backgroundPrimary: "#2d5986",
+  backgroundSecondary: "#61d3ed",
   purple: "#27234b",
 };
 

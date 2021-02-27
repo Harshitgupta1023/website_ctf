@@ -1,10 +1,10 @@
 :root {
   --temp: #80ffdb;
   --temp2: #64dfdf;
-  --violet-secondary: #7a24bf;
+  --violet-secondary: #2668bec5;
   --text-primary: #fff;
   --text-secondary: #777;
-  --background-dark: #252525;
+  --background-dark: #cee9ee;
   --background: #27234b;
   --secondary: #592f9e;
 }
@@ -38,8 +38,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--violet-secondary);
+  /* background: var(--violet-secondary); */
   padding: 5px 1rem;
+  background: #2193b0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #6dd5ed,
+    #2193b0
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #6dd5ed,
+    #2193b0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #app-logo {
