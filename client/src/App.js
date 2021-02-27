@@ -1,34 +1,32 @@
 import "./App.css";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
-import TopicsSection from "./layout/TopicsSection";
-import Navbar from "./layout/Navbar";
-
-const theme = createMuiTheme({
-    palette: {
-        type: "dark",
-        primary: {
-            dark: "#7a24bf",
-            light: "#a52ed9",
-            // main: "#a808bd",
-            main: "#fff",
-        },
-        background: {
-            default: "#252525",
-            paper: "#7a24bf",
-        },
-    },
-});
+import { sectionData } from "../src/data/constants";
 
 function App() {
-    return (
-        <MuiThemeProvider theme={theme}>
-            <div className="App">
-                <Navbar />
-                <TopicsSection />
-            </div>
-        </MuiThemeProvider>
-    );
+  return (
+    <div className="App">
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+
+            {sectionData.map((data) => {
+              return (
+                <Route
+                  exact
+                  key={data.id}
+                  path={data.link}
+                  component={data.pagename}
+                />
+              );
+            })}
+          </Switch>
+        </div>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
