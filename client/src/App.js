@@ -11,7 +11,6 @@ function App() {
         <div>
           <Switch>
             <Route exact path="/" component={Home} />
-
             {sectionData.map((data) => {
               return (
                 <Route
