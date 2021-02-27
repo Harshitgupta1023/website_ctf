@@ -7,49 +7,48 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
+import { Link } from "react-router-dom";
 const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
-    },
-    media: {
-        height: 140,
-    },
+  root: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  },
 });
 
 export default function SectionCard(props) {
-    const classes = useStyles();
-    const { image, title, details } = props;
-    return (
-        <Card className={classes.root}>
-            <CardActionArea>
-                <CardMedia
-                    className={classes.media}
-                    image={require(`../media/${image}`).default}
-                    title={title}
-                    style={{ height: "200px" }}
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {title}
-                    </Typography>
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        {details}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                    Share
-                </Button>
-                <Button size="small" color="primary">
-                    Learn More
-                </Button>
-            </CardActions>
-        </Card>
-    );
+  const classes = useStyles();
+  const { image, title, details, link } = props;
+  return (
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image={require(`../media/${image}`).default}
+          title={title}
+          style={{ height: "200px" }}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {title}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {details}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="large" color="primary">
+          Share
+        </Button>
+
+        <Link style={{ textDecoration: "none" }} to={link}>
+          <Button size="large" color="primary">
+            Questions
+          </Button>
+        </Link>
+      </CardActions>
+    </Card>
+  );
 }
