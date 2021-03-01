@@ -6,7 +6,9 @@ module.exports = {
       try {
         return await Problem.find().exec();
       } catch (err) {
-        throw new Error(err);
+        const error = new Error(err);
+        error.message = "Could not find problem";
+        throw error;
       }
     },
     getProblem: async (root, args, context, info) => {
@@ -17,7 +19,9 @@ module.exports = {
         }
         return await Problem.findById(id).exec();
       } catch (err) {
-        throw new Error(err);
+        const error = new Error(err);
+        error.message = "Could not find problem";
+        throw error;
       }
     },
   },

@@ -1,9 +1,14 @@
 const Problem = require("../../../models/Problem");
+const ProblemValidator = require("../../validators/problemValidators");
 
 module.exports = {
   Mutation: {
     createProblem: async (root, args, context, info) => {
       try {
+        const validationResponse = await ProblemValidator.validate(args);
+        if (validationResponse.error) {
+          throw validationResponse.error;
+        }
         const question = new Problem(args);
         return await question.save();
       } catch (err) {
@@ -13,29 +18,47 @@ module.exports = {
     updateProblem: async (root, args, context, info) => {
       try {
         let { id, title, statement, solution, points, category, hints } = args;
-        if (Problem.findById(id)) {
+        const oldData = (await Problem.findById(id)).toJSON();
+        if (oldData) {
           let data = {};
           if (title) {
             data["title"] = title;
+          } else {
+            data["title"] = oldData["title"];
           }
           if (statement) {
             data["statement"] = statement;
+          } else {
+            data["statement"] = oldData["statement"];
           }
           if (solution) {
             data["solution"] = solution;
+          } else {
+            data["solution"] = oldData["solution"];
           }
           if (points) {
             data["points"] = points;
+          } else {
+            data["points"] = oldData["points"];
           }
           if (category) {
             data["category"] = category;
+          } else {
+            data["category"] = ["category"];
           }
           if (hints) {
             data["hints"] = hints;
+          } else {
+            data["hints"] = oldData["hints"];
           }
-          return await Problem.findByIdAndUpdate(id, { $set: data });
+          const validationResponse = await ProblemValidator.validate(data);
+          if (validationResponse.error) {
+            throw validationResponse.error;
+          }
+          await Problem.findByIdAndUpdate(id, { $set: data });
+          return await Problem.findById(id);
         } else {
-          throw new error("Error 404! Not Found");
+          throw new error("Not Found");
         }
       } catch {
         throw new Error(err);
