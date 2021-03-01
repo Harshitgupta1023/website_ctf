@@ -1,4 +1,5 @@
-SeekhoCTF
-Under Development
+# SeekhoCTF
 
-CTF Website for IIT Jodhpurs
+_Under Development_
+
+CTF Website for IIT Jodhpur
