@@ -1,72 +1,68 @@
-import Crypto from "../pages/Crypto";
-import Forensic from "../pages/Forensic";
-import Webexploitation from "../pages/Webexploitation";
-import Generalskill from "../pages/Generalskill";
-import Reverseengineering from "../pages/Reverseengineering";
-import Binaryexploitation from "../pages/Binaryexploitation";
-
 export const colors = {
-  backgroundPrimary: "#2d5986",
-  backgroundSecondary: "#61d3ed",
-  purple: "#27234b",
+    random: "#2d5986",
+    backgroundSecondary: "#61d3ed",
+    backgroundPrimary: "#E94B3CFF",
+    primaryDark: "#27234b",
+    secondaryDark: "#2D2926FF",
+    purple: "#7303fc",
+    primaryTertiary: "#80b3ff",
+    textPrimary: "#fff",
 };
 
 export const sectionData = [
-  {
-    id: 1,
-    pagename: Generalskill,
-    title: "General Skills",
-    image: "general-skills.jpg",
-    link: "/generalskill",
-    details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
-  },
-  {
-    id: 2,
+    {
+        id: 1,
+        category: "general-skills",
+        title: "General Skills",
+        image: "general-skills.jpg",
+        link: "/general-skills",
+        details:
+            "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+    },
+    {
+        id: 2,
+        category: "crypto",
+        title: "Cryptography",
+        image: "crypto-logo.jpg",
+        link: "/cryptography",
 
-    pagename: Crypto,
-    title: "Cryptography",
-    image: "crypto-logo.jpg",
-    link: "/crypto",
-
-    details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
-  },
-  {
-    id: 3,
-
-    pagename: Webexploitation,
-    title: "Web Exploitation",
-    image: "web-exploitation.jpg",
-    link: "/webexploitation",
-    details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
-  },
-  {
-    id: 4,
-    pagename: Binaryexploitation,
-    title: "Binary Exploitation",
-    image: "binary-exploitation.jpg",
-    link: "/binaryexploitation",
-    details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
-  },
-  {
-    id: 5,
-    pagename: Forensic,
-    title: "Forensics",
-    image: "forensics.jpg",
-    link: "/forensic",
-    details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
-  },
-  {
-    id: 6,
-    pagename: Reverseengineering,
-    title: "Reverse Engineering",
-    image: "reverse-engineering.jpg",
-    link: "/reverseengineering",
-    details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
-  },
+        details:
+            "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+    },
+    {
+        id: 3,
+        category: "web-exploitation",
+        title: "Web Exploitation",
+        image: "web-exploitation.jpg",
+        link: "/web-exploitation",
+        details:
+            "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+    },
+    {
+        id: 4,
+        category: "binary-exploitation",
+        title: "Binary Exploitation",
+        image: "binary-exploitation.jpg",
+        link: "/binary-exploitation",
+        details:
+            "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+    },
+    {
+        id: 5,
+        category: "forensics",
+        title: "Forensics",
+        image: "forensics.jpg",
+        link: "/forensics",
+        details:
+            "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+    },
+    {
+        id: 6,
+        category: "reverse-engineering",
+        title: "Reverse Engineering",
+        image: "reverse-engineering.jpg",
+        link: "/reverse-engineering",
+        details:
+            "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+    },
 ];
