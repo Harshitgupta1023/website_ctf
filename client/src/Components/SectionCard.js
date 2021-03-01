@@ -7,19 +7,26 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 345,
+        maxWidth: 370,
+        marginBottom: 80,
+        opacity: 0.8,
+        "&:hover": {
+            opacity: 1,
+        },
     },
+
     media: {
-        height: 140,
+        height: 100,
     },
 });
 
 export default function SectionCard(props) {
     const classes = useStyles();
-    const { image, title, details } = props;
+    const { image, title, details, link } = props;
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -43,12 +50,15 @@ export default function SectionCard(props) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
+                <Button size="large" color="primary">
                     Share
                 </Button>
-                <Button size="small" color="primary">
-                    Learn More
-                </Button>
+
+                <Link style={{ textDecoration: "none" }} to={link}>
+                    <Button size="large" color="primary">
+                        Practice
+                    </Button>
+                </Link>
             </CardActions>
         </Card>
     );

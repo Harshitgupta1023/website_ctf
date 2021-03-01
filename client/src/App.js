@@ -1,21 +1,24 @@
 import "./App.css";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import BackgroundVideo from "./layout/BackgroundVideo";
+import ProblemsPage from "./pages/ProblemsPage";
 
-import TopicsSection from "./layout/TopicsSection";
-import Navbar from "./layout/Navbar";
+import { colors } from "./data/constants";
+import { sectionData } from "./data/constants";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 
 const theme = createMuiTheme({
     palette: {
         type: "dark",
         primary: {
-            dark: "#7a24bf",
-            light: "#a52ed9",
-            // main: "#a808bd",
-            main: "#fff",
+            dark: colors.primaryDark,
+            light: colors.purple,
+            main: colors.textPrimary,
         },
         background: {
-            default: "#252525",
-            paper: "#7a24bf",
+            default: colors.backgroundSecondary,
+            paper: colors.backgroundPrimary,
         },
     },
 });
@@ -24,8 +27,26 @@ function App() {
     return (
         <MuiThemeProvider theme={theme}>
             <div className="App">
-                <Navbar />
-                <TopicsSection />
+                <BackgroundVideo />
+                <Router>
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        {sectionData.map((data) => {
+                            return (
+                                <Route
+                                    exact
+                                    key={data.id}
+                                    path={data.link}
+                                    component={() => (
+                                        <ProblemsPage
+                                            category={data.category}
+                                        />
+                                    )}
+                                />
+                            );
+                        })}
+                    </Switch>
+                </Router>
             </div>
         </MuiThemeProvider>
     );

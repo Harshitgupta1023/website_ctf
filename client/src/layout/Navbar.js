@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -18,7 +19,9 @@ export default function Navbar() {
     return (
         <div className="header">
             {/* <Navbar /> */}
-            <h1 className="header_heading">SeekhoCTF</h1>
+            <Link to="/" className="header_heading links">
+                SeekhoCTF
+            </Link>
             <IconButton aria-label="notifications" className="header_notif">
                 <Badge badgeContent={4} color="secondary">
                     <NotificationsIcon fontSize="large" />
