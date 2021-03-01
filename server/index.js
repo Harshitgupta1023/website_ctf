@@ -19,3 +19,5 @@ mongoose
     console.log(`Server is ready at : ${url}`);
   })
   .catch((err) => console.log(err));
+
+mongoose.set("useFindAndModify", false);
