@@ -11,133 +11,117 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-
+import { Link } from "react-router-dom";
+import { sectionData } from "../data/constants";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: "flex",
+  root: {
+    display: "flex",
+  },
+  paper: {
+    position: "absolute",
+    marginTop: "40px",
+    height: "450px",
+    overflowX: "hidden",
+    borderRadius: "10px",
+  },
+  menuButton: {
+    marginRight: 36,
+  },
+  hide: {
+    display: "none",
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: "nowrap",
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: "hidden",
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing(9) + 1,
     },
-    paper: {
-        position: "absolute",
-        marginTop: "40px",
-        height: "450px",
-        overflowX: "hidden",
-        borderRadius: "10px",
-    },
-    menuButton: {
-        marginRight: 36,
-    },
-    hide: {
-        display: "none",
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-        whiteSpace: "nowrap",
-    },
-    drawerOpen: {
-        width: drawerWidth,
-        transition: theme.transitions.create("width", {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    drawerClose: {
-        transition: theme.transitions.create("width", {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        overflowX: "hidden",
-        width: theme.spacing(7) + 1,
-        [theme.breakpoints.up("sm")]: {
-            width: theme.spacing(9) + 1,
-        },
-    },
-    toolbar: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-    },
+  },
+  toolbar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
 }));
 
 export default function MiniDrawer() {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
 
-    // const handleDrawerSlide = () => {
-    //     setOpen((oldOpenState) => !oldOpenState);
-    // };
-
-    return (
-        <div
-            className={classes.root}
-            style={{ position: "relative" }}
-            onMouseOver={() => setOpen(true)}
-            onMouseOut={() => setOpen(false)}
-        >
-            <Drawer
-                variant="permanent"
-                className={clsx(classes.drawer, {
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open,
-                })}
-                classes={{
-                    paper: clsx({
-                        [classes.drawerOpen]: open,
-                        [classes.drawerClose]: !open,
-                        [classes.paper]: true,
-                    }),
-                }}
-            >
-                <div className={classes.toolbar}>
-                    <h3 style={!open ? { display: "none" } : {}}>Categories</h3>
-                </div>
-                <Divider />
-                <List>
-                    {[
-                        "General Skills",
-                        "Cryptography",
-                        "Web Exploitation",
-                        "Binary Exploitation",
-                        "Forensics",
-                        "Reverse Engineering",
-                    ].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <div className={classes.toolbar}>
-                    <h3 style={!open ? { display: "none" } : {}}>
-                        Back to Home
-                    </h3>
-                    <IconButton>
-                        <ArrowBackIcon />
-                    </IconButton>
-                </div>
-                {/* <List>
-                    {["All mail", "Trash", "Spam"].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List> */}
-            </Drawer>
+  return (
+    <div
+      className={classes.root}
+      style={{ position: "relative" }}
+      onMouseOver={() => setOpen(true)}
+      onMouseOut={() => setOpen(false)}
+    >
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+            [classes.paper]: true,
+          }),
+        }}
+      >
+        <div className={classes.toolbar}>
+          <h3 style={!open ? { display: "none" } : {}}>Categories</h3>
         </div>
-    );
+        <Divider />
+        <List>
+          {sectionData.map((data) => (
+            <ListItem button key={data.id}>
+              <ListItemIcon>
+                {data.id % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <Link to={data.link} className="links">
+                <ListItemText primary={data.title} />
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <div className={classes.toolbar}>
+          <Link to="/" className="links">
+            <h3 style={!open ? { display: "none" } : {}}>Back to Home</h3>
+          </Link>
+          <Link to="/" className="links">
+            <IconButton>
+              <ArrowBackIcon />
+            </IconButton>
+          </Link>
+        </div>
+      </Drawer>
+    </div>
+  );
 }

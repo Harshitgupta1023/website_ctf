@@ -7,11 +7,15 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
+import Grow from "@material-ui/core/Grow";
 
 const useStyles = makeStyles({
   root: {
     width: 300,
     minWidth: 250,
+    opacity: 0.8,
+    transitionProperty: "width",
+    "&:hover": { width: 300, opacity: 1, transform: "scale3d(1.1, 1.1, 1.1)" },
   },
   title: {
     fontSize: 14,
@@ -36,34 +40,42 @@ const useStyles = makeStyles({
 
 export default function QuestionCard(props) {
   const classes = useStyles();
+  const [checked, setChecked] = React.useState(true);
+
   return (
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <div style={{ display: "inline-block" }}>
-          <Typography
-            className={classes.questiontitle}
-            variant="body2"
-            component="p"
-          >
-            {props.title}
+    <Grow
+      in={checked}
+      style={{ transformOrigin: "0 0 0" }}
+      {...(checked ? { timeout: 1500 } : {})}
+    >
+      <Card className={classes.root} variant="outlined">
+        <CardContent>
+          <div style={{ display: "inline-block" }}>
+            <Typography
+              className={classes.questiontitle}
+              variant="body2"
+              component="p"
+            >
+              {props.title}
+            </Typography>
+            <Chip className={classes.pointss} label={props.points} />
+          </div>
+          <Typography className={classes.pos} color="textSecondary">
+            {props.category}
           </Typography>
-          <Chip className={classes.pointss} label={props.points} />
-        </div>
-        <Typography className={classes.pos} color="textSecondary">
-          {props.category}
-        </Typography>
-        <Typography variant="body2" component="p">
-          {props.statement}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <form className={classes.textfield} noValidate autoComplete="off">
-          <TextField id="filled-basic" label="Answer" variant="filled" />
-        </form>
-        <Button style={{ marginLeft: 100 }} variant="contained">
-          Submit
-        </Button>
-      </CardActions>
-    </Card>
+          <Typography variant="body2" component="p">
+            {props.statement}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <form className={classes.textfield} noValidate autoComplete="off">
+            <TextField id="filled-basic" label="Answer" variant="filled" />
+          </form>
+          <Button style={{ marginLeft: 100 }} variant="contained">
+            Submit
+          </Button>
+        </CardActions>
+      </Card>
+    </Grow>
   );
 }
