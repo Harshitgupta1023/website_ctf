@@ -11,6 +11,15 @@ const PORT = process.env.PORT || 5000;
 
 const server = new ApolloServer({ typeDefs: [problem], resolvers });
 const app = express();
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 app.use("/uploads", express.static(__dirname));
 app.use("/fileUpload", REST_Routes);
 server.applyMiddleware({ app });
