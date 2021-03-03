@@ -6,6 +6,7 @@ module.exports = gql`
     title: String!
     statement: String!
     solution: String!
+    fileURL: String
     points: Int!
     hints: [String]
     category: [String]!

@@ -10,6 +10,7 @@ const problemSchema = new Schema(
       type: String,
       required: true,
     },
+    fileURL: String,
     solution: {
       type: String,
       required: true,
