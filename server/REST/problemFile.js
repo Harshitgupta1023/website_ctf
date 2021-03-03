@@ -45,7 +45,7 @@ router.post("/", upload.single("problemFile"), (req, res, next) => {
         .then((result) => {
           res.status(201).json({
             message: "File Uploaded Successfully",
-            fileURL: `localhost:5000/upload/${result.fileURL}`,
+            result,
           });
         })
         .catch((err) => {
