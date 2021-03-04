@@ -26,6 +26,7 @@ module.exports = gql`
       points: Int!
       hints: [String]
       category: [String]!
+      file: Upload
     ): Problem
     deleteProblem(id: ID!): Problem
     updateProblem(
@@ -36,6 +37,7 @@ module.exports = gql`
       points: Int
       hints: [String]
       category: [String]
+      file: Upload
     ): Problem
   }
 `;

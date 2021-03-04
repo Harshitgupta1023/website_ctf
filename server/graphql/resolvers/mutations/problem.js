@@ -1,15 +1,57 @@
 const Problem = require("../../../models/Problem");
 const ProblemValidator = require("../../validators/problemValidators");
+const path = require("path");
+const fs = require("fs");
+
+function generateRandomString(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 module.exports = {
   Mutation: {
     createProblem: async (root, args, context, info) => {
       try {
-        const validationResponse = await ProblemValidator.validate(args);
+        let {
+          file,
+          title,
+          statement,
+          solution,
+          points,
+          category,
+          hints,
+        } = args;
+        let data = {
+          title: title,
+          statement: statement,
+          solution: solution,
+          points: points,
+          category: category,
+          hints: hints,
+        };
+        const validationResponse = await ProblemValidator.validate(data);
         if (validationResponse.error) {
           throw validationResponse.error;
         }
-        const question = new Problem(args);
+        if (file) {
+          const { createReadStream, filename } = await file;
+          const { ext } = path.parse(filename);
+          const randomName = generateRandomString(12) + ext;
+          const stream = createReadStream();
+          const pathName = path.join(
+            __dirname,
+            `../../../static/problemFiles/${randomName}`
+          );
+          await stream.pipe(fs.createWriteStream(pathName));
+          data["fileURL"] = "static/problemFiles/" + randomName;
+        }
+        const question = new Problem(data);
         return await question.save();
       } catch (err) {
         throw new Error(err);
@@ -17,7 +59,16 @@ module.exports = {
     },
     updateProblem: async (root, args, context, info) => {
       try {
-        let { id, title, statement, solution, points, category, hints } = args;
+        let {
+          id,
+          title,
+          statement,
+          solution,
+          points,
+          category,
+          hints,
+          file,
+        } = args;
         const oldData = (await Problem.findById(id)).toJSON();
         if (oldData) {
           let data = {};
@@ -55,6 +106,21 @@ module.exports = {
           if (validationResponse.error) {
             throw validationResponse.error;
           }
+          if (file) {
+            if (oldData["fileURL"]) {
+              await removeFile(oldData["fileURL"]);
+            }
+            const { createReadStream, filename } = await file;
+            const { ext } = path.parse(filename);
+            const randomName = generateRandomString(12) + ext;
+            const stream = createReadStream();
+            const pathName = path.join(
+              __dirname,
+              `../../../static/problemFiles/${randomName}`
+            );
+            await stream.pipe(fs.createWriteStream(pathName));
+            data["fileURL"] = "static/problemFiles/" + randomName;
+          }
           await Problem.findByIdAndUpdate(id, { $set: data });
           return await Problem.findById(id);
         } else {
@@ -67,10 +133,19 @@ module.exports = {
     deleteProblem: async (root, args, context, info) => {
       try {
         let { id } = args;
+        const data = (await Problem.findById(id)).toJSON();
+        if (data.fileURL) {
+          await removeFile(data.fileURL);
+        }
         return await Problem.findByIdAndRemove(id);
       } catch {
         throw new Error(err);
       }
     },
   },
+};
+
+const removeFile = (filePath) => {
+  filePath = path.join(__dirname, "../../../", filePath);
+  fs.unlink(filePath, (err) => console.log(err));
 };
