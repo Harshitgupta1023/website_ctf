@@ -1,49 +1,138 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import { Link } from "react-router-dom";
-import Logindetails from "../layout/Logindetails";
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import googleOAuth from '../media/google.svg';
+import linkedinOAuth from '../media/linkedin.svg';
+import githubOAuth from '../media/github.svg';
 
-const forbutton = { color: "black" };
-export default function Signup() {
+
+
+function Copyright() {
   return (
-    <div className="login">
-      <div className="loginHeading">
-        <h1 className= "heading-auth-box">Seekho</h1>
-      </div>
-      <div className="loginTitle">
-        <h2 className="title-auth-box">CTF Easily</h2>
-      </div>
-      <div className="loginSubtitle">
-        <h3 className="sub-title-auth-box">Lorem Ipsum</h3>
-      </div>
-      <div className = "auth-box">
-        <div className="loginButton">
-          <ButtonGroup
-            aria-label="large outlined button group"
-            style={{ display: "flex-wrap", alignItems: "centre", width: "100%"}}
-          >
-            <Button
-              variant="contained"
-              style={{ fontSize: "27px", width: "50%" , textTransform: "none",  padding: 0, margin: 0, fontWeight: "bolder"}}
-            >
-              <Link className="links" to="/login">Sign up</Link>
-              {/* <a href= "http://localhost:3000/signup" className= "links">Sign up</a> */}
-              
-            </Button>
-            <Button
-              variant="contained"
-              style={{ fontSize: "27px", width: "50%", textTransform: "none", padding: 0, margin: 0 , fontWeight: "bolder"}}
-            >
-              <Link className="links" to="/login">Log in</Link>
-              {/* <a href= "http://localhost:3000/login" className= "links">Log in</a> */}
-            </Button>
-          </ButtonGroup>
-        </div>
-        <div className="logindetails ">
-          <Logindetails pagename="signup" />
-        </div>
-      </div>
+    <div>
+      <img src= {googleOAuth} style={{height:"50px", width:"50px"}}></img>
+      <img src= {githubOAuth} style={{height:"50px", width:"50px"}}></img>
+      <img src= {linkedinOAuth} style={{height:"50px", width:"50px"}}></img>
     </div>
+  );
+}
+
+const useStyles = makeStyles((theme) => ({
+  
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
+export default function SignUp() {
+  const classes = useStyles();
+
+  return (
+    <Container component="main" maxWidth="xs" style={{backgroundColor:"#D85347"}}>
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <form className={classes.form} noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="firstName"
+                variant="outlined"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                autoComplete="lname"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign Up
+          </Button>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Link href="login" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
+      </div>
+      <Box mt={5}>
+        <Copyright />
+      </Box>
+    </Container>
   );
 }
