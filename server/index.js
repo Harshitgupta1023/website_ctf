@@ -1,4 +1,5 @@
-const { ApolloServer } = require("apollo-server");
+const { ApolloServer } = require("apollo-server-express");
+const express = require("express");
 const mongoose = require("mongoose");
 
 const { MONGO_URL } = require("./config");
@@ -8,16 +9,21 @@ const resolvers = require("./graphql/resolvers/index");
 const PORT = process.env.PORT || 5000;
 
 const server = new ApolloServer({ typeDefs: [problem], resolvers });
+const app = express();
+app.use("/uploads", express.static(__dirname));
+server.applyMiddleware({ app });
 
 mongoose
-  .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
   .then(() => {
     console.log("MongoDB Connected...");
-    return server.listen({ port: PORT });
+    return app.listen({ port: PORT });
   })
-  .then(({ url }) => {
-    console.log(`Server is ready at : ${url}`);
+  .then(() => {
+    console.log(`Server is ready at : ${PORT}`);
   })
   .catch((err) => console.log(err));
-
-mongoose.set("useFindAndModify", false);

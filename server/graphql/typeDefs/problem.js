@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server");
+const { gql } = require("apollo-server-express");
 
 module.exports = gql`
   type Problem {
@@ -6,6 +6,7 @@ module.exports = gql`
     title: String!
     statement: String!
     solution: String!
+    fileURL: String
     points: Int!
     hints: [String]
     category: [String]!
@@ -25,6 +26,7 @@ module.exports = gql`
       points: Int!
       hints: [String]
       category: [String]!
+      file: Upload
     ): Problem
     deleteProblem(id: ID!): Problem
     updateProblem(
@@ -35,6 +37,7 @@ module.exports = gql`
       points: Int
       hints: [String]
       category: [String]
+      file: Upload
     ): Problem
   }
 `;
