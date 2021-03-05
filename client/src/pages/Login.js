@@ -4,45 +4,44 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Link } from "react-router-dom";
 import Logindetails from "../layout/Logindetails";
 
-const forbutton = { color: "black" };
 export default function Login() {
   return (
     <div className="login">
       <div className="loginHeading">
-        <h1>website</h1>
+        <h1 className= "heading-auth-box">Seekho</h1>
       </div>
       <div className="loginTitle">
-        <p>for ctf</p>
+        <h2 className="title-auth-box">CTF Easily</h2>
       </div>
       <div className="loginSubtitle">
-        <p>practice</p>
+        <h3 className="sub-title-auth-box">Lorem Ipsum</h3>
       </div>
-      <div className="loginButton">
-        <ButtonGroup
-          size="large"
-          aria-label="large outlined button group"
-          style={{ display: "flex", alignItems: "centre", width: "100%" }}
-        >
-          <Button
-            variant="contained"
-            style={{ fontSize: "20px", width: "50%" }}
+      <div className = "auth-box">
+        <div className="loginButton">
+          <ButtonGroup
+            aria-label="large outlined button group"
+            style={{ display: "flex-wrap", alignItems: "centre", width: "100%"}}
           >
-            <Link to="/signup" className="links" style={forbutton}>
-              SignUp
-            </Link>
-          </Button>
-          <Button
-            variant="contained"
-            style={{ fontSize: "20px", width: "50%" }}
-          >
-            <Link to="login" className="links" style={forbutton}>
-              Login
-            </Link>
-          </Button>
-        </ButtonGroup>
-      </div>
-      <div className="logindetails ">
-        <Logindetails pagename="login" />
+            <Button
+              variant="contained"
+              style={{ fontSize: "27px", width: "50%" , textTransform: "none",  padding: 0, margin: 0, fontWeight: "bolder"}}
+            >
+              <Link className="links" to="/signup">Sign up</Link>
+              {/* <a href= "http://localhost:3000/signup" className= "links">Log in</a> */}
+              
+            </Button>
+            <Button
+              variant="contained"
+              style={{ fontSize: "27px", width: "50%", textTransform: "none", padding: 0, margin: 0 , fontWeight: "bolder"}}
+            >
+              <Link className="links" to="/login">Log in</Link>
+              {/* <a href= "http://localhost:3000/login" className= "links">Log in</a> */}
+            </Button>
+          </ButtonGroup>
+        </div>
+        <div className="logindetails ">
+          <Logindetails pagename="login" />
+        </div>
       </div>
     </div>
   );
