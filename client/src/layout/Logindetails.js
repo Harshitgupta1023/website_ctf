@@ -5,12 +5,12 @@ import CardContent from "@material-ui/core/CardContent";
 import Inputfield from "./Inputfield";
 import Divider from "@material-ui/core/Divider";
 import { Typography } from "@material-ui/core";
-import Google from "../media/google.jpg";
-import Github from "../media/github.jpg";
-import Linkedin from "../media/linkedin.jpg";
+import googleOAuth from "./../media/google.svg";
+import githubOAuth from "./../media/github.svg";
+
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "#e0e0e0",
+    backgroundColor: "#f5fdfd",
     color: "black",
     minHeight: "100%",
   },
@@ -28,18 +28,18 @@ export default function Logindetails(props) {
           />
         </div>
       </CardContent>
-      <Divider style={{ backgroundColor: "red" }} />
 
+      <hr></hr>
       <Typography
-        style={{ display: "flex", justifyContent: "center" }}
-        variant="bpdy1"
+        style={{ color: "black", justifyContent: "center" }}
+        variant="body1"
       >
-        or connet with
+        or connect with
       </Typography>
-      <div className="loginimage">
-        <img src={Google} alt="Google icon"></img>
-        <img src={Github} alt="Github icon"></img>
-        <img src={Linkedin} alt="LinkedIn icon"></img>
+
+      <div className="img">
+        <img src={googleOAuth} />
+        <img src={githubOAuth} />
       </div>
     </Card>
   );

@@ -22,7 +22,7 @@ export default function Navbar(props) {
       <Link to="/" className="header_heading links">
         SeekhoCTF
       </Link>
-      <Link to="/login" className="header_login ">
+      <Link to="/login" className="header_login  links">
         <Button>Login</Button>
       </Link>
       <IconButton aria-label="notifications" className="header_notif">
