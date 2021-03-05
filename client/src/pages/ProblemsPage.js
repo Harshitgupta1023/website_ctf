@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Slidebar from "../layout/Slidebar";
-import ProblemsSection from "../layout/ProblemsSection";
+import Allquestion from "../layout/Allquestion";
 import Navbar from "../layout/Navbar";
+import { makeStyles } from "@material-ui/core/styles";
+import Pagination from "@material-ui/lab/Pagination";
+
 export default function ProblemsPage({ category }) {
   return (
     <div>
@@ -10,8 +13,8 @@ export default function ProblemsPage({ category }) {
         // add links
         style={{}}
       />
-      <div>
-        <ProblemsSection category={category} />
+      <div style={{ marginLeft: 100, marginTop: 40 }}>
+        <Allquestion category={category} />
       </div>
     </div>
   );

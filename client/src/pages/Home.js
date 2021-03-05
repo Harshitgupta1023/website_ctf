@@ -3,12 +3,12 @@ import TopicsSection from "../layout/TopicsSection";
 import Navbar from "../layout/Navbar";
 
 function Home() {
-    return (
-        <div className="home">
-            <Navbar />
-            <TopicsSection />
-        </div>
-    );
+  return (
+    <div className="home">
+      <Navbar condition="false" />
+      <TopicsSection />
+    </div>
+  );
 }
 
 export default Home;

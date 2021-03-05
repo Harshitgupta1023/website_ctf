@@ -111,6 +111,7 @@ export default function MiniDrawer() {
           ))}
         </List>
         <Divider />
+
         <div className={classes.toolbar}>
           <Link to="/" className="links">
             <h3 style={!open ? { display: "none" } : {}}>Back to Home</h3>
