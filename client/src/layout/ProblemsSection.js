@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { data } from "../data/questionsData";
 import QuestionCard from "../Components/QuestionCard";
-export default function ProblemsSection({ category }) {
-  const [questions, setQuestions] = useState([]);
-  useEffect(() => {
-    const q = [];
-    data.forEach((ques) => {
-      if (ques.category.find((c) => c === category)) q.push(ques);
-    });
-    setQuestions(q);
-  }, [category]);
-
+export default function ProblemsSection({ questions }) {
   return (
     <div className="topics-section">
       {questions.map((question, index) => (

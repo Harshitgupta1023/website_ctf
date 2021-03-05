@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 
 export default function SectionCard(props) {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState(true);
+  const [checked] = React.useState(true);
   const { image, title, details, link, id } = props;
   return (
     <Grow

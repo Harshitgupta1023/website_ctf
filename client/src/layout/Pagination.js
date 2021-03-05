@@ -1,23 +1,18 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
-
-export default function BasicPagination() {
-  const classes = useStyles();
+export default function BasicPagination({
+  postsPerPage,
+  totalPosts,
+  paginate,
+}) {
+  const i = Math.ceil(totalPosts / postsPerPage);
   return (
-    <div className={classes.root}>
-      <Pagination count={10} />
-      <Pagination count={10} color="primary" />
-      <Pagination count={10} color="secondary" />
-      <Pagination count={10} disabled />
-    </div>
+    <Pagination
+      style={{ display: "flex", justifyContent: "center" }}
+      count={i}
+      size="large"
+      color="secondary"
+      onChange={(event, page) => paginate(page)}
+    />
   );
 }

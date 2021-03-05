@@ -1,8 +1,7 @@
 export const data = [
   {
     id: 1,
-    title:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
+    title: "What",
     statement:
       "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
     solution: "IITJCTF",
@@ -210,6 +209,114 @@ export const data = [
     title: "What?",
     statement:
       "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
+    solution: "IITJCTF",
+    points: "100",
+    hints: ["crypto", "mango"],
+    category: ["crypto"],
+    submissions: 0,
+    accepted: 1,
+  },
+  {
+    id: 19,
+    title: "What?",
+    statement:
+      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
+    solution: "IITJCTF",
+    points: "100",
+    hints: ["crypto", "mango"],
+    category: ["crypto"],
+    submissions: 0,
+    accepted: 1,
+  },
+  {
+    id: 20,
+    title: "What?",
+    statement:
+      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
+    solution: "IITJCTF",
+    points: "100",
+    hints: ["crypto", "mango"],
+    category: ["crypto"],
+    submissions: 0,
+    accepted: 1,
+  },
+  {
+    id: 21,
+    title: "What?",
+    statement:
+      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
+    solution: "IITJCTF",
+    points: "100",
+    hints: ["crypto", "mango"],
+    category: ["crypto"],
+    submissions: 0,
+    accepted: 1,
+  },
+  {
+    id: 22,
+    title: "What?",
+    statement:
+      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
+    solution: "IITJCTF",
+    points: "100",
+    hints: ["crypto", "mango"],
+    category: ["crypto"],
+    submissions: 0,
+    accepted: 1,
+  },
+  {
+    id: 23,
+    title: "What?",
+    statement:
+      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
+    solution: "IITJCTF",
+    points: "100",
+    hints: ["crypto", "mango"],
+    category: ["crypto"],
+    submissions: 0,
+    accepted: 1,
+  },
+  {
+    id: 24,
+    title: "What?",
+    statement:
+      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
+    solution: "IITJCTF",
+    points: "100",
+    hints: ["crypto", "mango"],
+    category: ["crypto"],
+    submissions: 0,
+    accepted: 1,
+  },
+  {
+    id: 25,
+    title: "What?",
+    statement:
+      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
+    solution: "IITJCTF",
+    points: "100",
+    hints: ["crypto", "mango"],
+    category: ["crypto"],
+    submissions: 0,
+    accepted: 1,
+  },
+  {
+    id: 26,
+    title: "What?",
+    statement:
+      "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
+    solution: "IITJCTF",
+    points: "100",
+    hints: ["crypto", "mango"],
+    category: ["crypto"],
+    submissions: 0,
+    accepted: 1,
+  },
+  {
+    id: 27,
+    title: "What?",
+    statement:
+      "Generate Lorem 27 Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!",
     solution: "IITJCTF",
     points: "100",
     hints: ["crypto", "mango"],

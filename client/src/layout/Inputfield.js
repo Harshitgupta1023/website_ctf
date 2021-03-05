@@ -109,18 +109,17 @@ function Forlogin() {
               checked={state.checkedB}
               onChange={handleChange}
               name="checkedB"
-              color="primary"
+              color="secondary"
             />
           }
           label="Remember Me"
         />
-        <a
+        <Button
           href="#"
           style={{ display: "flex", justifyContent: "center", margin: "auto" }}
         >
-          {" "}
           Forgot Your Password
-        </a>
+        </Button>
       </FormGroup>
       <Divider style={{ backgroundColor: "white" }} />
       <br />

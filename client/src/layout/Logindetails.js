@@ -1,9 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Inputfield from "./Inputfield";
 import Divider from "@material-ui/core/Divider";
 import { Typography } from "@material-ui/core";
@@ -38,10 +36,10 @@ export default function Logindetails(props) {
       >
         or connet with
       </Typography>
-      <div>
-        <img src={Google}></img>
-        <img src={Github}></img>
-        <img src={Linkedin}></img>
+      <div className="loginimage">
+        <img src={Google} alt="Google icon"></img>
+        <img src={Github} alt="Github icon"></img>
+        <img src={Linkedin} alt="LinkedIn icon"></img>
       </div>
     </Card>
   );
