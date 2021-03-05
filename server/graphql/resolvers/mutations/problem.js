@@ -2,17 +2,7 @@ const Problem = require("../../../models/Problem");
 const ProblemValidator = require("../../validators/problemValidators");
 const path = require("path");
 const fs = require("fs");
-
-function generateRandomString(length) {
-  var result = "";
-  var characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
+const upload = require("../../upload/upload");
 
 module.exports = {
   Mutation: {
@@ -40,16 +30,7 @@ module.exports = {
           throw validationResponse.error;
         }
         if (file) {
-          const { createReadStream, filename } = await file;
-          const { ext } = path.parse(filename);
-          const randomName = generateRandomString(12) + ext;
-          const stream = createReadStream();
-          const pathName = path.join(
-            __dirname,
-            `../../../static/problemFiles/${randomName}`
-          );
-          await stream.pipe(fs.createWriteStream(pathName));
-          data["fileURL"] = "static/problemFiles/" + randomName;
+          data["fileURL"] = await upload(file);
         }
         const question = new Problem(data);
         return await question.save();
@@ -110,16 +91,7 @@ module.exports = {
             if (oldData["fileURL"]) {
               await removeFile(oldData["fileURL"]);
             }
-            const { createReadStream, filename } = await file;
-            const { ext } = path.parse(filename);
-            const randomName = generateRandomString(12) + ext;
-            const stream = createReadStream();
-            const pathName = path.join(
-              __dirname,
-              `../../../static/problemFiles/${randomName}`
-            );
-            await stream.pipe(fs.createWriteStream(pathName));
-            data["fileURL"] = "static/problemFiles/" + randomName;
+            data["fileURL"] = await upload(file);
           }
           await Problem.findByIdAndUpdate(id, { $set: data });
           return await Problem.findById(id);
