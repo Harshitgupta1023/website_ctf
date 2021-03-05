@@ -60,10 +60,9 @@ function Forsiginup() {
 
         <Grid item>
           <Button
-            size="large"
-            style={{ backgroundColor: "red", fontSize: "20px" }}
-          >
-            Create an Account
+  
+            style={{ fontSize: "25px",marginLeft: "30%",height: "30%",width: "100%" , textTransform: "none", fontWeight: "bolder", color: "white", backgroundColor: "#448ee4"}}
+          > Create An Account
           </Button>
         </Grid>
       </Grid>
@@ -83,15 +82,17 @@ function Forlogin() {
 
   return (
     <div className={classes.margin}>
+      
       <Grid container spacing={1} alignItems="flex-end">
         <Grid item>
           <MailIcon fontSize="large" />
         </Grid>
         <Grid item style={{ backgroundColor: "#c0d0d1", width: "75%" }}>
-          <TextField label=" Email" style={{ width: "100%" }} />
+          <TextField label=" Your email" style={{ width: "100%" }} />
         </Grid>
       </Grid>
       <br />
+      
       <Grid container spacing={1} alignItems="flex-end">
         <Grid item>
           <LockIcon fontSize="large" />
@@ -100,26 +101,30 @@ function Forlogin() {
           <Password />
         </Grid>
       </Grid>
+  
       <br />
-      <Divider style={{ backgroundColor: "white" }} />
-      <FormGroup row>
+
+      <FormGroup row className= "control-row">
         <FormControlLabel
+          style= {{color:"black", marginRight: "33%", marginLeft:"2%"}}
           control={
             <Checkbox
+              style= {{color: "#448ee4"}}
               checked={state.checkedB}
               onChange={handleChange}
               name="checkedB"
               color="primary"
+              inputProps={{ 'aria-label': 'secondary checkbox' }}
             />
           }
-          label="Remember Me"
+          label="Remember me"
         />
         <a
           href="#"
-          style={{ display: "flex", justifyContent: "center", margin: "auto" }}
+          className= "forgot-your"
         >
           {" "}
-          Forgot Your Password
+          Forgot your password?
         </a>
       </FormGroup>
       <Divider style={{ backgroundColor: "white" }} />
@@ -132,10 +137,10 @@ function Forlogin() {
 
         <Grid item>
           <Button
-            size="large"
-            style={{ backgroundColor: "red", fontSize: "20px" }}
+            size="200px"
+            style={{ fontSize: "25px", height: "30%",width: "150%" , textTransform: "none",  padding: "5%", fontWeight: "bolder", color: "white", backgroundColor: "#448ee4"}}
           >
-            Login
+            Log In
           </Button>
         </Grid>
       </Grid>
