@@ -18,18 +18,26 @@ import hackingOAuth from '../media/hacking.jpg';
 import discordOAuth from '../media/discord.svg';
 import googleOAuth from '../media/google.svg';
 
-function Copyright() {
+function ConnectWith(){
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
+    <Typography variant="body2" color="white" align="center">
+    {'or connect with'}
     </Typography>
-  );
+  )
 }
+
+function Handles() {
+  return (
+    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <a href="www.google.com">
+        <img src={googleOAuth} style={{marginLeft: "20%" ,marginTop:"3%",height:"50px", width:"50px"}}/>
+      </a>
+      <Link href="">
+      <img src={discordOAuth} style={{marginLeft:"40%",marginTop:"3%",height:"50px", width:"50px"}}/>
+      </Link>
+    </div>
+  )
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -134,7 +142,8 @@ export default function SignInSide() {
               </Grid>
             </Grid>
             <Box mt={5}>
-              {/* <Copyright /> */}
+              <ConnectWith/>
+              <Handles />
             </Box>
           </form>
         </div>

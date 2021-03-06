@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -30,12 +29,12 @@ function ConnectWith(){
   )
 }
 
-function Copyright() {
+function Handles() {
   return (
     <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-      <Link href="www.google.com">
+      <a href="www.google.com">
         <img src={googleOAuth} style={{marginLeft: "20%" ,marginTop:"3%",height:"50px", width:"50px"}}/>
-      </Link>
+      </a>
       <Link href="">
       <img src={discordOAuth} style={{marginLeft:"40%",marginTop:"3%",height:"50px", width:"50px"}}/>
       </Link>
@@ -152,7 +151,7 @@ export default function SignInSide() {
             </Grid>
             <Box mt={5}>
               <ConnectWith />
-              <Copyright />
+              <Handles />
             </Box>
           </form>
         </div>
