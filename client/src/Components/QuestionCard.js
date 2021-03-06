@@ -48,7 +48,6 @@ export default function QuestionCard(props) {
 
   return (
     <Grow
-      onClick={() => console.log("hi")}
       in={checked}
       style={{ transformOrigin: "0 0 0" }}
       {...(checked ? { timeout: 1000 } : {})}
