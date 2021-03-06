@@ -12,7 +12,11 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import axios from "axios"
+import { button } from '../data/constants';
+import { color } from '@material-ui/core';
+import hackingOAuth from '../media/hacking.jpg';
+import discordOAuth from '../media/discord.svg';
+import googleOAuth from '../media/google.svg';
 
 function Copyright() {
   return (
@@ -30,11 +34,10 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
-    backgroundColor: "black"
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
-    backgroundRepeat: 'no-repeat',
+    backgroundImage: `url(${hackingOAuth})`,
+    // backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
@@ -56,14 +59,22 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-  },
+    backgroundColor: button.buttonBackgroundColor,
+    color: button.buttonColor,
+    fontWeight: button.buttonFontWeight,
+    fontSize: button.buttonFontSize,
+    textTransform: button.buttonTextTransform,
+    '&:hover': {
+      backgroundColor: button.buttonHoverColor,
+    }
+  }
 }));
 
 export default function SignInSide() {
   const classes = useStyles();
 
   return (
-    <Grid container style={{backgroundColor: "black"}} component="main" className={classes.root}  >
+    <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -72,7 +83,7 @@ export default function SignInSide() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Log in
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -108,7 +119,7 @@ export default function SignInSide() {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Log in
             </Button>
             <Grid container>
               <Grid item xs>
@@ -123,7 +134,7 @@ export default function SignInSide() {
               </Grid>
             </Grid>
             <Box mt={5}>
-              <Copyright />
+              {/* <Copyright /> */}
             </Box>
           </form>
         </div>

@@ -1,13 +1,23 @@
 export const colors = {
   random: "#2d5986",
-  backgroundSecondary: "#61d3ed",
-  backgroundPrimary: "#E94B3CFF",
+  backgroundSecondary: "#424242",
+  backgroundPrimary: "#424242",
   primaryDark: "#27234b",
   secondaryDark: "#2D2926FF",
   purple: "#7303fc",
   primaryTertiary: "#80b3ff",
   textPrimary: "#fff",
-};
+  
+}
+
+export const button = {
+  buttonBackgroundColor: "#f50057",
+  buttonHoverColor: "#dc004e",
+  buttonColor: "#fff",
+  buttonFontWeight: "bolder",
+  buttonTextTransform: "none",
+  buttonFontSize: "20px",
+}
 
 export const sectionData = [
   {

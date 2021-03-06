@@ -20,7 +20,7 @@ const theme = createMuiTheme({
     background: {
       default: colors.backgroundSecondary,
       paper: colors.backgroundPrimary,
-    },
+   },
   },
 });
 
