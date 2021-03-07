@@ -11,7 +11,7 @@ function generateRandomString(length) {
   return result;
 }
 
-module.exports = async (file) => {
+module.exports = async (file, folder) => {
   if (file) {
     const { createReadStream, filename } = await file;
     const { ext } = path.parse(filename);
@@ -19,10 +19,10 @@ module.exports = async (file) => {
     const stream = createReadStream();
     const pathName = path.join(
       __dirname,
-      `../../static/problemFiles/${randomName}`
+      `../../static/${folder}/${randomName}`
     );
     await stream.pipe(fs.createWriteStream(pathName));
-    return "static/problemFiles/" + randomName;
+    return `static/${folder}/${randomName}`;
   } else {
     throw new Error("No file given");
   }

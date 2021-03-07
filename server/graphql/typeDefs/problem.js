@@ -14,12 +14,12 @@ module.exports = gql`
     accepted: Int
   }
 
-  type Query {
+  extend type Query {
     getProblems: [Problem]
     getProblem(id: ID!): Problem
     getProblemsByCategory(category: String!): [Problem]
   }
-  type Mutation {
+  extend type Mutation {
     createProblem(
       title: String!
       statement: String!

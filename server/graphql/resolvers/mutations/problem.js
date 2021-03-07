@@ -3,7 +3,6 @@ const ProblemValidator = require("../../validators/problemValidators");
 const path = require("path");
 const fs = require("fs");
 const upload = require("../../upload/upload");
-const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 
 module.exports = {
   Mutation: {
@@ -36,7 +35,7 @@ module.exports = {
           throw validationResponse.error;
         }
         if (file) {
-          data["fileURL"] = await upload(file);
+          data["fileURL"] = await upload(file, "problemFiles");
         }
         const question = new Problem(data);
         return await question.save();
@@ -97,7 +96,7 @@ module.exports = {
             if (oldData["fileURL"]) {
               await removeFile(oldData["fileURL"]);
             }
-            data["fileURL"] = await upload(file);
+            data["fileURL"] = await upload(file, "problemFiles");
           }
           await Problem.findByIdAndUpdate(id, { $set: data });
           return await Problem.findById(id);
