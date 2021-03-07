@@ -80,10 +80,11 @@ export default function QuestionCard(props) {
                         ))}
                     </div>
                     <Typography variant="body2">{props.statement}</Typography>
-                    {props.fileURL !== "" && (
+                    {props.fileURL && (
                         <Button variant="contained">
                             <a
                                 href={`http://localhost:5000/uploads/${props.fileURL}`}
+                                className="links"
                             >
                                 File
                             </a>
