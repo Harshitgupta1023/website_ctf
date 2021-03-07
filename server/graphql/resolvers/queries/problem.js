@@ -24,5 +24,23 @@ module.exports = {
         throw error;
       }
     },
+    getProblemsByCategory: async (root, args, context, info) => {
+      try {
+        let { category } = args;
+        category = category.toLowerCase();
+        let data = await Problem.find().exec();
+        let out = [];
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].category.includes(category)) {
+            out.push(data[i]);
+          }
+        }
+        return out;
+      } catch (err) {
+        const error = new Error(err);
+        error.message = "Could not find problem";
+        throw error;
+      }
+    },
   },
 };
