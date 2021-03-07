@@ -48,6 +48,7 @@ export default function QuestionCard(props) {
 
   return (
     <Grow
+      onClick={() => console.log("hi")}
       in={checked}
       style={{ transformOrigin: "0 0 0" }}
       {...(checked ? { timeout: 1000 } : {})}
@@ -64,20 +65,28 @@ export default function QuestionCard(props) {
             <Typography
               className={classes.questiontitle}
               variant="body2"
-              component="p"
+              // component="p"
             >
               {props.title}
             </Typography>
             <Chip className={classes.pointss} label={props.points} />
           </div>
-          <Typography className={classes.pos} color="textSecondary">
+          <div className={classes.pos} color="textSecondary">
             {props.category.map((c) => (
-              <Chip label={c} style={{ margin: "3px" }} />
+              <Chip key={c} label={c} style={{ margin: "3px" }} />
             ))}
-          </Typography>
-          <Typography variant="body2" component="p">
-            {props.statement}
-          </Typography>
+          </div>
+          <Typography variant="body2">{props.statement}</Typography>
+          {props.fileURL && (
+            <Button variant="contained">
+              <a
+                href={`http://localhost:5000/uploads/${props.fileURL}`}
+                className="links"
+              >
+                File
+              </a>
+            </Button>
+          )}
         </CardContent>
         <CardActions>
           <form className={classes.textfield} noValidate autoComplete="off">

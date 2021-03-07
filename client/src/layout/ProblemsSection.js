@@ -12,18 +12,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 export default function ProblemsSection({ questions }) {
-  const classes = useStyles();
-
   return (
     <div className="topics-section">
       {questions.map((question, index) => (
-        <div className={classes.topppp}>
+        <div className="topppp" key={question.id}>
           <QuestionCard
-            key={question.id}
             category={question.category}
+            className="question"
             points={question.points}
             title={question.title}
             statement={question.statement}
+            fileURL={question.fileURL}
           />
         </div>
       ))}

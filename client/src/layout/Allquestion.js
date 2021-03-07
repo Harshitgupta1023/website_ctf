@@ -1,23 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { data } from "../data/questionsData";
+import React, { useState } from "react";
+import { gql, useQuery } from "@apollo/client";
 import ProblemsSection from "./ProblemsSection";
+import Alert from "@material-ui/lab/Alert";
+import AlertTitle from "@material-ui/lab/AlertTitle";
+import Loading from "../Components/Loading";
 import Pagination from "./Pagination";
 
-export default function Allquestion({ category }) {
-  const [questions, setQuestions] = useState([]);
-  useEffect(() => {
-    const q = [];
-    data.forEach((ques) => {
-      if (ques.category.find((c) => c === category)) q.push(ques);
-    });
-    setQuestions(q);
-  }, [category]);
+const GET_PROBLEMS = gql`
+  query {
+    getProblems {
+      id
+      title
+      statement
+      solution
+      fileURL
+      points
+      hints
+      category
+      submissions
+      accepted
+    }
+  }
+`;
 
-  // adding pagination
+export default function Allquestion({ category }) {
+  const { data, error, loading } = useQuery(GET_PROBLEMS);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
-  // manages number of card on page
+  if (error) {
+    return (
+      <Alert severity="error">
+        <AlertTitle>Error</AlertTitle>
+        {error}
+      </Alert>
+    );
+  }
+  if (loading) return <Loading loading={loading} />;
+
+  const questions = data.getProblems;
+  // adding pagination
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = questions.slice(indexOfFirstPost, indexOfLastPost);

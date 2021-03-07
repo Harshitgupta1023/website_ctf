@@ -3,6 +3,7 @@ const ProblemValidator = require("../../validators/problemValidators");
 const path = require("path");
 const fs = require("fs");
 const upload = require("../../upload/upload");
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 
 module.exports = {
   Mutation: {
@@ -17,6 +18,11 @@ module.exports = {
           category,
           hints,
         } = args;
+        if (category) {
+          for (var i = 0; i < category.length; i++) {
+            category[i] = category[i].toLowerCase();
+          }
+        }
         let data = {
           title: title,
           statement: statement,

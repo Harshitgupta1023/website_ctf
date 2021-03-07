@@ -17,6 +17,7 @@ module.exports = gql`
   type Query {
     getProblems: [Problem]
     getProblem(id: ID!): Problem
+    getProblemsByCategory(category: String!): [Problem]
   }
   type Mutation {
     createProblem(

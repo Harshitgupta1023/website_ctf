@@ -15,13 +15,11 @@ const useStyles = makeStyles(() => ({
 
 export default function TopicsSection() {
   const [sections] = useState(sectionData);
-  const classes = useStyles();
   return (
     <div className="topics-section">
       {sections.map((section, index) => (
-        <div className={classes.topppp}>
+        <div className="topppp" key={index}>
           <SectionCard
-            key={section.id}
             id={section.id}
             title={section.title}
             image={section.image}

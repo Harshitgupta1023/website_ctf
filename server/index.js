@@ -14,16 +14,16 @@ app.use("/uploads", express.static(__dirname));
 server.applyMiddleware({ app });
 
 mongoose
-  .connect(MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then(() => {
-    console.log("MongoDB Connected...");
-    return app.listen({ port: PORT });
-  })
-  .then(() => {
-    console.log(`Server is ready at : ${PORT}`);
-  })
-  .catch((err) => console.log(err));
+    .connect(MONGO_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+    })
+    .then(() => {
+        console.log("MongoDB Connected...");
+        return app.listen({ port: PORT });
+    })
+    .then(() => {
+        console.log(`Server is ready at : ${PORT}`);
+    })
+    .catch((err) => console.log(err));
