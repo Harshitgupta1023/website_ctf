@@ -23,6 +23,11 @@ const theme = createMuiTheme({
             paper: colors.backgroundPrimary,
         },
     },
+    background: {
+      default: colors.backgroundSecondary,
+      paper: colors.backgroundPrimary,
+   },
+  },
 });
 
 function App() {
