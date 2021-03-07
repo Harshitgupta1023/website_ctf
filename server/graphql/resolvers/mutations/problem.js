@@ -58,36 +58,14 @@ module.exports = {
         const oldData = (await Problem.findById(id)).toJSON();
         if (oldData) {
           let data = {};
-          if (title) {
-            data["title"] = title;
-          } else {
-            data["title"] = oldData["title"];
-          }
-          if (statement) {
-            data["statement"] = statement;
-          } else {
-            data["statement"] = oldData["statement"];
-          }
-          if (solution) {
-            data["solution"] = solution;
-          } else {
-            data["solution"] = oldData["solution"];
-          }
-          if (points) {
-            data["points"] = points;
-          } else {
-            data["points"] = oldData["points"];
-          }
-          if (category) {
-            data["category"] = category;
-          } else {
-            data["category"] = ["category"];
-          }
-          if (hints) {
-            data["hints"] = hints;
-          } else {
-            data["hints"] = oldData["hints"];
-          }
+
+          data["title"] = title ? title : oldData["title"];
+          data["statement"] = statement ? statement : oldData["statement"];
+          data["solution"] = solution ? solution : oldData["solution"];
+          data["points"] = points ? points : oldData["points"];
+          data["category"] = category ? category : oldData["category"];
+          data["hints"] = hints ? hints : oldData["hints"];
+
           const validationResponse = await ProblemValidator.validate(data);
           if (validationResponse.error) {
             throw validationResponse.error;
