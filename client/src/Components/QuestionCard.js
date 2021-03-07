@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Grow from "@material-ui/core/Grow";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 300,
     minWidth: 250,
@@ -40,54 +40,51 @@ const useStyles = makeStyles({
   questiontitle: {
     position: "relative",
   },
-});
+}));
 
 export default function QuestionCard(props) {
   const classes = useStyles();
-  const [checked] = React.useState(true);
 
   return (
-    <Grow
-      in={checked}
-      style={{ transformOrigin: "0 0 0" }}
-      {...(checked ? { timeout: 1000 } : {})}
+    <Card
+      className={classes.root}
+      style={{ width: props.width, height: props.height }}
+      variant="outlined"
     >
-      <Card className={classes.root} variant="outlined">
-        <CardContent>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
+      <CardContent>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            className={classes.questiontitle}
+            variant="body2"
+            component="p"
           >
-            <Typography
-              className={classes.questiontitle}
-              variant="body2"
-              component="p"
-            >
-              {props.title}
-            </Typography>
-            <Chip className={classes.pointss} label={props.points} />
-          </div>
-          <Typography className={classes.pos} color="textSecondary">
-            {props.category.map((c) => (
-              <Chip label={c} style={{ margin: "3px" }} />
-            ))}
+            {props.title}
           </Typography>
-          <Typography variant="body2" component="p">
-            {props.statement}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <form className={classes.textfield} noValidate autoComplete="off">
-            <TextField id="filled-basic" label="Answer" variant="filled" />
-          </form>
-          <Button style={{ marginLeft: 100 }} variant="contained">
-            Submit
-          </Button>
-        </CardActions>
-      </Card>
-    </Grow>
+          <Chip className={classes.pointss} label={props.points} />
+        </div>
+        <Typography className={classes.pos} color="textSecondary">
+          {props.category.map((c) => (
+            <Chip label={c} style={{ margin: "3px" }} />
+          ))}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {props.statement}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <form className={classes.textfield} noValidate autoComplete="off">
+          <TextField id="filled-basic" label="Answer" variant="filled" />
+        </form>
+        <Button style={{ marginLeft: 100 }} variant="contained">
+          Submit
+        </Button>
+      </CardActions>
+    </Card>
   );
 }

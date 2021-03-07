@@ -1,5 +1,11 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import BackgroundVideo from "./layout/BackgroundVideo";
 import ProblemsPage from "./pages/ProblemsPage";
@@ -7,8 +13,9 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { colors } from "./data/constants";
 import { sectionData } from "./data/constants";
+import { data } from "./data/questionsData";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
-
+import Question from "./pages/Question";
 const theme = createMuiTheme({
   palette: {
     type: "dark",
@@ -20,7 +27,7 @@ const theme = createMuiTheme({
     background: {
       default: colors.backgroundSecondary,
       paper: colors.backgroundPrimary,
-   },
+    },
   },
 });
 
@@ -41,6 +48,27 @@ function App() {
                   key={data.id}
                   path={data.link}
                   component={() => <ProblemsPage category={data.category} />}
+                />
+              );
+            })}
+            {data.map((ques) => {
+              console.log(`some${ques.id}`);
+              return (
+                <Route
+                  key={ques.id}
+                  exact
+                  path={`/some${ques.id}`}
+                  component={() => (
+                    <Question
+                      id={ques.id}
+                      category={ques.category}
+                      points={ques.points}
+                      title={ques.title}
+                      statement={ques.statement}
+                      width={800}
+                      height={600}
+                    />
+                  )}
                 />
               );
             })}
