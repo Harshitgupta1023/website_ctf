@@ -1,18 +1,18 @@
 import React from "react";
 import ProblemsPage from "./ProblemsPage";
 import QuestionCard from "../Components/QuestionCard";
-import { Link } from "react-router-dom";
-export default function Question(props) {
-  console.log(props.category);
+import { Link, withRouter } from "react-router-dom";
+function Question(props) {
+  console.log(props.history);
   return (
-    <Link to="/cryptography">
+    <Link to={`/${props.history.location.pathname.split("/")[1]}`}>
       <div style={{ position: "relative" }}>
         <div style={{ opacity: 0.5, position: "absolute" }}>
           {props.category.map((ca) => {
             return <ProblemsPage category={ca} />;
           })}
         </div>
-        <Link to={`/some${props.id}`}>
+        <Link to={`/${props.category}/${props.id}`}>
           <div
             style={{
               opacity: 1,
@@ -38,3 +38,5 @@ export default function Question(props) {
     </Link>
   );
 }
+
+export default withRouter(Question);

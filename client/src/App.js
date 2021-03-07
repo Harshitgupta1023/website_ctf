@@ -52,12 +52,12 @@ function App() {
               );
             })}
             {data.map((ques) => {
-              console.log(`some${ques.id}`);
+              console.log(`${ques.category}${ques.id}`);
               return (
                 <Route
                   key={ques.id}
                   exact
-                  path={`/some${ques.id}`}
+                  path={`/${ques.category[1]}/${ques.id}`}
                   component={() => (
                     <Question
                       id={ques.id}

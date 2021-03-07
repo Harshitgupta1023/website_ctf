@@ -7,8 +7,7 @@ export const colors = {
   purple: "#7303fc",
   primaryTertiary: "#80b3ff",
   textPrimary: "#fff",
-  
-}
+};
 
 export const button = {
   buttonBackgroundColor: "#f50057",
@@ -17,7 +16,7 @@ export const button = {
   buttonFontWeight: "bolder",
   buttonTextTransform: "none",
   buttonFontSize: "20px",
-}
+};
 
 export const sectionData = [
   {
@@ -34,7 +33,7 @@ export const sectionData = [
     category: "crypto",
     title: "Cryptography",
     image: "crypto-logo.jpg",
-    link: "/cryptography",
+    link: "/crypto",
 
     details:
       "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
