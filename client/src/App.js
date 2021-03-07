@@ -24,10 +24,9 @@ const theme = createMuiTheme({
         },
     },
     background: {
-      default: colors.backgroundSecondary,
-      paper: colors.backgroundPrimary,
-   },
-  },
+        default: colors.backgroundSecondary,
+        paper: colors.backgroundPrimary,
+    },
 });
 
 function App() {
