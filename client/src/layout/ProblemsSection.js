@@ -1,6 +1,8 @@
 import React from "react";
 import QuestionCard from "../Components/QuestionCard";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link, withRouter } from "react-router-dom";
+
 const useStyles = makeStyles(() => ({
   topppp: {
     transition: "all 0.2s ease-in-out",
@@ -11,22 +13,31 @@ const useStyles = makeStyles(() => ({
     },
   },
 }));
-export default function ProblemsSection({ questions }) {
+function ProblemsSection(props) {
   const classes = useStyles();
   return (
     <div className="topics-section">
-      {questions.map((question, index) => (
+      {props.questions.map((question, index) => (
         <div className={classes.topppp} key={question.id}>
-          <QuestionCard
-            category={question.category}
-            className="question"
-            points={question.points}
-            title={question.title}
-            statement={question.statement}
-            fileURL={question.fileURL}
-          />
+          <Link
+            to={`/${props.history.location.pathname.split("/")[1]}/${
+              question.id
+            }`}
+            style={{ textDecoration: "none" }}
+          >
+            <QuestionCard
+              category={question.category}
+              className="question"
+              points={question.points}
+              title={question.title}
+              statement={question.statement}
+              fileURL={question.fileURL}
+            />
+          </Link>
         </div>
       ))}
     </div>
   );
 }
+
+export default withRouter(ProblemsSection);

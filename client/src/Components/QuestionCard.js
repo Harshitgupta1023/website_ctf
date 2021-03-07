@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Grow from "@material-ui/core/Grow";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 300,
     minWidth: 250,
@@ -40,63 +40,59 @@ const useStyles = makeStyles({
   questiontitle: {
     position: "relative",
   },
-});
+}));
 
 export default function QuestionCard(props) {
   const classes = useStyles();
-  const [checked] = React.useState(true);
 
   return (
-    <Grow
-      onClick={() => console.log("hi")}
-      in={checked}
-      style={{ transformOrigin: "0 0 0" }}
-      {...(checked ? { timeout: 1000 } : {})}
+    <Card
+      className={classes.root}
+      style={{ width: props.width, height: props.height }}
+      variant="outlined"
     >
-      <Card className={classes.root} variant="outlined">
-        <CardContent>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
+      <CardContent>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            className={classes.questiontitle}
+            variant="body2"
+            // component="p"
           >
-            <Typography
-              className={classes.questiontitle}
-              variant="body2"
-              // component="p"
+            {props.title}
+          </Typography>
+          <Chip className={classes.pointss} label={props.points} />
+        </div>
+        <div className={classes.pos} color="textSecondary">
+          {props.category.map((c) => (
+            <Chip key={c} label={c} style={{ margin: "3px" }} />
+          ))}
+        </div>
+        <Typography variant="body2">{props.statement}</Typography>
+        {props.fileURL && (
+          <Button variant="contained">
+            <a
+              href={`http://localhost:5000/uploads/${props.fileURL}`}
+              className="links"
             >
-              {props.title}
-            </Typography>
-            <Chip className={classes.pointss} label={props.points} />
-          </div>
-          <div className={classes.pos} color="textSecondary">
-            {props.category.map((c) => (
-              <Chip key={c} label={c} style={{ margin: "3px" }} />
-            ))}
-          </div>
-          <Typography variant="body2">{props.statement}</Typography>
-          {props.fileURL && (
-            <Button variant="contained">
-              <a
-                href={`http://localhost:5000/uploads/${props.fileURL}`}
-                className="links"
-              >
-                File
-              </a>
-            </Button>
-          )}
-        </CardContent>
-        <CardActions>
-          <form className={classes.textfield} noValidate autoComplete="off">
-            <TextField id="filled-basic" label="Answer" variant="filled" />
-          </form>
-          <Button style={{ marginLeft: 100 }} variant="contained">
-            Submit
+              File
+            </a>
           </Button>
-        </CardActions>
-      </Card>
-    </Grow>
+        )}
+      </CardContent>
+      <CardActions>
+        <form className={classes.textfield} noValidate autoComplete="off">
+          <TextField id="filled-basic" label="Answer" variant="filled" />
+        </form>
+        <Button style={{ marginLeft: 100 }} variant="contained">
+          Submit
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
