@@ -11,8 +11,13 @@ module.exports = gql`
     points: Int
     solved: [String]
   }
+  type AuthData {
+    userID: ID!
+    token: String!
+    tokenExpiration: Int!
+  }
   type Query {
-    login(username: String, password: String!): User
+    login(username: String, password: String!): AuthData!
   }
   type Mutation {
     createUser(
