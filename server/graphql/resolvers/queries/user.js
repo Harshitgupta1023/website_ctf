@@ -5,7 +5,7 @@ const { JWT_KEY } = require("../../../config");
 
 module.exports = {
   Query: {
-    login: async (root, args, context, info) => {
+    login: async (root, args, { req }, info) => {
       let { username, password } = args;
       let user = await User.findOne({ username: username });
       if (!user) {
