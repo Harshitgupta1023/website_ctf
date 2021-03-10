@@ -28,4 +28,4 @@ To start the server run
 
 Open any browser and open http://localhost:5000/graphql to access the GraphQL API
 
-The same can be accessed from an foriegn API or any frontend
+The server can now be accessed by our frontend or from any foriegn API
