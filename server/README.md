@@ -6,7 +6,7 @@ Clone this repository by running the following command in your terminal/command 
 
 # Installing Dependencies
 
-Now we need to get all our dependcies right run the following commands to get the project going
+Now we need to install all the dependencies by running the following commands
 
 `$ npm install --global yarn`
 
@@ -18,11 +18,11 @@ Now run
 
 `$ yarn install`
 
-At these stage the project is ready and we can start running it.
+At this stage the project is ready and we can start running our server.
 
 # Running the Server Locally
 
-To start the server run
+To start the server, run
 
 `$ yarn start`
 
