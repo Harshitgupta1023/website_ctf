@@ -8,10 +8,8 @@ const bcrypt = require("bcryptjs");
 module.exports = {
   Mutation: {
     createUser: async (root, args, { req }, info) => {
-      let { firstName, lastName, username, password, email, image } = args;
+      let { username, password, email, image } = args;
       let data = {
-        firstName: firstName,
-        lastName: lastName,
         username,
         email: email,
         password: await bcrypt.hash(password, 12),
@@ -38,15 +36,13 @@ module.exports = {
       if (!req.isAuth) {
         throw new Error("Unauthenticated!");
       }
-      let { id, firstName, lastName, username, email, image } = args;
-      if (req.userID != id) {
+      let { id, username, email, image } = args;
+      if (req.userID != id && !req.isAdmin) {
         throw new Error("Unauthorized");
       }
       let oldData = await (await User.findById(id)).toJSON();
       if (oldData) {
         let data = {};
-        data["firstName"] = firstName ? firstName : oldData["firstName"];
-        data["lastName"] = lastName ? lastName : oldData["lastName"];
         if (username) {
           let userA = await User.findOne({ username: username });
           if (userA) {
@@ -82,12 +78,35 @@ module.exports = {
         throw new error("User Not Found");
       }
     },
+    updatePassword: async (root, args, { req }, info) => {
+      if (!req.isAuth) {
+        throw new Error("Unauthenticated!");
+      }
+      let { id, oldPassword, newPassword } = args;
+      if (req.userID != id && !req.isAdmin) {
+        throw new Error("Unauthorized");
+      }
+      let user = await User.findById(id);
+      if (!user) {
+        throw new Error("User not Found");
+      }
+      if (!(await bcrypt.compare(oldPassword, user.password))) {
+        throw new Error("Incorrect old password");
+      }
+      if (newPassword == "") {
+        throw new Error("New password can't be empty");
+      }
+      user.findByIdAndUpdate(id, {
+        $set: { password: await bcrypt.hash(password, 12) },
+      });
+      return await User.findById(id);
+    },
     deleteUser: async (root, args, { req }, info) => {
       if (!req.isAuth) {
         throw new Error("Unauthenticated!");
       }
       let { id } = args;
-      if (req.userID != id) {
+      if (req.userID != id && !req.isAdmin) {
         throw new Error("Unauthorized");
       }
       const data = (await User.findById(id)).toJSON();

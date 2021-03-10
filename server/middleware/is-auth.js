@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
-const { JWT_KEY } = require("../config");
+const { JWT_KEY, ADMIN_USERNAMES } = require("../config");
 module.exports = (req, res, next) => {
   const authHeader = req.get("Authorization");
+  req.isAdmin = false;
   if (!authHeader) {
     req.isAuth = false;
     return next();
@@ -21,6 +22,9 @@ module.exports = (req, res, next) => {
   if (!decodedToken) {
     req.isAuth = false;
     return next();
+  }
+  if (ADMIN_USERNAMES.includes(decodedToken.userData.username)) {
+    req.isAdmin = true;
   }
   req.isAuth = true;
   req.userID = decodedToken.userData._id;

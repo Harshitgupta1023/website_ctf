@@ -7,6 +7,11 @@ const upload = require("../../upload/upload");
 module.exports = {
   Mutation: {
     createProblem: async (root, args, { req }, info) => {
+      if (!req.isAdmin) {
+        throw new Error(
+          "Unauthorized! You need admin priviliges to access this method"
+        );
+      }
       let { file, title, statement, solution, points, category, hints } = args;
       if (category) {
         for (var i = 0; i < category.length; i++) {
@@ -32,6 +37,11 @@ module.exports = {
       return await question.save();
     },
     updateProblem: async (root, args, { req }, info) => {
+      if (!req.isAdmin) {
+        throw new Error(
+          "Unauthorized! You need admin priviliges to access this method"
+        );
+      }
       let {
         id,
         title,
@@ -70,6 +80,11 @@ module.exports = {
       }
     },
     deleteProblem: async (root, args, { req }, info) => {
+      if (!req.isAdmin) {
+        throw new Error(
+          "Unauthorized! You need admin priviliges to access this method"
+        );
+      }
       let { id } = args;
       const data = (await Problem.findById(id)).toJSON();
       if (data.fileURL) {
