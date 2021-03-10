@@ -9,53 +9,52 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 export default function Navbar(props) {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const handleClick = (e) => {
-        setAnchorEl(e.currentTarget);
-    };
-    const handleClose = (e) => {
-        setAnchorEl(null);
-    };
-    return (
-        <div className="header">
-            {/* <Navbar /> */}
-            <Link to="/" className="header_heading links">
-                SeekhoCTF
-            </Link>
-            <Link to="/login" className="header_login  links">
-                <Button>Login</Button>
-            </Link>
-            <Link to="/problems" className="header_login  links">
-                <Button>Create Problem</Button>
-            </Link>
-            <IconButton aria-label="notifications" className="header_notif">
-                <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon fontSize="large" />
-                </Badge>
-            </IconButton>
-            <IconButton aria-label="settings" className="header_settings">
-                <Badge badgeContent={4} color="secondary">
-                    <SettingsIcon fontSize="large" />
-                </Badge>
-            </IconButton>
-            <IconButton
-                aria-label="profile"
-                className="header_profile"
-                onClick={handleClick}
-            >
-                <PersonIcon fontSize="large" />
-            </IconButton>
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Menu>
-        </div>
-    );
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+  const handleClose = (e) => {
+    setAnchorEl(null);
+  };
+  return (
+    <div className="header">
+      <Link to="/" className="header_heading links">
+        SeekhoCTF
+      </Link>
+
+      <Link to="/getstarted" className="header_getstarted  links">
+        <Button>Get started</Button>
+      </Link>
+      <Link to="/" className="header_home links">
+        <Button>Home</Button>
+      </Link>
+      <Link to="/tools" className="header_tools  links">
+        <Button>Tools</Button>
+      </Link>
+      <Link to="/login" className="header_login  links">
+        <Button>Login</Button>
+      </Link>
+      <Link to="/problems" className="header_createproblem  links">
+        <Button>Create Problem</Button>
+      </Link>
+      {/* <IconButton
+        aria-label="profile"
+        className="header_profile"
+        onClick={handleClick}
+      >
+        <PersonIcon fontSize="large" />
+      </IconButton>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu> */}
+    </div>
+  );
 }

@@ -7,6 +7,8 @@ import {
   useLocation,
 } from "react-router-dom";
 import Home from "./pages/Home";
+import Getstarted from "./pages/Getstarted";
+import Tools from "./pages/Tools";
 import BackgroundVideo from "./layout/BackgroundVideo";
 import ProblemsPage from "./pages/ProblemsPage";
 import CreateProblem from "./pages/CreateProblem";
@@ -85,6 +87,8 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/getstarted" component={Getstarted} />
+            <Route exact path="/tools" component={Tools} />
             <Route exact path="/problems" component={CreateProblem} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
