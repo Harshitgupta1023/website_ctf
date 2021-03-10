@@ -2,7 +2,7 @@ const Problem = require("../../../models/Problem");
 
 module.exports = {
   Query: {
-    getProblems: async (root, args, context, info) => {
+    getProblems: async (root, args, { req }, info) => {
       try {
         return await Problem.find().exec();
       } catch (err) {
@@ -11,7 +11,7 @@ module.exports = {
         throw error;
       }
     },
-    getProblem: async (root, args, context, info) => {
+    getProblem: async (root, args, { req }, info) => {
       try {
         let { id } = args;
         if (!id) {
@@ -24,7 +24,7 @@ module.exports = {
         throw error;
       }
     },
-    getProblemsByCategory: async (root, args, context, info) => {
+    getProblemsByCategory: async (root, args, { req }, info) => {
       try {
         let { category } = args;
         category = category.toLowerCase();
