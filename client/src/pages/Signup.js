@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Link from '@material-ui/core/Link';
+// import Link from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -32,12 +33,12 @@ function ConnectWith(){
 function Handles() {
   return (
     <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-      <a href="www.google.com">
+      <a href="https://youtube.com/">
         <img src={googleOAuth} style={{marginLeft: "20%" ,marginTop:"3%",height:"50px", width:"50px"}}/>
       </a>
-      <Link href="">
+      <a href="">
       <img src={discordOAuth} style={{marginLeft:"40%",marginTop:"3%",height:"50px", width:"50px"}}/>
-      </Link>
+      </a>
     </div>
   )
 };
