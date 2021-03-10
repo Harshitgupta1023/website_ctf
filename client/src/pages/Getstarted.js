@@ -2,13 +2,13 @@ import React from "react";
 import TopicsSection from "../layout/TopicsSection";
 import Navbar from "../layout/Navbar";
 
-function Home() {
+function Getstarted() {
   return (
     <div>
-      <Navbar condition="false" />
+      <Navbar home="true" />
       <TopicsSection />
     </div>
   );
 }
 
-export default Home;
+export default Getstarted;

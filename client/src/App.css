@@ -86,7 +86,7 @@ body {
   height: 90%;
   font-family: "ZCOOL KuaiLe", cursive;
   font-size: 3.5rem;
-  flex: 4;
+  flex: 3;
 }
 
 .header_heading:hover {
@@ -94,22 +94,13 @@ body {
   cursor: pointer;
 }
 
-.header_settings {
+.header_login,
+.header_tools,
+.header_getstarted,
+.header_home,
+.header_createproblem {
   flex: 0.5;
   justify-self: flex-end;
-}
-
-.header_profile {
-  flex: 0.5;
-  justify-self: flex-end;
-}
-
-.header_login {
-  flex: 0.5;
-  justify-self: flex-end;
-}
-.header_notif {
-  flex: 0.5;
 }
 
 .main-container {
