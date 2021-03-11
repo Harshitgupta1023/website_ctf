@@ -6,6 +6,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import Loginanimation from "./animation/Loginanimation";
 import Home from "./pages/Home";
 import Getstarted from "./pages/Getstarted";
 import Tools from "./pages/Tools";

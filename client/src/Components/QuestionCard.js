@@ -7,7 +7,6 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
-import Grow from "@material-ui/core/Grow";
 
 const useStyles = makeStyles((theme) => ({
   root: {
