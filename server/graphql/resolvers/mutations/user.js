@@ -72,8 +72,11 @@ module.exports = {
           }
           data["imageURL"] = await upload(image, "images");
         }
-        await User.findByIdAndUpdate(id, { $set: data });
-        return await User.findById(id);
+        for (i in data) {
+          oldData[i] = data[i];
+        }
+        await oldData.save();
+        return oldData;
       } else {
         throw new error("User Not Found");
       }
@@ -129,8 +132,8 @@ module.exports = {
       const curTime = Date.now();
       if (user.verificationOTP.code) {
         if (curTime > user.verificationOTP.expTime) {
-          user.verificationOTP.code = generateOTP(6);
-          user.verificationOTP.count = 1;
+          user.verificationOTP.code = generateOTP(8);
+          user.verificationOTP.count = 0;
           user.verificationOTP.expTime = curTime + 24 * 60 * 60 * 1000;
         }
         if (user.verificationOTP.count >= 3) {
@@ -142,7 +145,7 @@ module.exports = {
           user.verificationOTP.expTime = curTime + 24 * 60 * 60 * 1000;
         }
       } else {
-        user.verificationOTP.code = generateOTP(6);
+        user.verificationOTP.code = generateOTP(8);
         user.verificationOTP.count = 1;
         user.verificationOTP.expTime = curTime + 24 * 60 * 60 * 1000;
       }
@@ -170,8 +173,8 @@ module.exports = {
       const curTime = Date.now();
       if (user.forgotPassOTP.code) {
         if (curTime > user.forgotPassOTP.expTime) {
-          user.forgotPassOTP.code = generateOTP(6);
-          user.forgotPass.count = 1;
+          user.forgotPassOTP.code = generateOTP(8);
+          user.forgotPassOTP.count = 0;
           user.forgotPassOTP.expTime = curTime + 24 * 60 * 60 * 1000;
         }
         if (user.forgotPassOTP.count >= 3) {
@@ -183,7 +186,7 @@ module.exports = {
           user.forgotPassOTP.expTime = curTime + 24 * 60 * 60 * 1000;
         }
       } else {
-        user.forgotPassOTP.code = generateOTP(6);
+        user.forgotPassOTP.code = generateOTP(8);
         user.forgotPassOTP.count = 1;
         user.forgotPassOTP.expTime = curTime + 24 * 60 * 60 * 1000;
       }
@@ -240,6 +243,13 @@ module.exports = {
         if (user.forgotPassOTP.code && user.forgotPassOTP.code === OTP) {
           user.password = await bcrypt.hash(newPassword, 12);
           user.forgotPassOTP.count = 0;
+          sendMail(
+            user.email,
+            "Forgot Password OTP",
+            "Hi " +
+              user.username +
+              ",\nCongratulations! Your password was changed successfully."
+          );
           user.forgotPassOTP.code = null;
           user.forgotPassOTP.expTime = null;
           await user.save();
