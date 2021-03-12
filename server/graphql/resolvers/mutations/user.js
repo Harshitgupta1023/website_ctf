@@ -138,7 +138,7 @@ module.exports = {
         }
         if (user.verificationOTP.count >= 3) {
           throw new Error(
-            "You have maximum number of times OTP limit for the day. Try again tommorow"
+            "You have exceeded OTP generation limit for the day. Try again tommorow"
           );
         } else {
           user.verificationOTP.count += 1;
