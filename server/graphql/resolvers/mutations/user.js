@@ -153,9 +153,9 @@ module.exports = {
         user.email,
         "Email Verification",
         "Hi " +
-          user.username +
-          ",\nYour OTP for email verification is " +
-          user.verificationOTP.code +
+          user.username.bold() +
+          ",<br>Your OTP for email verification is " +
+          user.verificationOTP.code.toString().bold() +
           ". It will remain valid for 1 day."
       );
       await user.save();
@@ -179,7 +179,7 @@ module.exports = {
         }
         if (user.forgotPassOTP.count >= 3) {
           throw new Error(
-            "You have maximum number of times OTP limit for the day. Try again tommorow"
+            "You have exceeded OTP generation limit for the day. Try again tommorow"
           );
         } else {
           user.forgotPassOTP.count += 1;
@@ -194,9 +194,9 @@ module.exports = {
         user.email,
         "Forgot Password OTP",
         "Hi " +
-          user.username +
-          ",\n\nYour OTP for resetting your password is " +
-          user.forgotPassOTP.code +
+          user.username.bold() +
+          ",<br>Your OTP for resetting your password is " +
+          user.forgotPassOTP.code.toString().bold() +
           ". It will remain valid for 1 day."
       );
       await user.save();
@@ -221,8 +221,8 @@ module.exports = {
             user.email,
             "Email Verification",
             "Hi " +
-              user.username +
-              ",\nCongratulations! Your account has been successfully verified."
+              user.username.bold() +
+              ",<br>Congratulations! Your account has been successfully verified."
           );
           user.verificationOTP.count = 0;
           user.verificationOTP.code = null;
@@ -247,8 +247,8 @@ module.exports = {
             user.email,
             "Forgot Password OTP",
             "Hi " +
-              user.username +
-              ",\nCongratulations! Your password was changed successfully."
+              user.username.bold() +
+              ",<br>Congratulations! Your password was changed successfully."
           );
           user.forgotPassOTP.code = null;
           user.forgotPassOTP.expTime = null;

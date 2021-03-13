@@ -8,6 +8,7 @@ module.exports = (to, subject, message) => {
     from: "SeekhoCTF<seekhoctf@gmail.com>",
     subject: subject,
     text: message,
+    html: message,
   };
   sgMail
     .send(msg)
