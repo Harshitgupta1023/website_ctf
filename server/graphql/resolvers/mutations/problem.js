@@ -52,7 +52,7 @@ module.exports = {
         hints,
         file,
       } = args;
-      const oldData = (await Problem.findById(id)).toJSON();
+      const oldData = await Problem.findById(id);
       if (oldData) {
         let data = {};
 
@@ -73,8 +73,11 @@ module.exports = {
           }
           data["fileURL"] = await upload(file, "problemFiles");
         }
-        await Problem.findByIdAndUpdate(id, { $set: data });
-        return await Problem.findById(id);
+        for (i in data) {
+          oldData[i] = data[i];
+        }
+        await oldData.save();
+        return oldData;
       } else {
         throw new error("Not Found");
       }
