@@ -6,7 +6,6 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import Loginanimation from "./animation/Loginanimation";
 import Home from "./pages/Home";
 import Getstarted from "./pages/Getstarted";
 import Tools from "./pages/Tools";
@@ -61,7 +60,7 @@ const theme = createMuiTheme({
 
 const sectionData = [
   "general-skills",
-  "crypto",
+  "cryptography",
   "web-exploitation",
   "reverse-engineering",
   "binary-exploitation",
@@ -91,6 +90,7 @@ function App() {
             <Route exact path="/getstarted" component={Getstarted} />
             <Route exact path="/tools" component={Tools} />
             <Route exact path="/problems" component={CreateProblem} />
+
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             {sectionData.map((data, index) => {
@@ -105,6 +105,7 @@ function App() {
             })}
             {questions.map((ques) => {
               console.log(`/${ques.category[0]}/${ques.id}`);
+
               return (
                 <Route
                   key={ques.id}

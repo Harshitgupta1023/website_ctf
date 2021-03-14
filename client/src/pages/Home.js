@@ -1,7 +1,7 @@
 import React from "react";
-import TopicsSection from "../layout/TopicsSection";
 import Navbar from "../layout/Navbar";
 import Typing from "../animation/Typing";
+import Carousel from "../layout/Carousel";
 function Home() {
   return (
     <div>
@@ -18,6 +18,7 @@ function Home() {
           1000,
         ]}
       />
+      <Carousel />
     </div>
   );
 }

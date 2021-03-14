@@ -19,7 +19,7 @@ export const data = [
     solution: "IITJCTF",
     points: "100",
     hints: ["crypto", "mango"],
-    category: ["crypto"],
+    category: ["cryptography"],
     submissions: 0,
     accepted: 1,
   },

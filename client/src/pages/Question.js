@@ -3,7 +3,6 @@ import ProblemsPage from "./ProblemsPage";
 import QuestionCard from "../Components/QuestionCard";
 import { Link, withRouter } from "react-router-dom";
 function Question(props) {
-  console.log(props.history);
   return (
     <Link to={`/${props.history.location.pathname.split("/")[1]}`}>
       <div style={{ position: "relative" }}>
