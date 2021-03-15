@@ -29,7 +29,7 @@ export default function Allquestion({ category }) {
   });
   // console.log(data);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(8);
+  const [postsPerPage] = useState(6);
 
   if (error) {
     return (

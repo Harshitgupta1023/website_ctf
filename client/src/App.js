@@ -52,7 +52,6 @@ function App() {
             <Route exact path="/getstarted" component={Getstarted} />
             <Route exact path="/tools" component={Tools} />
             <Route exact path="/problems" component={CreateProblem} />
-
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             {sectionData.map((data, index) => {
@@ -65,7 +64,6 @@ function App() {
                 />
               );
             })}
-            <Route exact path="/:category/:id" component={Showquestion} />
           </Switch>
         </Router>
       </div>
