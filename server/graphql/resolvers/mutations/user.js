@@ -4,6 +4,8 @@ const path = require("path");
 const fs = require("fs");
 const upload = require("../../upload/upload");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { JWT_KEY } = require("../../../config");
 const sendMail = require("../../../middleware/sendGrid"); //Now using Send Grid, replaced Gmail API
 module.exports = {
   Mutation: {
