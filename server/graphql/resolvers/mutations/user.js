@@ -7,6 +7,14 @@ const fs = require("fs");
 const upload = require("../../upload/upload");
 const bcrypt = require("bcryptjs");
 const sendMail = require("../../../middleware/sendGrid"); //Now using Send Grid, replaced Gmail API
+
+const {
+  GMAIL_CLIENT_SECRET,
+  GMAIL_CLIENT_ID,
+  OAUTH_REFRESH_TOKEN,
+} = require("../../../config");
+const { OAuth2Client } = require("google-auth-library");
+
 module.exports = {
   Mutation: {
     createUser: async (root, args, { req }, info) => {
@@ -275,6 +283,47 @@ module.exports = {
       }
       throw new Error("OTP doesn't match");
     },
+    googleLogin: async (root, args, { req }, info) => {
+      const { id_token } = args;
+      const client = new OAuth2Client(GMAIL_CLIENT_ID);
+      const ticket = await client.verifyIdToken({
+        idToken: id_token,
+        audience: GMAIL_CLIENT_ID,
+      });
+      const payload = ticket.getPayload();
+      if (payload) {
+        const { iss, aud, email, exp, picture } = payload;
+        if (
+          iss !== "accounts.google.com" &&
+          iss !== "https://accounts.google.com"
+        ) {
+          throw new Error("Malicious Request");
+        }
+        if (aud !== GMAIL_CLIENT_ID) {
+          throw new Error("Malicious Request");
+        }
+        if (exp > Date.now()) {
+          throw new Error("Token Expired");
+        }
+        const username = email.split("@")[0];
+        let user = await User.findOne({ username: username, email: email });
+        if (!user) {
+          user = new User({
+            username: username,
+            password: await bcrypt.hash(generateRandomString(8), 12),
+            email: email,
+            verified: true,
+            imageURL: picture,
+          });
+          await user.save();
+        }
+        console.log(user);
+        const token = jwt.sign({ userData: user }, JWT_KEY, {
+          expiresIn: "1h",
+        });
+        return { userID: user.id, token: token, tokenExpiration: 1 };
+      }
+    },
   },
 };
 
@@ -286,6 +335,20 @@ const generateOTP = (length) => {
   return out;
 };
 const removeFile = (filePath) => {
+  if (filePath[0] == "h") {
+    return; //Since, the paths beginning with https are on google servers. So, no need to unlink them
+  }
   filePath = path.join(__dirname, "../../../", filePath);
   fs.unlink(filePath, (err) => console.log(err));
 };
+
+function generateRandomString(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
