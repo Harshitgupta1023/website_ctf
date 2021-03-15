@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PersonIcon from "@material-ui/icons/Person";
 import Badge from "@material-ui/core/Badge";
@@ -8,8 +8,10 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import { AuthContext } from "../context/auth";
 export default function Navbar(props) {
     const [anchorEl, setAnchorEl] = useState(null);
+    const { user, logout } = useContext(AuthContext);
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
     };
@@ -41,12 +43,12 @@ export default function Navbar(props) {
                     <Button>Create Problem</Button>
                 </Link>
             )}
-            {props.login ? (
+            {user ? (
                 <Link to="/login" className="header_links  links">
-                    <Button>Logout</Button>
+                    <Button onClick={() => logout()}>Logout</Button>
                 </Link>
             ) : (
-                <Link to="/getstarted" className="header_links  links">
+                <Link to="/login" className="header_links  links">
                     <Button>Login</Button>
                 </Link>
             )}
