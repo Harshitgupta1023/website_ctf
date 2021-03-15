@@ -1,11 +1,6 @@
 import "./App.css";
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Getstarted from "./pages/Getstarted";
 import Tools from "./pages/Tools";
@@ -16,28 +11,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { colors } from "./data/constants";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
-import Question from "./pages/Question";
-import { gql, useQuery } from "@apollo/client";
-import Alert from "@material-ui/lab/Alert";
-import AlertTitle from "@material-ui/lab/AlertTitle";
-import Loading from "./Components/Loading";
-
-const GET_PROBLEMS = gql`
-  query {
-    getProblems {
-      id
-      title
-      statement
-      solution
-      fileURL
-      points
-      hints
-      category
-      submissions
-      accepted
-    }
-  }
-`;
+import Showquestion from "./testing/Showquestion";
 
 const theme = createMuiTheme({
   palette: {
@@ -60,7 +34,7 @@ const theme = createMuiTheme({
 
 const sectionData = [
   "general-skills",
-  "crypto",
+  "cryptography",
   "web-exploitation",
   "reverse-engineering",
   "binary-exploitation",
@@ -68,18 +42,6 @@ const sectionData = [
 ];
 
 function App() {
-  const { data, error, loading } = useQuery(GET_PROBLEMS);
-  if (error) {
-    return (
-      <Alert severity="error">
-        <AlertTitle>Error</AlertTitle>
-        {error}
-      </Alert>
-    );
-  }
-  if (loading) return <Loading loading={loading} />;
-  const questions = data.getProblems;
-
   return (
     <MuiThemeProvider theme={theme}>
       <div className="App">
@@ -90,6 +52,7 @@ function App() {
             <Route exact path="/getstarted" component={Getstarted} />
             <Route exact path="/tools" component={Tools} />
             <Route exact path="/problems" component={CreateProblem} />
+
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             {sectionData.map((data, index) => {
@@ -102,27 +65,7 @@ function App() {
                 />
               );
             })}
-            {questions.map((ques) => {
-              console.log(`/${ques.category[0]}/${ques.id}`);
-              return (
-                <Route
-                  key={ques.id}
-                  exact
-                  path={`/${ques.category[0]}/${ques.id}`}
-                  component={() => (
-                    <Question
-                      id={ques.id}
-                      category={ques.category}
-                      points={ques.points}
-                      title={ques.title}
-                      statement={ques.statement}
-                      width={800}
-                      height={600}
-                    />
-                  )}
-                />
-              );
-            })}
+            <Route exact path="/:category/:id" component={Showquestion} />
           </Switch>
         </Router>
       </div>

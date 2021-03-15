@@ -7,7 +7,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
-import Grow from "@material-ui/core/Grow";
+import GetAppIcon from "@material-ui/icons/GetApp";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,23 +66,37 @@ export default function QuestionCard(props) {
           >
             {props.title}
           </Typography>
-          <Chip className={classes.pointss} label={props.points} />
+          {/* <Chip className={classes.pointss} label={props.points} /> */}
+          <Chip
+            // variant="outlined"
+            className={classes.pointss}
+            color="secondary"
+            label={props.points}
+          />
         </div>
         <div className={classes.pos} color="textSecondary">
-          {props.category.map((c) => (
-            <Chip key={c} label={c} style={{ margin: "3px" }} />
+          {props.category.map((c, ind) => (
+            <Chip
+              key={ind}
+              label={c}
+              style={{
+                margin: "3px",
+                border: ".5px solid white",
+              }}
+              // avatar={}
+            />
           ))}
         </div>
         <Typography variant="body2">{props.statement}</Typography>
         {props.fileURL && (
-          <Button variant="contained">
-            <a
-              href={`http://localhost:5000/uploads/${props.fileURL}`}
-              className="links"
-            >
-              File
-            </a>
-          </Button>
+          <a
+            href={`http://localhost:5000/uploads/${props.fileURL}`}
+            className="links"
+          >
+            <Button variant="contained" size="small">
+              <GetAppIcon fontSize="small" /> File
+            </Button>
+          </a>
         )}
       </CardContent>
       <CardActions>

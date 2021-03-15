@@ -1,3 +1,4 @@
+const { boolean } = require("joi");
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
@@ -18,6 +19,20 @@ const userSchema = new Schema(
     points: {
       type: Number,
       default: 0,
+    },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
+    verificationOTP: {
+      code: { type: Number },
+      count: { type: Number, default: 0 },
+      expTime: { type: Number },
+    },
+    forgotPassOTP: {
+      code: { type: Number },
+      count: { type: Number, default: 0 },
+      expTime: { type: Number },
     },
     solvedProblems: {
       type: Array,

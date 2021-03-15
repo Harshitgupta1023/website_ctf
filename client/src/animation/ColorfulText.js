@@ -4,7 +4,7 @@ import ReactDom from "react-dom";
 import {AnimatedText} from "./AnimatedText";
 
 
-function App(){
+function ColorfulText(){
     return (
             <div style={{
                 margin:"10% 2%"
@@ -19,4 +19,4 @@ function App(){
     );
 }
 
-export default App;
+export default ColorfulText;

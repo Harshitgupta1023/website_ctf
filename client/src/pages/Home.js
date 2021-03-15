@@ -17,7 +17,7 @@ import video from "../media/video.mp4";
 import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
-import App from "../index1";
+import ColorfulText from "../animation/ColorfulText";
 import Carousel from "../layout/Carousel";
 
 
@@ -31,12 +31,12 @@ function Copyright() {
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
+    </div>
+  );}
 
       
-    </div>
 
-  );
-}
+
 
 
 function Handles() {
@@ -136,7 +136,10 @@ export default function Home(){
    return (
     <div>
     <div container component="main" className= {classes.navbar}>
-      <Navbar condition="false" />
+    
+      <Navbar login tools home createProblems getStarted/>
+      {/* <TopicsSection /> */}
+  
     </div>
     <hr className={classes.hr}></hr>
     <div>
@@ -181,7 +184,7 @@ export default function Home(){
       </div>
       <div xs={12} sm={8} md={5} container component="main" className={classes.handleSec}>
           <Handles/>
-          <App/>
+          <ColorfulText/>
       </div>
       <div xs={12} sm={8} md={5} container component="main" className={classes.footer}>
       <Copyright />

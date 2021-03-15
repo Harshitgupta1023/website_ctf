@@ -3,7 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -157,10 +157,10 @@ export default function SignInSide() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2"></Link>
+                <Link to="#" variant="body2" className="links"></Link>
               </Grid>
               <Grid item>
-                <Link href="login" variant="body2">
+                <Link to="/login" variant="body2" className="links">
                   Already have an account? Log in
                 </Link>
               </Grid>

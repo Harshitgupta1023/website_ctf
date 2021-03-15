@@ -30,7 +30,6 @@ export default function SectionCard(props) {
   const { image, title, details, link, id } = props;
   return (
     <Grow
-      // onHover={console.log("NOw")}
       in={checked}
       style={{ transformOrigin: "0 0 0" }}
       {...(checked ? { timeout: 1000 * (id % 3 === 0 ? 3 : id % 3) } : {})}

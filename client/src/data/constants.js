@@ -35,7 +35,7 @@ export const sectionData = [
   },
   {
     id: 2,
-    category: "crypto",
+    category: "cryptography",
     title: "Cryptography",
     image: "crypto-logo.jpg",
     link: "/cryptography",
