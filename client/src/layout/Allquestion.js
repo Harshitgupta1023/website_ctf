@@ -6,7 +6,7 @@ import AlertTitle from "@material-ui/lab/AlertTitle";
 import Loading from "../Components/Loading";
 import Pagination from "./Pagination";
 
-var GET_PROBLEMS_BY_CATEGORY = gql`
+const GET_PROBLEMS_BY_CATEGORY = gql`
   query getProblemByCategory($category: String!) {
     getProblemsByCategory(category: $category) {
       id
@@ -27,7 +27,7 @@ export default function Allquestion({ category }) {
   const { data, error, loading } = useQuery(GET_PROBLEMS_BY_CATEGORY, {
     variables: { category },
   });
-  console.log(data);
+  // console.log(data);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
