@@ -34,6 +34,7 @@ module.exports = gql`
     ): User!
     updateUser(id: ID!, username: String, email: String, image: Upload): User!
     updatePassword(id: ID!, oldPassword: String!, newPassword: String!): User!
+    login(username: String, password: String!): AuthData!
     sendForgotPassOTP(username: String!, email: String!): User!
     sendVerificationOTP(id: ID!): User!
     forgotPassword(
