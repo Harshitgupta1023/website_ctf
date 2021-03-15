@@ -12,127 +12,127 @@
 } */
 
 :root {
-    --background-dark: #27234b;
-    --purple-pain: #8458b3;
-    --medium-purple: #d0bdf4;
-    --freeze-purple: #e5eaf5;
-    --ice-cold: #a0d2eb;
+  --background-dark: #27234b;
+  --purple-pain: #8458b3;
+  --medium-purple: #d0bdf4;
+  --freeze-purple: #e5eaf5;
+  --ice-cold: #a0d2eb;
 }
 
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    background-color: var(--background-dark);
-    background: url(media/bg-image.png) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    /* color: var(--text-primary); */
-    color: var(--text-color);
+  background-color: var(--background-dark);
+  background: url(media/bg-image.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* color: var(--text-primary); */
+  color: var(--text-color);
 }
 
 body {
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    line-height: 1.7;
-    /* padding: 1rem 1.5rem; */
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  /* padding: 1rem 1.5rem; */
 }
 
 .App {
-    height: 100vh;
-    width: 100%;
-    position: relative;
+  height: 100vh;
+  width: 100%;
+  position: relative;
 }
 
 .links,
 .links:hover,
 .links:active,
 .links:visited {
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    background: rgba(0, 0, 0, 0);
-    padding: 1px 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background: rgba(0, 0, 0, 0);
+  padding: 1px 1rem;
 }
 
 #app-logo {
-    flex: 2;
+  flex: 2;
 }
 
 .header_heading {
-    height: 90%;
-    font-family: "ZCOOL KuaiLe", cursive;
-    font-size: 2.5rem;
-    flex: 4;
+  height: 90%;
+  font-family: "ZCOOL KuaiLe", cursive;
+  font-size: 2.5rem;
+  flex: 4;
 }
 
 .header_heading:hover {
-    color: rgba(255, 255, 255, 0.9);
-    cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
 }
 
 .header_links {
-    /* border: 1px solid red; */
-    /* margin: 10px; */
-    flex: 0.5;
-    justify-self: center;
-    align-self: center;
-    text-align: center;
+  /* border: 1px solid red; */
+  /* margin: 10px; */
+  flex: 0.5;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
 }
 
 .main-container {
-    height: 100vh;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bottom-navigation {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .topics-section {
-    /* margin: 1rem;
+  /* margin: 1rem;
     margin-top: 1rem; */
-    /* display: flex;
+  /* display: flex;
   flex: 1 1 200px;
   flex-wrap: wrap;
   align-content: center;
   justify-content: space-around; */
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
-    grid-gap: 40px;
-    padding: 4rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  grid-gap: 40px;
+  padding: 4rem;
 }
 
 .topics-section > * {
-    justify-self: center;
-    align-self: center;
-    /* margin: 10px;
+  justify-self: center;
+  align-self: center;
+  /* margin: 10px;
     padding: 10px; */
 }
 
 .topics-section:last-child {
-    justify-self: flex-start;
-    align-self: flex-start;
+  justify-self: flex-start;
+  align-self: flex-start;
 }
 
 /* .topppp {
@@ -145,18 +145,22 @@ body {
 } */
 /* VIDEO BACKGROUND */
 .showcase video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    opacity: 0.8;
-    z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.8;
+  z-index: -1;
 }
 
 /* Pagination */
 .pagination {
-    width: 100%;
-    height: 50px;
+  width: 100%;
+  height: 50px;
+}
+
+.linkingSystem:hover {
+  background-color: white;
 }
