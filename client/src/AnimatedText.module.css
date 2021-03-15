@@ -1,0 +1,33 @@
+.animatedTextContainer {
+  position: relative;
+  cursor: default;
+  user-select: none;
+  --maskX: 0;
+  --maskY: 0;
+}
+
+.animatedTextContent {
+  color: #000000;
+  font-size: 60px;
+  font-family: "Akaya Telivigala", cursive;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 5px;
+  text-shadow: 5px 3px 8px rgba(0, 0, 0, 0.2);
+  margin: 0;
+}
+
+.animatedTextContentClone {
+  composes: animatedTextContent;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ffffff;
+  transition: all 0.4s ease-out;
+  clip-path: polygon(
+    0 0,
+    calc(var(--maskX) * 1% + (var(--maskY) -50) * 0.4%) 0,
+    calc(var(--maskX) * 1% + (var(--maskY) -50) * 0.4%) 100%,
+    0 100%
+  );
+}

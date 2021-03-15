@@ -26,27 +26,31 @@ function ConnectWith() {
 function Handles() {
   return (
     <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-      <a href="www.google.com">
+      <a href="https://google.com/" style={{
+            marginLeft: "20%",
+            marginTop: "2%"
+            
+          }}>
         <img
           alt="google"
           src={googleOAuth}
-          style={{
-            marginLeft: "20%",
-            marginTop: "3%",
+          style= {{
             height: "50px",
-            width: "50px",
+            width: "50px"
           }}
         />
       </a>
-      <Link href="">
+      <Link href="https://discord.com/" style={{
+            marginLeft: "45%",
+            marginTop: "2%"
+            
+          }}>
         <img
           alt="discord"
           src={discordOAuth}
           style={{
-            marginLeft: "40%",
-            marginTop: "3%",
             height: "50px",
-            width: "50px",
+            width: "50px"
           }}
         />
       </Link>
