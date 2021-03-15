@@ -16,156 +16,193 @@ import { button } from "../data/constants";
 import hackingOAuth from "../media/hacking.jpg";
 import discordOAuth from "../media/discord.svg";
 import googleOAuth from "../media/google.svg";
+import useForm from "../customHooks/useForm";
+import { gql, useMutation } from "@apollo/client";
 
 function ConnectWith() {
-  return (
-    <Typography variant="body2" color="white" align="center">
-      {"or connect with"}
-    </Typography>
-  );
+    return (
+        <Typography variant="body2" color="white" align="center">
+            {"or connect with"}
+        </Typography>
+    );
 }
 
 function Handles() {
-  return (
-    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-      <a href="www.google.com">
-        <img
-          alt="google"
-          src={googleOAuth}
-          style={{
-            marginLeft: "20%",
-            marginTop: "3%",
-            height: "50px",
-            width: "50px",
-          }}
-        />
-      </a>
-      <Link href="">
-        <img
-          alt="discord"
-          src={discordOAuth}
-          style={{
-            marginLeft: "40%",
-            marginTop: "3%",
-            height: "50px",
-            width: "50px",
-          }}
-        />
-      </Link>
-    </div>
-  );
+    return (
+        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <a href="www.google.com">
+                <img
+                    alt="google"
+                    src={googleOAuth}
+                    style={{
+                        marginLeft: "20%",
+                        marginTop: "3%",
+                        height: "50px",
+                        width: "50px",
+                    }}
+                />
+            </a>
+            <Link href="">
+                <img
+                    alt="discord"
+                    src={discordOAuth}
+                    style={{
+                        marginLeft: "40%",
+                        marginTop: "3%",
+                        height: "50px",
+                        width: "50px",
+                    }}
+                />
+            </Link>
+        </div>
+    );
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: `url(${hackingOAuth})`,
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[50]
-        : theme.palette.grey[900],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: button.buttonBackgroundColor,
-    color: button.buttonColor,
-    fontWeight: button.buttonFontWeight,
-    fontSize: button.buttonFontSize,
-    textTransform: button.buttonTextTransform,
-    "&:hover": {
-      backgroundColor: button.buttonHoverColor,
+    root: {
+        height: "100vh",
     },
-  },
+    image: {
+        backgroundImage: `url(${hackingOAuth})`,
+        backgroundColor:
+            theme.palette.type === "light"
+                ? theme.palette.grey[50]
+                : theme.palette.grey[900],
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+    },
+    paper: {
+        margin: theme.spacing(8, 4),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: "100%",
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+        backgroundColor: button.buttonBackgroundColor,
+        color: button.buttonColor,
+        fontWeight: button.buttonFontWeight,
+        fontSize: button.buttonFontSize,
+        textTransform: button.buttonTextTransform,
+        "&:hover": {
+            backgroundColor: button.buttonHoverColor,
+        },
+    },
 }));
 
-export default function SignInSide(props) {
-  const classes = useStyles();
+const LOGIN = gql`
+    mutation login($username: String!, $password: String!) {
+        login(username: $username, password: $password) {
+            userID
+            token
+        }
+    }
+`;
 
-  return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Log in
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
+export default function SignInSide(props) {
+    const classes = useStyles();
+    const [submitUser] = useMutation(LOGIN, {
+        onCompleted: () => console.log("User Logged In!!"),
+    });
+    const { formInputs, handleInputChange, handleSubmit } = useForm(
+        { username: "", password: "" },
+        () => {
+            submitUser({ variables: formInputs });
+            props.history.push("/");
+        }
+    );
+
+    return (
+        <Grid container component="main" className={classes.root}>
+            <CssBaseline />
+            <Grid item xs={false} sm={4} md={7} className={classes.image} />
+            <Grid
+                item
+                xs={12}
+                sm={8}
+                md={5}
+                component={Paper}
+                elevation={6}
+                square
             >
-              Log in
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to="#" variant="body2" className="links">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to="signup" variant="body2" className="links">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Log in
+                    </Typography>
+                    <form className={classes.form} onSubmit={handleSubmit}>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            onChange={handleInputChange}
+                            label="Username"
+                            name="username"
+                            value={formInputs.username}
+                            autoComplete="username"
+                            autoFocus
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            value={formInputs.password}
+                            onChange={handleInputChange}
+                            autoComplete="current-password"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox value="remember" color="primary" />
+                            }
+                            label="Remember me"
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Log in
+                        </Button>
+                        <Grid container>
+                            <Grid item xs>
+                                <Link to="#" variant="body2" className="links">
+                                    Forgot password?
+                                </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link
+                                    to="signup"
+                                    variant="body2"
+                                    className="links"
+                                >
+                                    {"Don't have an account? Sign Up"}
+                                </Link>
+                            </Grid>
+                        </Grid>
+                        <Box mt={5}>
+                            <ConnectWith />
+                            <Handles />
+                        </Box>
+                    </form>
+                </div>
             </Grid>
-            <Box mt={5}>
-              <ConnectWith />
-              <Handles />
-            </Box>
-          </form>
-        </div>
-      </Grid>
-    </Grid>
-  );
+        </Grid>
+    );
 }
