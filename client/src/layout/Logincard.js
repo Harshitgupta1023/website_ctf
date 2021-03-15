@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,7 +17,10 @@ import hackingOAuth from "../media/hacking.jpg";
 import discordOAuth from "../media/discord.svg";
 import googleOAuth from "../media/google.svg";
 import useForm from "../customHooks/useForm";
+import Loading from "../Components/Loading";
+import { AuthContext } from "../context/auth";
 import { gql, useMutation } from "@apollo/client";
+import { withRouter } from "react-router-dom";
 
 function ConnectWith() {
     return (
@@ -98,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const LOGIN = gql`
+const LOGIN_USER = gql`
     mutation login($username: String!, $password: String!) {
         login(username: $username, password: $password) {
             userID
@@ -107,19 +110,26 @@ const LOGIN = gql`
     }
 `;
 
-export default function SignInSide(props) {
+function SignInSide(props) {
     const classes = useStyles();
-    const [submitUser] = useMutation(LOGIN, {
-        onCompleted: () => console.log("User Logged In!!"),
+    const context = useContext(AuthContext);
+    const [loginUser, { loading }] = useMutation(LOGIN_USER, {
+        update(_, { data: { login: userData } }) {
+            context.login(userData);
+            console.log(userData);
+            props.history.push("/");
+        },
+        onError(err) {
+            console.log(err);
+        },
     });
     const { formInputs, handleInputChange, handleSubmit } = useForm(
         { username: "", password: "" },
         () => {
-            submitUser({ variables: formInputs });
-            props.history.push("/");
+            loginUser({ variables: formInputs });
         }
     );
-
+    if (loading) <Loading />;
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -182,7 +192,11 @@ export default function SignInSide(props) {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link to="#" variant="body2" className="links">
+                                <Link
+                                    to="signup"
+                                    variant="body2"
+                                    className="links"
+                                >
                                     Forgot password?
                                 </Link>
                             </Grid>
@@ -206,3 +220,5 @@ export default function SignInSide(props) {
         </Grid>
     );
 }
+
+export default withRouter(SignInSide);
