@@ -32,7 +32,9 @@ module.exports = {
         data["imageURL"] = await upload(image, "images");
       }
       const user = new User(data);
-      return await user.save();
+      console.log(user);
+      const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
+      return { userID: user.id, token: token, tokenExpiration: 1 };
     },
     updateUser: async (root, args, { req }, info) => {
       if (!req.isAuth) {
