@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import ColorfulText from "../animation/ColorfulText";
+import { AuthContext } from "../context/auth";
 export default function Navbar(props) {
+  const { user, logout } = useContext(AuthContext);
   return (
     <div className="header">
       <Link to="/" className="header_heading links">
@@ -28,12 +30,12 @@ export default function Navbar(props) {
           <Button>Create Problem</Button>
         </Link>
       )}
-      {props.login ? (
+      {user ? (
         <Link to="/login" className="header_links  links">
-          <Button>Logout</Button>
+          <Button onClick={() => logout()}>Logout</Button>
         </Link>
       ) : (
-        <Link to="/getstarted" className="header_links  links">
+        <Link to="/login" className="header_links  links">
           <Button>Login</Button>
         </Link>
       )}

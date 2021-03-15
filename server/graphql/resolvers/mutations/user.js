@@ -1,4 +1,6 @@
 const User = require("../../../models/User");
+const jwt = require("jsonwebtoken");
+const { JWT_KEY } = require("../../../config");
 const userValidator = require("../../validators/userValidators");
 const path = require("path");
 const fs = require("fs");
@@ -30,7 +32,9 @@ module.exports = {
         data["imageURL"] = await upload(image, "images");
       }
       const user = new User(data);
-      return await user.save();
+      console.log(user);
+      const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
+      return { userID: user.id, token: token, tokenExpiration: 1 };
     },
     updateUser: async (root, args, { req }, info) => {
       if (!req.isAuth) {
@@ -116,6 +120,19 @@ module.exports = {
         await removeFile(data.imageURL);
       }
       return await User.findByIdAndRemove(id);
+    },
+    login: async (root, args, { req }, info) => {
+      let { username, password } = args;
+      let user = await User.findOne({ username: username });
+      if (!user) {
+        throw new Error("User doesn't exist!");
+      }
+      const isAuth = await bcrypt.compare(password, user.password);
+      if (!isAuth) {
+        throw new Error("Password Incorrect!");
+      }
+      const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
+      return { userID: user.id, token: token, tokenExpiration: 1 };
     },
     sendVerificationOTP: async (root, args, { req }, info) => {
       if (!req.isAuth) {

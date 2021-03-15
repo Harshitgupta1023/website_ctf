@@ -9,6 +9,9 @@ import ProblemsPage from "./pages/ProblemsPage";
 import CreateProblem from "./pages/CreateProblem";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import { AuthProvider } from "./context/auth";
+import AuthRoute from "./utils/AuthRoute";
+import ProtectedRoute from "./utils/ProtectedRoute";
 import { colors } from "./data/constants";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import Showquestion from "./testing/Showquestion";
@@ -43,31 +46,39 @@ const sectionData = [
 
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
-      <div className="App">
-        <BackgroundVideo />
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/getstarted" component={Getstarted} />
-            <Route exact path="/tools" component={Tools} />
-            <Route exact path="/problems" component={CreateProblem} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            {sectionData.map((data, index) => {
-              return (
-                <Route
-                  exact
-                  key={index}
-                  path={`/${data}`}
-                  component={() => <ProblemsPage category={data} />}
-                />
-              );
-            })}
-          </Switch>
-        </Router>
-      </div>
-    </MuiThemeProvider>
+    <AuthProvider>
+      <MuiThemeProvider theme={theme}>
+        <div className="App">
+          <BackgroundVideo />
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/getstarted" component={Getstarted} />
+              <Route exact path="/tools" component={Tools} />
+              <Route exact path="/problems" component={CreateProblem} />
+
+              <AuthRoute exact path="/login" component={Login} />
+              <AuthRoute exact path="/signup" component={Signup} />
+              {sectionData.map((data, index) => {
+                return (
+                  <Route
+                    exact
+                    key={index}
+                    path={`/${data}`}
+                    component={() => <ProblemsPage category={data} />}
+                  />
+                );
+              })}
+              <ProtectedRoute
+                exact
+                path="/:category/:id"
+                component={Showquestion}
+              />
+            </Switch>
+          </Router>
+        </div>
+      </MuiThemeProvider>
+    </AuthProvider>
   );
 }
 
