@@ -19,6 +19,11 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
 import ColorfulText from "../animation/ColorfulText";
 import Carousel from "../layout/Carousel";
+import crypto from "../media/cryptography.jpg";
+import forensics from "../media/forensics.jpg";
+import reverseEngineering from "../media/reverse-engineering.jpg";
+import webExploitation from "../media/web-exploitation.jpg";
+import binaryExploitation from "../media/binary-exploitation.jpg";
 
 
 function Copyright() {
@@ -34,49 +39,105 @@ function Copyright() {
     </div>
   );}
 
-      
+  
+  function InfoAboutSite(){
+    const classes = useStyles();
+    return (
+      <div>
+          <p style={{
+            margin: "0 40% 4%",
+            fontSize: "3.5rem",
+            color: "white",
+            fontWeight: "bolder"
+          }}>Categories</p>
+  
+          <div  xs={12} sm={8} md={5} className={classes.infoRow}>
+
+            <img src={crypto} className={classes.imageLayoutLeft} ></img>
+
+            <h1 className={classes.headingInfoAboutSite}>Cryptography</h1>
+
+            <p className={classes.paraInfoAboutSite}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+            </p>
+
+          </div>
+
+
+          <div  xs={12} sm={8} md={5} className={classes.infoRow}>
+
+            <img src={webExploitation} className={classes.imageLayoutRight} ></img>
+
+            <h1 className={classes.headingInfoAboutSite}>Web Exploitation</h1>
+
+            <p className={classes.paraInfoAboutSite}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+            </p>
+
+          </div>
+
+
+          <div  xs={12} sm={8} md={5} className={classes.infoRow}>
+
+            <img src={binaryExploitation} className={classes.imageLayoutLeft} ></img>
+
+            <h1 className={classes.headingInfoAboutSite}>Binary Exploitation</h1>
+
+            <p className={classes.paraInfoAboutSite}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+            </p>
+          
+          </div>
+
+
+          <div  xs={12} sm={8} md={5} className={classes.infoRow}>
+
+            <img src={forensics} className={classes.imageLayoutRight} ></img>
+
+            <h1 className={classes.headingInfoAboutSite}>Forensics</h1>
+
+            <p className={classes.paraInfoAboutSite}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+            </p>
+          
+          </div>
+
+
+          <div  xs={12} sm={8} md={5} className={classes.infoRow}>
+
+            <img src={reverseEngineering} className={classes.imageLayoutLeft} ></img>
+
+            <h1 className={classes.headingInfoAboutSite}>Reverse Engineering</h1>
+
+            <p className={classes.paraInfoAboutSite}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+            </p>
+          
+          </div>
+
+      </div>
+    );
+  }
 
 
 
 
 function Handles() {
+  const classes = useStyles();
   return (
-    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6" >
+    <div>
       
-      <a href="https://google.com" className= "linkingSystem" style={{
+      <a className={classes.handlesLinks} href="https://google.com" style={{
         marginLeft:"15%",
         marginRight: "18.5%",
-        paddingTop: "22px"
-       
       }} >
-        <EmailIcon style={{
-            height: "35px",
-            width: "35px",
-            borderRadius: "50%"
-          }}/>
+        <EmailIcon className={classes.handlesIcons}/>
       </a>
 
       
-      <a  href="https://github.com/Harshitgupta1023/website_ctf.git" className= "linkingSystem" style={{
+      <a   className={classes.handlesLinks} href="https://github.com/Harshitgupta1023/website_ctf.git" style={{
         marginRight: "18.5%",
-        paddingTop: "22px"
-        
       }}>
-        <GitHubIcon style={{
-            height: "35px",
-            width: "35px",
-            borderRadius: "50%"
-          }}/>
+        <GitHubIcon className={classes.handlesIcons}/>
       </a>
       
-      <a className= "linkingSystem" href="https://instagram.com" style={{
-        paddingTop: "22px"
-      }}>
-        <InstagramIcon style={{
-            height: "35px",
-            width: "35px",
-            borderRadius: "50%"
-          }}/>
+      <a className={classes.handlesLinks} href="https://instagram.com">
+        <InstagramIcon className={classes.handlesIcons}/>
       </a>
     </div>
   );
@@ -108,7 +169,8 @@ const useStyles = makeStyles((theme) => ({
   },
   infoAboutSite:{
     backgroundColor: home.backgroundSecondary,
-    height: "200vh"
+    height: "320vh",
+    padding: "5% 10%"
   },
   carousel:{
     backgroundColor: home.backgroundPrimary,
@@ -125,10 +187,61 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1rem",
     color:"white",
     padding: "0.5% 42% 0"
+  },
+
+  infoRow:{
+  width: "80%",
+  margin: "10% auto 15% auto",
+  textAlign: "left",
+  lineHeight: "1"
+  },
+
+  imageLayoutLeft:{
+    width: "35%",
+    borderRadius: "50%",
+    float: "left",
+    marginRight: "30px"
+  },
+
+  imageLayoutRight:{
+    width: "35%",
+    borderRadius: "50%",
+    float: "right",
+    marginLeft: "30px"
+  },
+
+  headingInfoAboutSite:{
+    color: "gold",
+    marginBottom: "3%",
+    fontSize: "2.5rem"
+  },
+
+  paraInfoAboutSite:{
+    color: "white",
+    fontSize: "1rem",
+    lineHeight: "1.2"
+  },
+
+  handlesIcons:{
+    height: "35px",
+    width: "35px",
+    color: "white",
+  },
+
+  handlesLinks:{
+    "&:hover": {
+      backgroundColor: "#9c9c9c",
+  },
+    paddingTop: "22px",
+    borderRadius: "30%"
+
   }
 
 
+
 }));
+
+
 
 
 export default function Home(){
@@ -177,7 +290,7 @@ export default function Home(){
       </Grid>
       <hr className={classes.hr}></hr>
       <div xs={12} sm={8} md={5} container component="main" className={classes.infoAboutSite}> 
-                  
+         <InfoAboutSite/>         
       </div>
       <div xs={12} sm={8} md={5} container component="main" className={classes.carousel}> 
                   <Carousel/>
