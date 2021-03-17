@@ -40,7 +40,7 @@ function Copyright() {
   );}
 
   
-  function InfoAboutSite(){
+  function CategoriesSection(){
     const classes = useStyles();
     return (
       <div>
@@ -51,61 +51,61 @@ function Copyright() {
             fontWeight: "bolder"
           }}>Categories</p>
   
-          <div  xs={12} sm={8} md={5} className={classes.infoRow}>
+          <div  xs={12} sm={8} md={5} className={classes.categoriesRow}>
 
             <img src={crypto} className={classes.imageLayoutLeft} ></img>
 
-            <h1 className={classes.headingInfoAboutSite}>Cryptography</h1>
+            <h1 className={classes.headingCategoriesSection}>Cryptography</h1>
 
-            <p className={classes.paraInfoAboutSite}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+            <p className={classes.paraCategoriesSection}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
             </p>
 
           </div>
 
 
-          <div  xs={12} sm={8} md={5} className={classes.infoRow}>
+          <div  xs={12} sm={8} md={5} className={classes.categoriesRow}>
 
             <img src={webExploitation} className={classes.imageLayoutRight} ></img>
 
-            <h1 className={classes.headingInfoAboutSite}>Web Exploitation</h1>
+            <h1 className={classes.headingCategoriesSection}>Web Exploitation</h1>
 
-            <p className={classes.paraInfoAboutSite}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+            <p className={classes.paraCategoriesSection}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
             </p>
 
           </div>
 
 
-          <div  xs={12} sm={8} md={5} className={classes.infoRow}>
+          <div  xs={12} sm={8} md={5} className={classes.categoriesRow}>
 
             <img src={binaryExploitation} className={classes.imageLayoutLeft} ></img>
 
-            <h1 className={classes.headingInfoAboutSite}>Binary Exploitation</h1>
+            <h1 className={classes.headingCategoriesSection}>Binary Exploitation</h1>
 
-            <p className={classes.paraInfoAboutSite}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+            <p className={classes.paraCategoriesSection}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
             </p>
           
           </div>
 
 
-          <div  xs={12} sm={8} md={5} className={classes.infoRow}>
+          <div  xs={12} sm={8} md={5} className={classes.categoriesRow}>
 
             <img src={forensics} className={classes.imageLayoutRight} ></img>
 
-            <h1 className={classes.headingInfoAboutSite}>Forensics</h1>
+            <h1 className={classes.headingCategoriesSection}>Forensics</h1>
 
-            <p className={classes.paraInfoAboutSite}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+            <p className={classes.paraCategoriesSection}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
             </p>
           
           </div>
 
 
-          <div  xs={12} sm={8} md={5} className={classes.infoRow}>
+          <div  xs={12} sm={8} md={5} className={classes.categoriesRow}>
 
             <img src={reverseEngineering} className={classes.imageLayoutLeft} ></img>
 
-            <h1 className={classes.headingInfoAboutSite}>Reverse Engineering</h1>
+            <h1 className={classes.headingCategoriesSection}>Reverse Engineering</h1>
 
-            <p className={classes.paraInfoAboutSite}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+            <p className={classes.paraCategoriesSection}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt. Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris pellentesque ultricies. Phasellus eget tortor ac orci aliquam bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in. Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio, ut vestibulum enim lectus vitae ante. Integer at erat euismod, lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
             </p>
           
           </div>
@@ -167,7 +167,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     backgroundColor: home.backgroundPrimary,
   },
-  infoAboutSite:{
+  categoriesSection:{
     backgroundColor: home.backgroundSecondary,
     height: "320vh",
     padding: "5% 10%"
@@ -189,7 +189,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.5% 42% 0"
   },
 
-  infoRow:{
+  categoriesRow:{
   width: "80%",
   margin: "10% auto 15% auto",
   textAlign: "left",
@@ -210,13 +210,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "30px"
   },
 
-  headingInfoAboutSite:{
+  headingCategoriesSection:{
     color: "gold",
     marginBottom: "3%",
     fontSize: "2.5rem"
   },
 
-  paraInfoAboutSite:{
+  paraCategoriesSection:{
     color: "white",
     fontSize: "1rem",
     lineHeight: "1.2"
@@ -289,8 +289,8 @@ export default function Home(){
       </Grid>
       </Grid>
       <hr className={classes.hr}></hr>
-      <div xs={12} sm={8} md={5} container component="main" className={classes.infoAboutSite}> 
-         <InfoAboutSite/>         
+      <div xs={12} sm={8} md={5} container component="main" className={classes.categoriesSection}> 
+         <CategoriesSection/>         
       </div>
       <div xs={12} sm={8} md={5} container component="main" className={classes.carousel}> 
                   <Carousel/>
