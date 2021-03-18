@@ -46,5 +46,6 @@ module.exports = gql`
     verifyAccount(id: ID!, OTP: Int!): User!
     deleteUser(id: ID!): User
     googleLogin(id_token: String!): AuthData!
+    githubLogin(code: String!): AuthData!
   }
 `;

@@ -4,16 +4,18 @@ const { JWT_KEY } = require("../../../config");
 const userValidator = require("../../validators/userValidators");
 const path = require("path");
 const fs = require("fs");
+const axios = require("axios");
 const upload = require("../../upload/upload");
 const bcrypt = require("bcryptjs");
 const sendMail = require("../../../middleware/sendGrid"); //Now using Send Grid, replaced Gmail API
 
 const {
-  GMAIL_CLIENT_SECRET,
   GMAIL_CLIENT_ID,
-  OAUTH_REFRESH_TOKEN,
+  GITHUB_CLIENT_ID,
+  GITHUB_CLIENT_SECRET,
 } = require("../../../config");
 const { OAuth2Client } = require("google-auth-library");
+const { response } = require("express");
 
 module.exports = {
   Mutation: {
@@ -40,7 +42,7 @@ module.exports = {
         data["imageURL"] = await upload(image, "images");
       }
       const user = new User(data);
-      console.log(user);
+      user.save();
       const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
       return { userID: user.id, token: token, tokenExpiration: 1 };
     },
@@ -315,6 +317,8 @@ module.exports = {
             verified: true,
             imageURL: picture,
           });
+          // Here we have just created a random string and hashed it. No copy of the password is retained. As this user will alwas use google as sign in medium.
+          // If somehow user gets locked. There's no way to regain the account access
           await user.save();
         }
         console.log(user);
@@ -323,6 +327,52 @@ module.exports = {
         });
         return { userID: user.id, token: token, tokenExpiration: 1 };
       }
+    },
+    githubLogin: async (root, args, { req }, info) => {
+      const { code } = args;
+      const body = {
+        client_id: GITHUB_CLIENT_ID,
+        client_secret: GITHUB_CLIENT_SECRET,
+        code: code,
+      };
+      const opts = { headers: { accept: "application/json" } };
+      const resp = await axios.post(
+        `https://github.com/login/oauth/access_token`,
+        body,
+        opts
+      );
+      const token = resp.data["access_token"];
+      const githubRes = await axios.get("https://api.github.com/user", {
+        headers: { Authorization: "token " + token },
+      });
+      const userData = githubRes.data;
+      console.log(userData);
+      if (!userData.email) {
+        throw new Error(
+          "Email not public. Please make your email public from Github account settings to use this method of SignUp"
+        );
+      }
+      let user = await User.findOne({
+        username: userData.login,
+        email: userData.email,
+      });
+      if (!user) {
+        user = new User({
+          username: userData.login,
+          password: await bcrypt.hash(generateRandomString(8), 12),
+          email: userData.email,
+          verified: true,
+          imageURL: userData.avatar_url,
+        });
+        // Here we have just created a random string and hashed it. No copy of the password is retained. As this user will alwas use google as sign in medium.
+        // If somehow user gets locked. There's no way to regain the account access
+        await user.save();
+      }
+      console.log(user);
+      const jwt_token = jwt.sign({ userData: user }, JWT_KEY, {
+        expiresIn: "1h",
+      });
+      return { userID: user.id, token: jwt_token, tokenExpiration: 1 };
     },
   },
 };
