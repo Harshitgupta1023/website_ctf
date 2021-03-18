@@ -32,8 +32,17 @@ module.exports = gql`
       password: String!
       image: Upload
     ): AuthData!
-    updateUser(id: ID!, username: String, email: String, image: Upload): User!
-    updatePassword(id: ID!, oldPassword: String!, newPassword: String!): User!
+    updateUser(
+      id: ID!
+      username: String
+      email: String
+      image: Upload
+    ): AuthData!
+    updatePassword(
+      id: ID!
+      oldPassword: String!
+      newPassword: String!
+    ): AuthData!
     login(username: String, password: String!): AuthData!
     sendForgotPassOTP(username: String!, email: String!): User!
     sendVerificationOTP(id: ID!): User!
@@ -42,11 +51,11 @@ module.exports = gql`
       email: String!
       OTP: Int!
       newPassword: String!
-    ): User!
-    verifyAccount(id: ID!, OTP: Int!): User!
+    ): AuthData!
+    verifyAccount(id: ID!, OTP: Int!): AuthData!
     deleteUser(id: ID!): User
     googleLogin(id_token: String!): AuthData!
     githubLogin(code: String!): AuthData!
-    makeSubmission(id: ID!, problemID: ID!, submission: String): User!
+    makeSubmission(id: ID!, problemID: ID!, submission: String): AuthData!
   }
 `;

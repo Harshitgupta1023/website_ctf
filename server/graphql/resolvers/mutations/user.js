@@ -90,7 +90,10 @@ module.exports = {
           oldData[i] = data[i];
         }
         await oldData.save();
-        return oldData;
+        const token = jwt.sign({ userData: oldData }, JWT_KEY, {
+          expiresIn: "1h",
+        });
+        return { userID: oldData.id, token: token, tokenExpiration: 1 };
       } else {
         throw new error("User Not Found");
       }
@@ -115,7 +118,8 @@ module.exports = {
       }
       user.password = await bcrypt.hash(password, 12);
       await user.save();
-      return user;
+      const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
+      return { userID: user.id, token: token, tokenExpiration: 1 };
     },
     deleteUser: async (root, args, { req }, info) => {
       if (!req.isAuth) {
@@ -255,7 +259,10 @@ module.exports = {
           user.verificationOTP.code = null;
           user.verificationOTP.expTime = null;
           await user.save();
-          return user;
+          const token = jwt.sign({ userData: user }, JWT_KEY, {
+            expiresIn: "1h",
+          });
+          return { userID: user.id, token: token, tokenExpiration: 1 };
         }
       }
       throw new Error("OTP doesn't match");
@@ -280,7 +287,10 @@ module.exports = {
           user.forgotPassOTP.code = null;
           user.forgotPassOTP.expTime = null;
           await user.save();
-          return user;
+          const token = jwt.sign({ userData: user }, JWT_KEY, {
+            expiresIn: "1h",
+          });
+          return { userID: user.id, token: token, tokenExpiration: 1 };
         }
       }
       throw new Error("OTP doesn't match");
@@ -390,7 +400,7 @@ module.exports = {
         );
       }
       let prob = await Problem.findById(problemID);
-      if (await bcrypt.compare(submission, prob.solution)) {
+      if (await bcrypt.compare(submission.trim(), prob.solution)) {
         if (!user.solvedProblems.includes(problemID)) {
           user.solvedProblems.push(problemID);
           user.points += prob.points;
@@ -398,9 +408,10 @@ module.exports = {
         prob.accepted += 1;
       }
       prob.submissions += 1;
-      prob.save();
-      user.save();
-      return user;
+      await prob.save();
+      await user.save();
+      const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
+      return { userID: user.id, token: token, tokenExpiration: 1 };
     },
   },
 };
