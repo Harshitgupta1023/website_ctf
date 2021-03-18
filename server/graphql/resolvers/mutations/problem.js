@@ -1,6 +1,7 @@
 const Problem = require("../../../models/Problem");
 const ProblemValidator = require("../../validators/problemValidators");
 const path = require("path");
+const bcrypt = require("bcryptjs");
 const fs = require("fs");
 const upload = require("../../upload/upload");
 
@@ -21,7 +22,7 @@ module.exports = {
       let data = {
         title: title,
         statement: statement,
-        solution: solution,
+        solution: await bcrypt.hash(solution, 12),
         points: points,
         category: category,
         hints: hints,
@@ -58,7 +59,9 @@ module.exports = {
 
         data["title"] = title ? title : oldData["title"];
         data["statement"] = statement ? statement : oldData["statement"];
-        data["solution"] = solution ? solution : oldData["solution"];
+        data["solution"] = solution
+          ? await bcrypt.hash(solution, 12)
+          : oldData["solution"];
         data["points"] = points ? points : oldData["points"];
         data["category"] = category ? category : oldData["category"];
         data["hints"] = hints ? hints : oldData["hints"];

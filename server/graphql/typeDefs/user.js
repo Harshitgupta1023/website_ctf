@@ -10,7 +10,7 @@ module.exports = gql`
     verified: Boolean
     verificationOTP: OTP
     forgotPassOTP: OTP
-    solved: [String]
+    solvedProblems: [String]
   }
   type AuthData {
     userID: ID!
@@ -47,5 +47,6 @@ module.exports = gql`
     deleteUser(id: ID!): User
     googleLogin(id_token: String!): AuthData!
     githubLogin(code: String!): AuthData!
+    makeSubmission(id: ID!, problemID: ID!, submission: String): User!
   }
 `;
