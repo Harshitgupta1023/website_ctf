@@ -1,4 +1,5 @@
 const User = require("../../../models/User");
+const Problem = require("../../../models/Problem");
 const jwt = require("jsonwebtoken");
 const { JWT_KEY } = require("../../../config");
 const userValidator = require("../../validators/userValidators");
@@ -15,7 +16,6 @@ const {
   GITHUB_CLIENT_SECRET,
 } = require("../../../config");
 const { OAuth2Client } = require("google-auth-library");
-const { response } = require("express");
 
 module.exports = {
   Mutation: {
@@ -373,6 +373,34 @@ module.exports = {
         expiresIn: "1h",
       });
       return { userID: user.id, token: jwt_token, tokenExpiration: 1 };
+    },
+    makeSubmission: async (root, args, { req }, info) => {
+      if (!req.isAuth) {
+        throw new Error("Unauthenticated! Please Login");
+      }
+      let { id, problemID, submission } = args;
+      console.log(args);
+      if (req.userID != id && !req.isAdmin) {
+        throw new Error("Unauthorized");
+      }
+      let user = await User.findById(id);
+      if (!user.verified) {
+        throw new Error(
+          "You need to verify your email address before making any submissions"
+        );
+      }
+      let prob = await Problem.findById(problemID);
+      if (await bcrypt.compare(submission, prob.solution)) {
+        if (!user.solvedProblems.includes(problemID)) {
+          user.solvedProblems.push(problemID);
+          user.points += prob.points;
+        }
+        prob.accepted += 1;
+      }
+      prob.submissions += 1;
+      prob.save();
+      user.save();
+      return user;
     },
   },
 };
