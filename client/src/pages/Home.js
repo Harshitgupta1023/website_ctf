@@ -307,12 +307,12 @@ export default function Home() {
         <Navbar login tools home getStarted />
         {/* <TopicsSection /> */}
       </div>
-      <div xs={12} sm={8} md={5} container component="main" className={classes.handleSec}>
+      {/* <div xs={12} sm={8} md={5} container component="main" className={classes.handleSec}>
           <Handles/>
           <ColorfulText text="SeekhoCTF"/>
       </div>
       <div xs={12} sm={8} md={5} container component="main" className={classes.footer}>
-      <Copyright />
+      <Copyright /> */}
       <hr className={classes.hr}></hr>
       <div>
         <Grid container component="main" className={classes.root}>
@@ -379,13 +379,13 @@ export default function Home() {
           className={classes.handleSec}
         >
           <Handles />
-          <ColorfulText />
+          <ColorfulText text="SeekhoCTF"/>
         </div>
         <div xs={12} sm={8} md={5} component="main" className={classes.footer}>
           <Copyright />
         </div>
       </div>
     </div>
-  </div>
+
   );
 }
