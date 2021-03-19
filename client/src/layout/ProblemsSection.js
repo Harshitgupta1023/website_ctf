@@ -20,7 +20,6 @@ function ProblemsSection(props) {
   const [ids, setIds] = React.useState("");
 
   const handleClickOpen = (a) => {
-    console.log(a);
     setOpen(true);
   };
   const handleClose = () => {
@@ -39,7 +38,9 @@ function ProblemsSection(props) {
           }}
         >
           <QuestionCard
-            // onClick={() => handleClickOpen}
+            onClick={() => handleClickOpen}
+            width={350}
+            height={250}
             category={question.category}
             className="question"
             points={question.points}

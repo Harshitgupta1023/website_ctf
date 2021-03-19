@@ -44,7 +44,10 @@ export default function QuestionCard(props) {
   return (
     <Card
       className={props.apply ? "" : classes.root}
-      style={{ width: props.width, height: props.height }}
+      style={{
+        width: props.width ? props.width : "100%",
+        height: props.height,
+      }}
       variant="outlined"
     >
       <CardContent>
