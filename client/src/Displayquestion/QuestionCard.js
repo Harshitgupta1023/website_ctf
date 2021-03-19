@@ -86,9 +86,9 @@ export default function QuestionCard(props) {
         {props.answer && (
           <Mainbody statement={props.statement} hints={props.hints} />
         )}
-
         {props.answer && (
           <Answerpart
+            problemID={props.id}
             fileURL={props.fileURL}
             submissions={props.submissions}
             accepted={props.accepted}
