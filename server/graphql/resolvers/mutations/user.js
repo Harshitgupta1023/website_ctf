@@ -1,17 +1,19 @@
 const User = require("../../../models/User");
+const Problem = require("../../../models/Problem");
 const jwt = require("jsonwebtoken");
 const { JWT_KEY } = require("../../../config");
 const userValidator = require("../../validators/userValidators");
 const path = require("path");
 const fs = require("fs");
+const axios = require("axios");
 const upload = require("../../upload/upload");
 const bcrypt = require("bcryptjs");
 const sendMail = require("../../../middleware/sendGrid"); //Now using Send Grid, replaced Gmail API
 
 const {
-  GMAIL_CLIENT_SECRET,
   GMAIL_CLIENT_ID,
-  OAUTH_REFRESH_TOKEN,
+  GITHUB_CLIENT_ID,
+  GITHUB_CLIENT_SECRET,
 } = require("../../../config");
 const { OAuth2Client } = require("google-auth-library");
 
@@ -40,7 +42,7 @@ module.exports = {
         data["imageURL"] = await upload(image, "images");
       }
       const user = new User(data);
-      console.log(user);
+      user.save();
       const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
       return { userID: user.id, token: token, tokenExpiration: 1 };
     },
@@ -88,7 +90,10 @@ module.exports = {
           oldData[i] = data[i];
         }
         await oldData.save();
-        return oldData;
+        const token = jwt.sign({ userData: oldData }, JWT_KEY, {
+          expiresIn: "1h",
+        });
+        return { userID: oldData.id, token: token, tokenExpiration: 1 };
       } else {
         throw new error("User Not Found");
       }
@@ -113,7 +118,8 @@ module.exports = {
       }
       user.password = await bcrypt.hash(password, 12);
       await user.save();
-      return user;
+      const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
+      return { userID: user.id, token: token, tokenExpiration: 1 };
     },
     deleteUser: async (root, args, { req }, info) => {
       if (!req.isAuth) {
@@ -253,7 +259,10 @@ module.exports = {
           user.verificationOTP.code = null;
           user.verificationOTP.expTime = null;
           await user.save();
-          return user;
+          const token = jwt.sign({ userData: user }, JWT_KEY, {
+            expiresIn: "1h",
+          });
+          return { userID: user.id, token: token, tokenExpiration: 1 };
         }
       }
       throw new Error("OTP doesn't match");
@@ -278,7 +287,10 @@ module.exports = {
           user.forgotPassOTP.code = null;
           user.forgotPassOTP.expTime = null;
           await user.save();
-          return user;
+          const token = jwt.sign({ userData: user }, JWT_KEY, {
+            expiresIn: "1h",
+          });
+          return { userID: user.id, token: token, tokenExpiration: 1 };
         }
       }
       throw new Error("OTP doesn't match");
@@ -306,23 +318,116 @@ module.exports = {
           throw new Error("Token Expired");
         }
         const username = email.split("@")[0];
-        let user = await User.findOne({ username: username, email: email });
+        let user = await User.findOne({ email: email });
         if (!user) {
-          user = new User({
+          let userA = await User.findOne({ username: username });
+          let userDetails = {
             username: username,
             password: await bcrypt.hash(generateRandomString(8), 12),
+            // Here we have just created a random string and hashed it. No copy of the password is retained. As this user will alwas use google as sign in medium.
+            // If somehow user gets locked. There's no way to regain the account access
             email: email,
             verified: true,
             imageURL: picture,
-          });
+          };
+          if (userA) {
+            userDetails["username"] = username + generateRandomString(4);
+          }
+          user = new User(userDetails);
           await user.save();
+        } else {
+          if (!user.verified) {
+            await User.findOneAndDelete({ email: email });
+            let userDetails = {
+              username: username,
+              password: await bcrypt.hash(generateRandomString(8), 12),
+              email: email,
+              verified: true,
+              imageURL: picture,
+            };
+            user = new User(userDetails);
+            user.save();
+          }
         }
-        console.log(user);
         const token = jwt.sign({ userData: user }, JWT_KEY, {
           expiresIn: "1h",
         });
         return { userID: user.id, token: token, tokenExpiration: 1 };
       }
+    },
+    githubLogin: async (root, args, { req }, info) => {
+      const { code } = args;
+      const body = {
+        client_id: GITHUB_CLIENT_ID,
+        client_secret: GITHUB_CLIENT_SECRET,
+        code: code,
+      };
+      const opts = { headers: { accept: "application/json" } };
+      const resp = await axios.post(
+        `https://github.com/login/oauth/access_token`,
+        body,
+        opts
+      );
+      const token = resp.data["access_token"];
+      const githubRes = await axios.get("https://api.github.com/user", {
+        headers: { Authorization: "token " + token },
+      });
+      const userData = githubRes.data;
+      if (!userData.email) {
+        throw new Error(
+          "Email not public. Please make your email public from Github account settings to use this method of SignUp"
+        );
+      }
+      let user = await User.findOne({
+        email: userData.email,
+      });
+      if (!user) {
+        let userA = await User.findOne({ username: userData.login });
+        let userDetails = {
+          username: userData.login,
+          password: await bcrypt.hash(generateRandomString(8), 12),
+          email: userData.email,
+          verified: true,
+          imageURL: userData.avatar_url,
+        };
+        if (userA) {
+          userDetails["username"] = userData.login + generateRandomString(4);
+        }
+        user = new User(userDetails);
+        await user.save();
+      }
+      const jwt_token = jwt.sign({ userData: user }, JWT_KEY, {
+        expiresIn: "1h",
+      });
+      return { userID: user.id, token: jwt_token, tokenExpiration: 1 };
+    },
+    makeSubmission: async (root, args, { req }, info) => {
+      if (!req.isAuth) {
+        throw new Error("Unauthenticated! Please Login");
+      }
+      let { id, problemID, submission } = args;
+      if (req.userID != id && !req.isAdmin) {
+        throw new Error("Unauthorized");
+      }
+      let user = await User.findById(id);
+      if (!user.verified) {
+        throw new Error(
+          "You need to verify your email address before making any submissions"
+        );
+      }
+      let prob = await Problem.findById(problemID);
+      if (await bcrypt.compare(submission.trim(), prob.solution)) {
+        if (!user.solvedProblems.includes(problemID)) {
+          user.solvedProblems.push(problemID);
+          user.points += prob.points;
+        }
+        prob.accepted += 1;
+      }
+      prob.submissions += 1;
+      await prob.save();
+      await user.save();
+      const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
+      return { userID: user.id, token: token, tokenExpiration: 1 };
     },
   },
 };

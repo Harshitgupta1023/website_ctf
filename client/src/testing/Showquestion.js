@@ -3,7 +3,7 @@ import { gql, useQuery } from "@apollo/client";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 import Loading from "../Components/Loading";
-import QuestionCard from "../Components/QuestionCard";
+import QuestionCard from "../Displayquestion/QuestionCard";
 const GET_PROBLEM = gql`
   query getProblem($id: ID!) {
     getProblem(id: $id) {
@@ -39,13 +39,20 @@ export default function Showquestion(props) {
   const ques = data.getProblem;
   return (
     <QuestionCard
-      width={800}
-      height={600}
+      apply
+      answer
+      width={600}
+      height={1000}
       id={ques.id}
       category={ques.category}
       points={ques.points}
       title={ques.title}
       statement={ques.statement}
+      hints={ques.hints}
+      solution={ques.solution}
+      submissions={ques.submissions}
+      accepted={ques.accepted}
+      fileURL={ques.fileURL}
     />
   );
 }
