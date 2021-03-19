@@ -7,6 +7,7 @@ import Tools from "./pages/Tools";
 import BackgroundVideo from "./layout/BackgroundVideo";
 import ProblemsPage from "./pages/ProblemsPage";
 import CreateProblem from "./pages/CreateProblem";
+import VerifyUser from "./pages/VerifyUser";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { AuthProvider } from "./context/auth";
@@ -56,7 +57,7 @@ function App() {
               <Route exact path="/getstarted" component={Getstarted} />
               <Route exact path="/tools" component={Tools} />
               <Route exact path="/problems" component={CreateProblem} />
-
+              <Route exact path="/user/verify" component={VerifyUser} />
               <AuthRoute exact path="/login" component={Login} />
               <AuthRoute exact path="/signup" component={Signup} />
               {sectionData.map((data, index) => {
