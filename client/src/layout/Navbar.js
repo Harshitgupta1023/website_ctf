@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import ColorfulText from "../animation/ColorfulText";
 import { AuthContext } from "../context/auth";
 export default function Navbar(props) {
   const { user, logout } = useContext(AuthContext);
