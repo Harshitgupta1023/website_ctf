@@ -416,16 +416,19 @@ module.exports = {
         );
       }
       let prob = await Problem.findById(problemID);
+      prob.submissions += 1;
       if (await bcrypt.compare(submission.trim(), prob.solution)) {
         if (!user.solvedProblems.includes(problemID)) {
           user.solvedProblems.push(problemID);
           user.points += prob.points;
         }
         prob.accepted += 1;
+        await prob.save();
+        await user.save();
+      } else {
+        await prob.save();
+        throw new Error("Wrong Answer");
       }
-      prob.submissions += 1;
-      await prob.save();
-      await user.save();
       const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
       return { userID: user.id, token: token, tokenExpiration: 1 };
     },
