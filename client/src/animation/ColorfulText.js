@@ -4,7 +4,7 @@ import ReactDom from "react-dom";
 import {AnimatedText} from "./AnimatedText";
 
 
-function ColorfulText(){
+function ColorfulText(props){
     return (
             <div style={{
                 margin:"10% 2%"
@@ -12,7 +12,7 @@ function ColorfulText(){
                 <AnimatedText
                 textColor="white"
                 overlayColor="gold">
-                    SeekhoCTF
+                    {props.text}
                 </AnimatedText>
             </div>
             

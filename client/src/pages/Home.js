@@ -297,7 +297,7 @@ export default function Home(){
       </div>
       <div xs={12} sm={8} md={5} container component="main" className={classes.handleSec}>
           <Handles/>
-          <ColorfulText/>
+          <ColorfulText text="SeekhoCTF"/>
       </div>
       <div xs={12} sm={8} md={5} container component="main" className={classes.footer}>
       <Copyright />
