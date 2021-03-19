@@ -1,5 +1,5 @@
 import React from "react";
-import QuestionCard from "../Components/QuestionCard";
+import QuestionCard from "../Displayquestion/QuestionCard";
 import { makeStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 import Showquestion from "../testing/Showquestion";
@@ -46,6 +46,7 @@ function ProblemsSection(props) {
             title={question.title}
             statement={question.statement}
             fileURL={question.fileURL}
+            hints={question.hints}
           />
           {/* </Link> */}
         </div>
