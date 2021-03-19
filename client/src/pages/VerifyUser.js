@@ -33,15 +33,14 @@ const SEND_VERIFICATION_OTP = gql`
 const VERIFY_ACCOUNT = gql`
   mutation verifyAccount($id: ID!, $OTP: Int!) {
     verifyAccount(id: $id, OTP: $OTP) {
-      id
-      email
-      username
+      userID
+      token
     }
   }
 `;
 
 export default function FormDialog(props) {
-  const { user } = useContext(AuthContext);
+  const { user, updateUser } = useContext(AuthContext);
   const [otp, setOtp] = useState(0);
   const [sendVerificationOTP] = useMutation(SEND_VERIFICATION_OTP, {
     onCompleted: () => {
@@ -56,10 +55,11 @@ export default function FormDialog(props) {
     },
   });
   const [verifyAccount, { loading }] = useMutation(VERIFY_ACCOUNT, {
-    onCompleted: () => {
+    onCompleted: (data) => {
       setMessage("Your Email has been verified.");
       setSeverity("success");
       setOpen(true);
+      updateUser(data.verifyAccount.token);
       props.setOpen(false);
     },
     onError(err) {

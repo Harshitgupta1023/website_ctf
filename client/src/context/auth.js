@@ -16,6 +16,7 @@ const AuthContext = createContext({
   user: null,
   login: (userData) => {},
   logout: () => {},
+  updateUser: () => {},
 });
 
 const authReducer = (state, action) => {
@@ -25,10 +26,10 @@ const authReducer = (state, action) => {
         ...state,
         user: action.payload,
       };
-    case "VERIFY_USER":
+    case "UPDATE_USER":
       return {
         ...state,
-        user: { ...action.payload, verified: true },
+        user: action.payload,
       };
     case "LOGOUT":
       return {
@@ -53,6 +54,16 @@ function AuthProvider(props) {
     });
   }
 
+  function updateUser(token) {
+    const decodedToken = jwtDecode(token);
+    const userData = decodedToken.userData;
+    localStorage.setItem("jwtToken", token);
+    dispatch({
+      type: "UPDATE_USER",
+      payload: userData,
+    });
+  }
+
   function logout() {
     localStorage.removeItem("jwtToken");
     dispatch({ type: "LOGOUT" });
@@ -60,7 +71,7 @@ function AuthProvider(props) {
 
   return (
     <AuthContext.Provider
-      value={{ user: state.user, login, logout }}
+      value={{ user: state.user, login, logout, updateUser }}
       {...props}
     />
   );
