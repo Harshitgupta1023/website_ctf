@@ -303,8 +303,8 @@ export default function Home() {
   const classes = useStyles();
   return (
     <div>
-      <div container component="main" className={classes.navbar}>
-        <Navbar login tools home createProblems getStarted />
+      <div component="main" className={classes.navbar}>
+        <Navbar login tools home getStarted />
         {/* <TopicsSection /> */}
       </div>
       <hr className={classes.hr}></hr>
@@ -351,7 +351,6 @@ export default function Home() {
           xs={12}
           sm={8}
           md={5}
-          container
           component="main"
           className={classes.categoriesSection}
         >
@@ -361,7 +360,6 @@ export default function Home() {
           xs={12}
           sm={8}
           md={5}
-          container
           component="main"
           className={classes.carousel}
         >
@@ -371,21 +369,13 @@ export default function Home() {
           xs={12}
           sm={8}
           md={5}
-          container
           component="main"
           className={classes.handleSec}
         >
           <Handles />
           <ColorfulText />
         </div>
-        <div
-          xs={12}
-          sm={8}
-          md={5}
-          container
-          component="main"
-          className={classes.footer}
-        >
+        <div xs={12} sm={8} md={5} component="main" className={classes.footer}>
           <Copyright />
         </div>
       </div>
