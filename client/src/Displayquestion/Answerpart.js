@@ -14,10 +14,10 @@ const useStyles = makeStyles((theme) => ({
   },
   answer: {
     position: "absolute",
-    bottom: 50,
+    marginTop: 20,
     display: "flex",
     justifyContent: "space-between",
-    width: "95%",
+    width: "90%",
   },
   body: {
     flexGrow: 1,
@@ -28,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "gray",
   },
   answercontainer: {
+    marginTop: 10,
     display: "flex",
-    width: "100%",
+    width: "90%",
   },
 }));
 

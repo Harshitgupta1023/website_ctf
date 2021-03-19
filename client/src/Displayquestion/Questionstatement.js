@@ -1,21 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  container: {
     display: "flex",
-  },
-  //   toolbar: theme.mixins.toolbar,
-  //   drawerPaper: {
-  // width: drawerWidth,
-  //   },
-  content: {
-    height: 200,
-    flexGrow: 1,
-    // padding: theme.spacing(3),
+    flexDirection: "row",
+    height: 300,
   },
 }));
 
@@ -23,9 +13,10 @@ export default function Questionstatement(props) {
   const classes = useStyles();
 
   return (
-    <main className={classes.content}>
-      <h1>Question</h1>
-      <Typography paragraph>{props.statement}</Typography>
-    </main>
+    <div className={classes.container}>
+      <div className="center-col">
+        <p>{props.statement} </p>
+      </div>
+    </div>
   );
 }

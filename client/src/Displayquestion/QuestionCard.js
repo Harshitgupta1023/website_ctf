@@ -83,11 +83,9 @@ export default function QuestionCard(props) {
         </div>
         {props.answer && <Divider />}
         <br></br>
-        <div>
-          {props.answer && (
-            <Mainbody statement={props.statement} hints={props.hints} />
-          )}
-        </div>
+        {props.answer && (
+          <Mainbody statement={props.statement} hints={props.hints} />
+        )}
 
         {props.answer && (
           <Answerpart

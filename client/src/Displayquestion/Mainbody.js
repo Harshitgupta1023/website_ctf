@@ -6,6 +6,7 @@ import Hints from "./Hints";
 import Questionstatement from "./Questionstatement";
 const useStyles = makeStyles((theme) => ({
   body: {
+    width: "95%",
     flexGrow: 1,
   },
 }));
@@ -16,7 +17,8 @@ export default function Mainbody(props) {
   return (
     <div className={classes.body}>
       <Grid container spacing={3}>
-        <Grid item xs={8} sm={8} style={{ height: 200 }}>
+        <Grid item xs={8} sm={8}>
+          <h2>Question</h2>
           <Questionstatement statement={props.statement} />
         </Grid>
         <Grid item xs={4} sm={4}>
