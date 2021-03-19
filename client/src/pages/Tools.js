@@ -8,6 +8,7 @@ import Box from "@material-ui/core/Box";
 import { tools } from "../data/constants";
 import Navbar from "../layout/Navbar";
 import ToolsCard from "../Components/ToolsCard";
+import BouncingText from "../animation/BouncingText";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -128,9 +129,11 @@ export default function VerticalTabs() {
             {...a11yProps(4)}
           />
         </Tabs>
+
         <TabPanel value={value} index={0}>
           <p className={classes.content}>
-            Cryptography
+            <BouncingText text="Cryptography" />
+
             <div
               style={{
                 display: "flex",
@@ -146,16 +149,24 @@ export default function VerticalTabs() {
           </p>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <p className={classes.content}>Web Exploitation</p>
+          <p className={classes.content}>
+            <BouncingText text="Web Exploitation" />
+          </p>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <p className={classes.content}>Bianry Exploitation</p>
+          <p className={classes.content}>
+            <BouncingText text="Binanry Exploitation" />
+          </p>
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <p className={classes.content}>Forensics</p>
+          <p className={classes.content}>
+            <BouncingText text="Forensics" />
+          </p>
         </TabPanel>
         <TabPanel value={value} index={4}>
-          <p className={classes.content}>Reverse Engineering</p>
+          <p className={classes.content}>
+            <BouncingText text="Reverse Engineering" />
+          </p>
         </TabPanel>
       </div>
     </div>
