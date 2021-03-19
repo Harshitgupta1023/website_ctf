@@ -318,20 +318,37 @@ module.exports = {
           throw new Error("Token Expired");
         }
         const username = email.split("@")[0];
-        let user = await User.findOne({ username: username, email: email });
+        let user = await User.findOne({ email: email });
         if (!user) {
-          user = new User({
+          let userA = await User.findOne({ username: username });
+          let userDetails = {
             username: username,
             password: await bcrypt.hash(generateRandomString(8), 12),
+            // Here we have just created a random string and hashed it. No copy of the password is retained. As this user will alwas use google as sign in medium.
+            // If somehow user gets locked. There's no way to regain the account access
             email: email,
             verified: true,
             imageURL: picture,
-          });
-          // Here we have just created a random string and hashed it. No copy of the password is retained. As this user will alwas use google as sign in medium.
-          // If somehow user gets locked. There's no way to regain the account access
+          };
+          if (userA) {
+            userDetails["username"] = username + generateRandomString(4);
+          }
+          user = new User(userDetails);
           await user.save();
+        } else {
+          if (!user.verified) {
+            await User.findOneAndDelete({ email: email });
+            let userDetails = {
+              username: username,
+              password: await bcrypt.hash(generateRandomString(8), 12),
+              email: email,
+              verified: true,
+              imageURL: picture,
+            };
+            user = new User(userDetails);
+            user.save();
+          }
         }
-        console.log(user);
         const token = jwt.sign({ userData: user }, JWT_KEY, {
           expiresIn: "1h",
         });
@@ -356,29 +373,29 @@ module.exports = {
         headers: { Authorization: "token " + token },
       });
       const userData = githubRes.data;
-      console.log(userData);
       if (!userData.email) {
         throw new Error(
           "Email not public. Please make your email public from Github account settings to use this method of SignUp"
         );
       }
       let user = await User.findOne({
-        username: userData.login,
         email: userData.email,
       });
       if (!user) {
-        user = new User({
+        let userA = await User.findOne({ username: userData.login });
+        let userDetails = {
           username: userData.login,
           password: await bcrypt.hash(generateRandomString(8), 12),
           email: userData.email,
           verified: true,
           imageURL: userData.avatar_url,
-        });
-        // Here we have just created a random string and hashed it. No copy of the password is retained. As this user will alwas use google as sign in medium.
-        // If somehow user gets locked. There's no way to regain the account access
+        };
+        if (userA) {
+          userDetails["username"] = userData.login + generateRandomString(4);
+        }
+        user = new User(userDetails);
         await user.save();
       }
-      console.log(user);
       const jwt_token = jwt.sign({ userData: user }, JWT_KEY, {
         expiresIn: "1h",
       });
@@ -389,7 +406,6 @@ module.exports = {
         throw new Error("Unauthenticated! Please Login");
       }
       let { id, problemID, submission } = args;
-      console.log(args);
       if (req.userID != id && !req.isAdmin) {
         throw new Error("Unauthorized");
       }
