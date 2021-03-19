@@ -7,6 +7,7 @@ import Chip from "@material-ui/core/Chip";
 import { Divider } from "@material-ui/core";
 import Answerpart from "./Answerpart";
 import Mainbody from "./Mainbody";
+import Tick from "../media/green_tick.svg";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 300,
@@ -83,6 +84,20 @@ export default function QuestionCard(props) {
         </div>
         {props.answer && <Divider />}
         <br></br>
+        {props.solved && (
+          <div style={{ width: 130 }}>
+            <h2 style={{ display: "inline" }}>Solved</h2>
+            <img
+              alt="tick"
+              src={Tick}
+              style={{
+                float: "right",
+                height: "38px",
+                width: "30px",
+              }}
+            />
+          </div>
+        )}
         {props.answer && (
           <Mainbody statement={props.statement} hints={props.hints} />
         )}

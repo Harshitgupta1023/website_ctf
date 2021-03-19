@@ -5,6 +5,8 @@ import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 import Loading from "../Components/Loading";
 import Pagination from "./Pagination";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth";
 
 const GET_PROBLEMS_BY_CATEGORY = gql`
   query getProblemByCategory($category: String!) {
@@ -30,7 +32,7 @@ export default function Allquestion({ category }) {
   // console.log(data);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);
-
+  const { user } = useContext(AuthContext);
   if (error) {
     return (
       <Alert severity="error">
@@ -53,6 +55,8 @@ export default function Allquestion({ category }) {
     <div>
       <div className="pagination">
         <Pagination
+          points={user.points}
+          solved={user.solvedProblems.length}
           postsPerPage={postsPerPage}
           totalPosts={questions.length}
           paginate={paginate}

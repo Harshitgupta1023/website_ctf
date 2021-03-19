@@ -379,13 +379,12 @@ export default function Home() {
           className={classes.handleSec}
         >
           <Handles />
-          <ColorfulText text="SeekhoCTF"/>
+          <ColorfulText text="SeekhoCTF" />
         </div>
         <div xs={12} sm={8} md={5} component="main" className={classes.footer}>
           <Copyright />
         </div>
       </div>
     </div>
-
   );
 }

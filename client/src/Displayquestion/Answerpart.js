@@ -21,7 +21,10 @@ const SUBMIT_ANSWER = gql`
 `;
 const useStyles = makeStyles((theme) => ({
   textfield: {
-    width: "70%",
+    width: "80%",
+  },
+  buttonfield: {
+    marginLeft: 30,
   },
   answer: {
     position: "absolute",
@@ -41,7 +44,8 @@ const useStyles = makeStyles((theme) => ({
   answercontainer: {
     marginTop: 10,
     display: "flex",
-    width: "90%",
+    // justifyContent:"center",
+    width: "100%",
   },
 }));
 
@@ -94,13 +98,14 @@ export default function Answerpart(props) {
             </a>
           )}
         </Grid>
-        <CardActions className={classes.answercontainer}>
+        <CardActions style={{ width: 600 }}>
           <form
-            className={classes.textfield}
+            className={classes.answercontainer}
             onSubmit={handleSubmit}
             autoComplete="off"
           >
             <TextField
+              className={classes.textfield}
               fullWidth
               id="filled-basic"
               label="IITJCTF{flag}"
@@ -111,8 +116,8 @@ export default function Answerpart(props) {
               value={ans}
             />
             <Button
+              className={classes.buttonfield}
               type="submit"
-              style={{ marginLeft: 10 }}
               variant="contained"
             >
               Submit
