@@ -129,7 +129,6 @@ export default function UpdateProblem(props) {
       file: null,
     },
     () => {
-      //   console.log(formInputs);
       submitProblem({
         variables: {
           id,
