@@ -4,6 +4,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import Navbar from "../layout/Navbar";
 import { AuthContext } from "../context/auth";
 import FormDialog from "./VerifyUser";
+import Button from "@material-ui/core/Button";
 
 function Alert(props) {
   return (
@@ -15,22 +16,18 @@ function Alert(props) {
 
 function Getstarted() {
   const { user } = useContext(AuthContext);
-  console.log(user);
   const [open, setOpen] = useState(false);
   return (
     <div>
       <Navbar home="true" />
       {user && !user.verified && (
-        <div
-          onClick={(e) => setOpen((prev) => setOpen(!prev))}
-          style={{ cursor: "pointer" }}
-        >
+        <Button onClick={(e) => setOpen(true)} style={{ width: "100%" }}>
           <Alert severity="warning">
             Your account has not been verified. Click to Verify.
           </Alert>
-        </div>
+        </Button>
       )}
-      {user && !user.verified && <FormDialog open={open} setOpen={setOpen} />}
+      <FormDialog open={open} setOpen={setOpen} />
       <TopicsSection />
     </div>
   );

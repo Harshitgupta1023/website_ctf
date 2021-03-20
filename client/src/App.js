@@ -58,9 +58,15 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route exact path="/getstarted" component={Getstarted} />
               <Route exact path="/tools" component={Tools} />
-              <Route exact path="/problems" component={CreateProblem} />
+              <ProtectedRoute
+                exact
+                path="/problems"
+                component={CreateProblem}
+              />
               <Route exact path="/user/verify" component={VerifyUser} />
-              <AuthRoute exact path="/login" component={Login} />
+              <AuthRoute path="/login" component={Login} />
+              {/* Important for Callback */}
+              <AuthRoute exact path="/callback" component={Login} />
               <AuthRoute exact path="/signup" component={Signup} />
               <AuthRoute exact path="/forgotPass" component={ForgotPass} />
               {sectionData.map((data, index) => {

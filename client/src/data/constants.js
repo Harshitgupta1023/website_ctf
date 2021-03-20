@@ -9,6 +9,12 @@ export const colors = {
   textPrimary: "#fff",
 };
 
+export const clients = {
+  GOOGLE_CLIENT_ID:
+    "1099211349164-8cjb0n7v47e83ftbp1eomrc80nkrri70.apps.googleusercontent.com",
+  GITHUB_CLIENT_ID: "ed484ec2e37a4ae61e1b",
+};
+
 export const button = {
   buttonBackgroundColor: "#f50057",
   buttonHoverColor: "#dc004e",
@@ -21,12 +27,12 @@ export const button = {
 export const home = {
   backgroundPrimary: "#1A202C",
   backgroundSecondary: "#2D3748",
-}
+};
 
 export const tools = {
   backgroundPrimary: "#1A202C",
   backgroundSecondary: "#2D3748",
-}
+};
 
 export const sectionData = [
   {
