@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,9 +8,23 @@ import { Divider } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Confeti from "./Confeti";
+import { gql, useMutation } from "@apollo/client";
+import { AuthContext } from "../context/auth";
+
+const SUBMIT_ANSWER = gql`
+  mutation makeSubmission($id: ID!, $problemID: ID!, $submission: String) {
+    makeSubmission(id: $id, problemID: $problemID, submission: $submission) {
+      userID
+      token
+    }
+  }
+`;
 const useStyles = makeStyles((theme) => ({
   textfield: {
-    width: "70%",
+    width: "80%",
+  },
+  buttonfield: {
+    marginLeft: 30,
   },
   answer: {
     position: "absolute",
@@ -30,20 +44,37 @@ const useStyles = makeStyles((theme) => ({
   answercontainer: {
     marginTop: 10,
     display: "flex",
-    width: "90%",
+    // justifyContent:"center",
+    width: "100%",
   },
 }));
 
 export default function Answerpart(props) {
   const classes = useStyles();
+  const [show, setShow] = useState(false);
+  const [submitProblem] = useMutation(SUBMIT_ANSWER, {
+    onCompleted(data) {
+      setShow(true);
+      updateUser(data.makeSubmission.token);
+    },
+    onError(err) {
+      console.log(err);
+    },
+  });
+  const { user, updateUser } = useContext(AuthContext);
   const [ans, setAns] = useState(props.answer);
   function handlechange(event) {
     setAns(event.target.value);
   }
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitProblem({
+      variables: { problemID: props.problemID, submission: ans, id: user._id },
+    });
+  };
   return (
     <div>
-      {ans === props.solution ? <Confeti /> : null}
+      {show ? <Confeti /> : null}
       <Grid container spacing={3} className={classes.answer}>
         <Grid item xs={12} className={classes.submissionstats}>
           <Typography variant="p">
@@ -67,9 +98,14 @@ export default function Answerpart(props) {
             </a>
           )}
         </Grid>
-        <CardActions className={classes.answercontainer}>
-          <form className={classes.textfield} noValidate autoComplete="off">
+        <CardActions style={{ width: 600 }}>
+          <form
+            className={classes.answercontainer}
+            onSubmit={handleSubmit}
+            autoComplete="off"
+          >
             <TextField
+              className={classes.textfield}
               fullWidth
               id="filled-basic"
               label="IITJCTF{flag}"
@@ -77,11 +113,16 @@ export default function Answerpart(props) {
               onChange={(event) => {
                 handlechange(event);
               }}
+              value={ans}
             />
+            <Button
+              className={classes.buttonfield}
+              type="submit"
+              variant="contained"
+            >
+              Submit
+            </Button>
           </form>
-          <Button style={{ marginLeft: 100 }} variant="contained">
-            Submit
-          </Button>
         </CardActions>
       </Grid>
     </div>

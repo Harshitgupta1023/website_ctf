@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import TopicsSection from "../layout/TopicsSection";
 import MuiAlert from "@material-ui/lab/Alert";
 import Navbar from "../layout/Navbar";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth";
 import FormDialog from "./VerifyUser";
 

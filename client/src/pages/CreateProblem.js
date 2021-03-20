@@ -124,6 +124,7 @@ export default function CreateProblem({ history }) {
         onSubmit={handleSubmit}
         className={classes.root}
         style={{
+          backgroundColor: "black",
           position: "relative",
           left: "50%",
           transform: "translateX(-50%)",

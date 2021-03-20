@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 import Showquestion from "../testing/Showquestion";
 import { Dialog } from "@material-ui/core";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth";
 const useStyles = makeStyles(() => ({
   topppp: {
     transition: "all 0.2s ease-in-out",
@@ -25,6 +27,7 @@ function ProblemsSection(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="topics-section">
@@ -40,6 +43,9 @@ function ProblemsSection(props) {
           <QuestionCard
             onClick={() => handleClickOpen}
             width={350}
+            solved={
+              user.solvedProblems.indexOf(question.id) === -1 ? false : true
+            }
             height={250}
             category={question.category}
             className="question"

@@ -23,6 +23,11 @@ export const home = {
   backgroundSecondary: "#2D3748",
 }
 
+export const tools = {
+  backgroundPrimary: "#1A202C",
+  backgroundSecondary: "#2D3748",
+}
+
 export const sectionData = [
   {
     id: 1,
