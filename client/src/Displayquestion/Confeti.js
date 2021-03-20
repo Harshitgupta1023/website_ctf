@@ -1,5 +1,7 @@
 import React from "react";
 import Confetti from "react-confetti";
+import Typing from "../animation/Congratulations";
+
 
 export default function Confeti() {
   return (
@@ -8,15 +10,25 @@ export default function Confeti() {
       <p
         style={{
           position: "absolute",
-          bottom: 350,
-          left: 120,
-          fontSize: 40,
+          bottom: "45%",
+          left: "27%",
+          fontSize: "1rem",
           fontFamily: "Sofia",
           color: "gold",
-          backgroundColor: "#424242",
+          backgroundColor: "#1A202C",
         }}
       >
-        🎉 Congratulation{" "}
+  
+                <Typing
+                  words={[
+                    '🎉Congrats ',
+                    2500,
+                    "You solved It",
+                    2500
+                  ]}
+                />
+
+        {/* 🎉 Congratulations {" "} */}
       </p>
     </div>
   );
