@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,7 +10,8 @@ import Mainbody from "./Mainbody";
 import Tick from "../media/green_tick.svg";
 import { Link } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
-
+import { admin_username } from "../config";
+import { AuthContext } from "../context/auth";
 const DELETE_PROBLEM = gql`
   mutation deleteProblem($id: ID!) {
     deleteProblem(id: $id) {
@@ -64,6 +65,7 @@ export default function QuestionCard(props) {
   const [removeProblem] = useMutation(DELETE_PROBLEM, {
     onCompleted: (dat) => console.log(dat),
   });
+  const { user } = useContext(AuthContext);
 
   function handleDelete() {
     removeProblem({ variables: { id } });
@@ -93,7 +95,7 @@ export default function QuestionCard(props) {
           <Typography className={classes.questiontitle} variant="h4">
             {props.title}
           </Typography>
-          {props.answer && (
+          {props.answer && admin_username.includes(user.username) && (
             <Link
               to={`${props.location}/updateproblems/${props.id}`}
               className="links"
@@ -101,7 +103,7 @@ export default function QuestionCard(props) {
               <Button variant="contained">Update</Button>
             </Link>
           )}
-          {props.answer && (
+          {props.answer && admin_username.includes(user.username) && (
             <Button variant="contained" onClick={handleDelete}>
               Delete
             </Button>
