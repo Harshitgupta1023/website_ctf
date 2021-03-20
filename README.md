@@ -47,3 +47,5 @@ This will automatically open up the website in your default browser (Remember ru
 ## Contribution Guide
 
 We are open to contribution. If you find any issues and want to contribute feel free to raise an issue or create a PR.
+
+To contact us, email us on seekhoCTF@gmail.com
