@@ -16,7 +16,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import { colors } from "./data/constants";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import Showquestion from "./testing/Showquestion";
-import {home} from ".//data/constants"
+import { home } from ".//data/constants";
 import ForgotPass from "./pages/ForgotPass";
 import UpdateProblem from "./pages/UpdateProblem";
 
@@ -63,7 +63,7 @@ function App() {
               <Route exact path="/problems" component={CreateProblem} />
               <Route
                 exact
-                path="/updateproblems/:id"
+                path="/:category/updateproblems/:id"
                 component={UpdateProblem}
               />
               <Route exact path="/user/verify" component={VerifyUser} />

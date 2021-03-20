@@ -114,7 +114,7 @@ export default function UpdateProblem(props) {
   const { data } = useQuery(GET_PROBLEM, {
     variables: { id },
   });
-  console.log(data);
+  //   console.log(props);
   const [submitProblem] = useMutation(UPDATE_PROBLEM, {
     onCompleted: (dat) => console.log(dat),
   });
@@ -129,8 +129,20 @@ export default function UpdateProblem(props) {
       file: null,
     },
     () => {
-      submitProblem({ variables: id, formInputs });
-      props.history.push("/");
+      //   console.log(formInputs);
+      submitProblem({
+        variables: {
+          id,
+          title: formInputs.title,
+          statement: formInputs.statement,
+          solution: formInputs.solution,
+          hints: formInputs.hints,
+          category: formInputs.category,
+          points: formInputs.points,
+          file: formInputs.file,
+        },
+      });
+      props.history.push(`/${props.match.params.category}`);
     }
   );
   const classes = useStyles();
@@ -220,7 +232,7 @@ export default function UpdateProblem(props) {
             value={formInputs.hints.join()}
             className={classes.textField}
             name="hints"
-            helperText="Enter multiple hints separated by commas"
+            helperText="Enter multiple hints separated by commas minium three letters !!"
             margin="dense"
             onChange={handleInputChange}
           />

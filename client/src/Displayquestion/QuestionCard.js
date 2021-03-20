@@ -9,6 +9,7 @@ import Answerpart from "./Answerpart";
 import Mainbody from "./Mainbody";
 import Tick from "../media/green_tick.svg";
 import { Link } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 300,
@@ -65,10 +66,14 @@ export default function QuestionCard(props) {
             {props.title}
           </Typography>
           {props.answer && (
-            <Link to={`/updateproblems/${props.id}`} className="links">
+            <Link
+              to={`${props.location}/updateproblems/${props.id}`}
+              className="links"
+            >
               <Button variant="contained">Update</Button>
             </Link>
           )}
+          {props.answer && <Button variant="contained">Delete</Button>}
           <Chip
             className={classes.pointss}
             color="secondary"
