@@ -16,6 +16,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import { colors } from "./data/constants";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import Showquestion from "./testing/Showquestion";
+import ForgotPass from "./pages/ForgotPass";
 
 const theme = createMuiTheme({
   palette: {
@@ -60,6 +61,7 @@ function App() {
               <Route exact path="/user/verify" component={VerifyUser} />
               <AuthRoute exact path="/login" component={Login} />
               <AuthRoute exact path="/signup" component={Signup} />
+              <AuthRoute exact path="/forgotPass" component={ForgotPass} />
               {sectionData.map((data, index) => {
                 return (
                   <Route
