@@ -192,7 +192,7 @@ function SignInSide(props) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to="signup" variant="body2" className="links">
+                <Link to="forgotPass" variant="body2" className="links">
                   Forgot password?
                 </Link>
               </Grid>

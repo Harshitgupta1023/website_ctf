@@ -7,8 +7,7 @@ const initialState = {
 
 if (localStorage.getItem("jwtToken")) {
   const decodedToken = jwtDecode(localStorage.getItem("jwtToken"));
-  if (decodedToken.tokenExpiration * 100 < Date.now())
-    localStorage.removeItem("jwtToken");
+  if (decodedToken.exp * 1000 < Date.now()) localStorage.removeItem("jwtToken");
   else initialState.user = decodedToken.userData;
 }
 
@@ -57,6 +56,7 @@ function AuthProvider(props) {
   function updateUser(token) {
     const decodedToken = jwtDecode(token);
     const userData = decodedToken.userData;
+    localStorage.removeItem("jwtToken");
     localStorage.setItem("jwtToken", token);
     dispatch({
       type: "UPDATE_USER",
