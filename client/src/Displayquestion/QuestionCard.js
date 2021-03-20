@@ -4,10 +4,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
-import { Divider } from "@material-ui/core";
+import { Button, Divider } from "@material-ui/core";
 import Answerpart from "./Answerpart";
 import Mainbody from "./Mainbody";
 import Tick from "../media/green_tick.svg";
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 300,
@@ -63,6 +64,11 @@ export default function QuestionCard(props) {
           <Typography className={classes.questiontitle} variant="h4">
             {props.title}
           </Typography>
+          {props.answer && (
+            <Link to={`/updateproblems/${props.id}`} className="links">
+              <Button variant="contained">Update</Button>
+            </Link>
+          )}
           <Chip
             className={classes.pointss}
             color="secondary"

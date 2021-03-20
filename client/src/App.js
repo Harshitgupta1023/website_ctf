@@ -17,6 +17,7 @@ import { colors } from "./data/constants";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import Showquestion from "./testing/Showquestion";
 import ForgotPass from "./pages/ForgotPass";
+import UpdateProblem from "./pages/UpdateProblem";
 
 const theme = createMuiTheme({
   palette: {
@@ -59,6 +60,11 @@ function App() {
               <Route exact path="/getstarted" component={Getstarted} />
               <Route exact path="/tools" component={Tools} />
               <Route exact path="/problems" component={CreateProblem} />
+              <Route
+                exact
+                path="/updateproblems/:id"
+                component={UpdateProblem}
+              />
               <Route exact path="/user/verify" component={VerifyUser} />
               <AuthRoute exact path="/login" component={Login} />
               <AuthRoute exact path="/signup" component={Signup} />
