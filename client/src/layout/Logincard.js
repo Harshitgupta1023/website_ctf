@@ -197,7 +197,6 @@ function SignInSide(props) {
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, { data: { login: userData } }) {
       context.login(userData);
-      console.log(userData);
       props.history.push("/getstarted");
     },
     onError(err) {

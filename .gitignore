@@ -14,6 +14,7 @@ node_modules
 
 # misc
 config.js
+.env
 .eslintcache
 .DS_Store
 .env.local

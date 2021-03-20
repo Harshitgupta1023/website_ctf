@@ -16,7 +16,9 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import { colors } from "./data/constants";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import Showquestion from "./testing/Showquestion";
+import { home } from ".//data/constants";
 import ForgotPass from "./pages/ForgotPass";
+import UpdateProblem from "./pages/UpdateProblem";
 
 const theme = createMuiTheme({
   palette: {
@@ -27,14 +29,14 @@ const theme = createMuiTheme({
       main: colors.textPrimary,
     },
     background: {
-      default: colors.backgroundSecondary,
-      paper: colors.backgroundPrimary,
+      default: home.backgroundSecondary,
+      paper: home.backgroundPrimary,
       // paper: "white"
     },
   },
   background: {
-    default: colors.backgroundSecondary,
-    paper: colors.backgroundPrimary,
+    default: home.backgroundSecondary,
+    paper: home.backgroundPrimary,
   },
 });
 
@@ -62,6 +64,11 @@ function App() {
                 exact
                 path="/problems"
                 component={CreateProblem}
+              />
+              <Route
+                exact
+                path="/:category/updateproblems/:id"
+                component={UpdateProblem}
               />
               <Route exact path="/user/verify" component={VerifyUser} />
               <AuthRoute path="/login" component={Login} />

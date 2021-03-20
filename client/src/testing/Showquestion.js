@@ -23,6 +23,7 @@ const GET_PROBLEM = gql`
 
 export default function Showquestion(props) {
   const id = props.id;
+
   const { data, error, loading } = useQuery(GET_PROBLEM, {
     variables: { id },
   });
@@ -35,14 +36,15 @@ export default function Showquestion(props) {
     );
   }
   if (loading) return <Loading loading={loading} />;
-  //   console.log(data);
+  // console.log(props);
   const ques = data.getProblem;
   return (
     <QuestionCard
       apply
       answer
+      location={props.location}
       width={600}
-      height={1000}
+      height={900}
       id={ques.id}
       category={ques.category}
       points={ques.points}
