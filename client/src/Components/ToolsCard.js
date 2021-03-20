@@ -7,7 +7,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import {button} from "../data/constants"
+import { button } from "../data/constants";
 
 const useStyles = makeStyles({
   root: {
@@ -17,20 +17,20 @@ const useStyles = makeStyles({
     marginRight: 10,
   },
   title: {
-    fontSize: "3rem",
-    fontWeight: "bolder",
+    fontSize: "2.5rem",
+    fontFamily: "'Redressed', cursive",
     color: "gold",
-    marginBottom: "18%"
-
+    marginBottom: "18%",
   },
 
-  smallTitle:{
+  smallTitle: {
+    fontFamily: "'Redressed', cursive",
     fontSize: "1.8rem",
     color: "gold",
-    marginBottom: "15%"
+    marginBottom: "15%",
   },
 
-  buttonStyle:{
+  buttonStyle: {
     width: "100%",
     display: "block",
     fontSize: "1rem",
@@ -48,9 +48,9 @@ const useStyles = makeStyles({
     },
   },
 
-  cardDiv:{
+  cardDiv: {
     margin: "10% 0% 10% 10%",
-  }
+  },
 });
 
 export default function ToolsCard(props) {
@@ -66,7 +66,7 @@ export default function ToolsCard(props) {
         <div className={classes.cardDiv}>
           <Card className={classes.root} style={{ backgroundColor: "#1A202C" }}>
             <CardContent>
-              <Typography  variant="h5" component="h2">
+              <Typography variant="h5" component="h2">
                 <center className={classes.title}>{props.title}</center>
               </Typography>
             </CardContent>
@@ -84,18 +84,20 @@ export default function ToolsCard(props) {
             onClick={handleflip}
           >
             <CardContent>
-              <Typography  variant="h5" component="h2">
+              <Typography variant="h5" component="h2">
                 <center className={classes.smallTitle}>{props.title}</center>
               </Typography>
             </CardContent>
             <CardActions>
-              <Button className={classes.buttonStyle}  href={props.description_link}>
+              <Button
+                className={classes.buttonStyle}
+                href={props.description_link}
+              >
                 Description
-                
               </Button>
             </CardActions>
             <CardActions>
-            <Button className={classes.buttonStyle} href={props.usage_link}>
+              <Button className={classes.buttonStyle} href={props.usage_link}>
                 Lorem Ipsum
               </Button>
             </CardActions>

@@ -46,7 +46,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   navbar: {
     backgroundColor: tools.backgroundPrimary,
-    height: "10vh",
+    height: "12vh",
   },
   root: {
     flexGrow: 1,
@@ -69,14 +69,17 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: "1.7rem",
     fontWeight: "bolder",
+    fontFamily: "'Cormorant Unicase', serif",
     padding: "0% 8%",
     color: "gold",
-    marginTop: "20%"
+    marginTop: "10%",
+    marginLeft: "4%",
   },
 
   content: {
+    fontFamily: "'Dancing Script', cursive",
     margin: "3%",
-    fontWeight: "bolder",
+    // fontWeight: "bolder",
     fontSize: "3rem",
     width: "60%",
   },
@@ -85,7 +88,6 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -98,7 +100,6 @@ export default function VerticalTabs() {
       </div>
       <hr className={classes.hr}></hr>
       <div className={classes.root}>
-      
         <Tabs
           orientation="vertical"
           variant="scrollable"
@@ -107,7 +108,6 @@ export default function VerticalTabs() {
           aria-label="Vertical tabs example"
           className={classes.tabs}
         >
-          
           <Tab
             className={classes.heading}
             label="Cryptography"
@@ -139,7 +139,7 @@ export default function VerticalTabs() {
           <p className={classes.content}>
             <BouncingText text="Cryptography" />
           </p>
-          <Grid container component="main" >
+          <Grid container component="main">
             <Grid item xs={4} md={4} sm={4}>
               <ToolsCard
                 title="HEX TO ASCII"
@@ -148,44 +148,48 @@ export default function VerticalTabs() {
                 paddingLeft="10%"
               />
             </Grid>
-            <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
                 description_link="https://youtube.com"
                 usage_link="https://youtube.com"
               />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-
             </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+          </Grid>
         </TabPanel>
         <TabPanel value={value} index={1}>
           <p className={classes.content}>
             <BouncingText text="Web Exploitation" />
           </p>
-          <Grid container component="main" >
+          <Grid container component="main">
             <Grid item xs={4} md={4} sm={4}>
               <ToolsCard
                 title="HEX TO ASCII"
@@ -194,45 +198,49 @@ export default function VerticalTabs() {
                 paddingLeft="10%"
               />
             </Grid>
-            <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
                 description_link="https://youtube.com"
                 usage_link="https://youtube.com"
               />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-
             </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+          </Grid>
         </TabPanel>
         <TabPanel value={value} index={2}>
           <p className={classes.content}>
             <BouncingText text="Binary Exploitation" />
           </p>
-          
-          <Grid container component="main" >
+
+          <Grid container component="main">
             <Grid item xs={4} md={4} sm={4}>
               <ToolsCard
                 title="HEX TO ASCII"
@@ -241,45 +249,48 @@ export default function VerticalTabs() {
                 paddingLeft="10%"
               />
             </Grid>
-            <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
                 description_link="https://youtube.com"
                 usage_link="https://youtube.com"
               />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-
             </Grid>
-
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+          </Grid>
         </TabPanel>
         <TabPanel value={value} index={3}>
           <p className={classes.content}>
             <BouncingText text="Forensics" />
           </p>
-          <Grid container component="main" >
+          <Grid container component="main">
             <Grid item xs={4} md={4} sm={4}>
               <ToolsCard
                 title="HEX TO ASCII"
@@ -288,44 +299,48 @@ export default function VerticalTabs() {
                 paddingLeft="10%"
               />
             </Grid>
-            <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
                 description_link="https://youtube.com"
                 usage_link="https://youtube.com"
               />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-
             </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+          </Grid>
         </TabPanel>
         <TabPanel value={value} index={4}>
           <p className={classes.content}>
             <BouncingText text="Reverse Engineering" />
           </p>
-          <Grid container component="main" >
+          <Grid container component="main">
             <Grid item xs={4} md={4} sm={4}>
               <ToolsCard
                 title="HEX TO ASCII"
@@ -334,38 +349,42 @@ export default function VerticalTabs() {
                 paddingLeft="10%"
               />
             </Grid>
-            <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
                 description_link="https://youtube.com"
                 usage_link="https://youtube.com"
               />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-              <Grid item xs={4} >
-               <ToolsCard title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-              </Grid>
-
             </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
+            </Grid>
+          </Grid>
         </TabPanel>
       </div>
     </div>

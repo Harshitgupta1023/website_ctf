@@ -73,9 +73,11 @@ body {
 
 .header_heading {
   height: 90%;
-  font-family: "ZCOOL KuaiLe", cursive;
-  font-size: 2.5rem;
-  flex: 4;
+  margin-left: 3%;
+  font-family: "Merriweather", serif;
+  color: #66bfbf;
+  font-size: 3.5rem;
+  flex: 3;
 }
 
 .header_heading:hover {

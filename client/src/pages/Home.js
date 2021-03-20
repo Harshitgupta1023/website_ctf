@@ -38,7 +38,7 @@ function CategoriesSection() {
     <div>
       <p
         style={{
-          margin: "0 40% 4%",
+          margin: "0 40%",
           fontSize: "3.5rem",
           color: "white",
           fontWeight: "bolder",
@@ -46,7 +46,16 @@ function CategoriesSection() {
       >
         Categories
       </p>
-
+      <hr
+        style={{
+          marginTop: "2%",
+          marginLeft: "47.5%",
+          borderStyle: "dotted none none",
+          width: "5%",
+          borderWidth: "10px",
+          borderColor: "#EAF6F6",
+        }}
+      />
       <div xs={12} sm={8} md={5} className={classes.categoriesRow}>
         <img
           src={crypto}
@@ -231,7 +240,7 @@ const useStyles = makeStyles((theme) => ({
   categoriesSection: {
     backgroundColor: home.backgroundSecondary,
     height: "320vh",
-    padding: "5% 10%",
+    padding: "2% 10%",
   },
   carousel: {
     backgroundColor: home.backgroundPrimary,
@@ -252,7 +261,7 @@ const useStyles = makeStyles((theme) => ({
 
   categoriesRow: {
     width: "80%",
-    margin: "10% auto 15% auto",
+    margin: "5% auto 12% auto",
     textAlign: "left",
     lineHeight: "1",
   },
@@ -263,7 +272,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "20%",
     float: "left",
     marginRight: "30px",
-    border: "5px solid gold"
+    border: "5px solid gold",
   },
 
   imageLayoutRight: {
@@ -277,8 +286,9 @@ const useStyles = makeStyles((theme) => ({
 
   headingCategoriesSection: {
     color: "gold",
-    marginBottom: "3%",
+    marginBottom: "5%",
     fontSize: "2.5rem",
+    fontFamily: "'Cormorant Unicase', serif",
   },
 
   paraCategoriesSection: {

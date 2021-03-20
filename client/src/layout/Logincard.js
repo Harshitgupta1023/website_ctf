@@ -8,6 +8,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
@@ -29,6 +31,10 @@ function ConnectWith() {
       {"or connect with"}
     </Typography>
   );
+}
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 function Handles({ history }) {
@@ -194,13 +200,18 @@ const GITHUB_LOGIN = gql`
 function SignInSide(props) {
   const classes = useStyles();
   const context = useContext(AuthContext);
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [severity, setSeverity] = React.useState("success");
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, { data: { login: userData } }) {
       context.login(userData);
       props.history.push("/getstarted");
     },
     onError(err) {
-      console.log(err);
+      setMessage("Credentials Incorrect!!");
+      setSeverity("error");
+      setOpen(true);
     },
   });
   const { formInputs, handleInputChange, handleSubmit } = useForm(
@@ -280,6 +291,15 @@ function SignInSide(props) {
           </form>
         </div>
       </Grid>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert onClose={() => setOpen(false)} severity={severity}>
+          {message}
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 }

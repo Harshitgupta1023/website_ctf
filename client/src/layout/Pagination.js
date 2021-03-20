@@ -26,9 +26,9 @@ export default function BasicPagination({
   return (
     <div className={classes.root}>
       <Grid container>
-        <Grid item xs={4} sm={6}>
+        <Grid item xs={8} sm={8}>
           <Pagination
-            style={{ position: "relative", marginLeft: 400 }}
+            style={{ position: "relative", marginLeft: 650 }}
             count={i}
             size="large"
             color="secondary"
@@ -39,7 +39,15 @@ export default function BasicPagination({
           <Typography
             variant="h4"
             color="primary"
-            style={{ position: "relative", marginLeft: 40 }}
+            style={{
+              position: "relative",
+              marginLeft: 40,
+              fontSize: "2.25rem",
+              color: "gold",
+              fontWeight: "bolder",
+
+              fontFamily: "'Cormorant Unicase', serif",
+            }}
           >
             Points: {points}
           </Typography>
@@ -48,7 +56,14 @@ export default function BasicPagination({
           <Typography
             variant="h4"
             color="primary"
-            style={{ position: "relative", marginLeft: 40 }}
+            style={{
+              position: "relative",
+              marginLeft: 40,
+              fontSize: "2.25rem",
+              color: "gold",
+              fontWeight: "bolder",
+              fontFamily: "'Cormorant Unicase', serif",
+            }}
           >
             Solved: {solved}
           </Typography>
