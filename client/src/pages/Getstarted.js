@@ -15,11 +15,12 @@ function Alert(props) {
 
 function Getstarted() {
   const { user } = useContext(AuthContext);
+  console.log(user);
   const [open, setOpen] = useState(false);
   return (
     <div>
       <Navbar home="true" />
-      {!user.verify && (
+      {user && !user.verified && (
         <div
           onClick={(e) => setOpen((prev) => setOpen(!prev))}
           style={{ cursor: "pointer" }}
@@ -29,7 +30,7 @@ function Getstarted() {
           </Alert>
         </div>
       )}
-      {!user.verify && <FormDialog open={open} setOpen={setOpen} />}
+      {user && !user.verified && <FormDialog open={open} setOpen={setOpen} />}
       <TopicsSection />
     </div>
   );

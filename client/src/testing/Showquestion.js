@@ -23,6 +23,7 @@ const GET_PROBLEM = gql`
 
 export default function Showquestion(props) {
   const id = props.id;
+
   const { data, error, loading } = useQuery(GET_PROBLEM, {
     variables: { id },
   });

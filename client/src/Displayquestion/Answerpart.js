@@ -51,10 +51,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Answerpart(props) {
   const classes = useStyles();
+  const [subm, setSubm] = useState(props.submissions);
+  const [accep, setAccep] = useState(props.accepted);
   const [show, setShow] = useState(false);
   const [submitProblem] = useMutation(SUBMIT_ANSWER, {
     onCompleted(data) {
       setShow(true);
+      setAccep(accep + 1);
       updateUser(data.makeSubmission.token);
     },
     onError(err) {
@@ -68,6 +71,7 @@ export default function Answerpart(props) {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSubm(subm + 1);
     submitProblem({
       variables: { problemID: props.problemID, submission: ans, id: user._id },
     });
@@ -78,7 +82,7 @@ export default function Answerpart(props) {
       <Grid container spacing={3} className={classes.answer}>
         <Grid item xs={12} className={classes.submissionstats}>
           <Typography variant="p">
-            submission : {props.submissions} / accepted: {props.accepted}
+            submission : {subm} / accepted: {accep}
           </Typography>
         </Grid>
         <Grid item xs={12}>
