@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Dancing Script', cursive",
     margin: "3%",
     // fontWeight: "bolder",
-    fontSize: "3rem",
+    fontSize: "4rem",
     width: "60%",
   },
 }));

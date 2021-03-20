@@ -15,12 +15,19 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    marginRight: 30,
   },
   paper: {
     marginRight: theme.spacing(2),
   },
   popper: {
     marginRight: "10px",
+  },
+  image: {
+    borderRadius: "30%",
+
+    height: 50,
+    width: 50,
   },
 }));
 
@@ -62,9 +69,12 @@ export default function Navbar(props) {
       <Link to="/" className="header_heading links">
         SeekhoCTF{" "}
       </Link>
+
       {props.getStarted && (
-        <Link to="/getstarted" className="header_getstarted  links">
-          <Button>Get started</Button>
+        <Link to="/getstarted" className="header_links  links">
+          <Button>
+            <center>Get started</center>
+          </Button>
         </Link>
       )}
       {props.home && (
@@ -73,12 +83,12 @@ export default function Navbar(props) {
         </Link>
       )}
       {props.tools && (
-        <Link to="/tools" className="header_links  links">
+        <Link to="/tools" className="header_links header_tools links">
           <Button>Tools</Button>
         </Link>
       )}
       {props.createProblems && admin_username.includes(user.username) && (
-        <Link to="/problems" className="header_links  links">
+        <Link to="/problems" className="header_links   links">
           <Button>Create Problem</Button>
         </Link>
       )}
@@ -91,6 +101,7 @@ export default function Navbar(props) {
             onClick={handleToggle}
           >
             <Avatar
+              className={classes.image}
               alt={user.username}
               src={`http://localhost:5000/uploads/${user.imageURL}`}
             />

@@ -18,7 +18,7 @@ import forensics from "../media/forensics.jpg";
 import reverseEngineering from "../media/reverse-engineering.jpg";
 import webExploitation from "../media/web-exploitation.jpg";
 import binaryExploitation from "../media/binary-exploitation.jpg";
-
+import border from "../media/border.jpg";
 function Copyright() {
   return (
     <div>
@@ -38,7 +38,7 @@ function CategoriesSection() {
     <div>
       <p
         style={{
-          margin: "0 40%",
+          margin: "3% 40% 0%",
           fontSize: "3.5rem",
           color: "white",
           fontWeight: "bolder",
@@ -239,8 +239,15 @@ const useStyles = makeStyles((theme) => ({
   },
   categoriesSection: {
     backgroundColor: home.backgroundSecondary,
-    height: "320vh",
+    height: "310vh",
     padding: "2% 10%",
+  },
+  categorycard: {
+    // border: "70px solid transparent",
+    // padding: "15px",
+    // borderImage: `url(${border}) 10% `,
+    border: "3px solid white",
+    boxShadow: "5px 5px 10px 15px #888888",
   },
   carousel: {
     backgroundColor: home.backgroundPrimary,
@@ -319,14 +326,7 @@ export default function Home() {
     <div>
       <div component="main" className={classes.navbar}>
         <Navbar login tools home getStarted />
-        {/* <TopicsSection /> */}
       </div>
-      {/* <div xs={12} sm={8} md={5} container component="main" className={classes.handleSec}>
-          <Handles/>
-          <ColorfulText text="SeekhoCTF"/>
-      </div>
-      <div xs={12} sm={8} md={5} container component="main" className={classes.footer}>
-      <Copyright /> */}
       <hr className={classes.hr}></hr>
       <div>
         <Grid container component="main" className={classes.root}>
@@ -374,7 +374,9 @@ export default function Home() {
           component="main"
           className={classes.categoriesSection}
         >
-          <CategoriesSection />
+          <div className={classes.categorycard}>
+            <CategoriesSection />
+          </div>
         </div>
         <div
           xs={12}

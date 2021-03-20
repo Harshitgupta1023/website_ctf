@@ -45,8 +45,7 @@ export default function BasicPagination({
               fontSize: "2.25rem",
               color: "gold",
               fontWeight: "bolder",
-
-              fontFamily: "'Cormorant Unicase', serif",
+              fontFamily: "'Roboto', sans-serif",
             }}
           >
             Points: {points}
@@ -62,7 +61,7 @@ export default function BasicPagination({
               fontSize: "2.25rem",
               color: "gold",
               fontWeight: "bolder",
-              fontFamily: "'Cormorant Unicase', serif",
+              fontFamily: "'Roboto', sans-serif",
             }}
           >
             Solved: {solved}

@@ -20,7 +20,7 @@ function Getstarted() {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <Navbar home="true" />
+      <Navbar home tools />
       {user && !user.verified && (
         <Button onClick={(e) => setOpen(true)} style={{ width: "100%" }}>
           <Alert severity="warning">

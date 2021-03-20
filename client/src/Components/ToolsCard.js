@@ -17,10 +17,10 @@ const useStyles = makeStyles({
     marginRight: 10,
   },
   title: {
-    fontSize: "2.5rem",
+    fontSize: "3.5rem",
     fontFamily: "'Redressed', cursive",
     color: "gold",
-    marginBottom: "18%",
+    marginBottom: "10%",
   },
 
   smallTitle: {

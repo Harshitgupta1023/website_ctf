@@ -32,6 +32,7 @@ function Item(props) {
       >
         <p
           style={{
+            fontFamily: "'Playfair Display', serif",
             fontWeight: "bolder",
             fontSize: "4rem",
             color: "gold",
@@ -39,7 +40,9 @@ function Item(props) {
         >
           {props.item.name}
         </p>
-        <h3>{props.item.description}</h3>
+        <h3 style={{ fontFamily: "'Roboto', sans-serif" }}>
+          {props.item.description}
+        </h3>
       </div>
 
       {/* <Contacts /> */}

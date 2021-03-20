@@ -22,6 +22,8 @@ const useStyles = makeStyles({
     color: "#ffec00",
   },
   categoriesText: {
+    fontFamily: "",
+    fontWeight: 300,
     fontSize: "1.2rem",
     color: "white",
   },
