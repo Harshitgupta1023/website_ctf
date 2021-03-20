@@ -27,7 +27,6 @@ function ProblemsSection(props) {
   };
   const handleClose = () => {
     setOpen(false);
-    window.location.reload();
   };
   const { user } = useContext(AuthContext);
 
