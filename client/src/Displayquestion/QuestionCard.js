@@ -67,6 +67,8 @@ export default function QuestionCard(props) {
 
   function handleDelete() {
     removeProblem({ variables: { id } });
+    window.location.reload();
+
     // props.history.push(`${props.location}`);
   }
 
