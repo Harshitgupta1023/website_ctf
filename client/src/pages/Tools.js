@@ -134,13 +134,7 @@ export default function VerticalTabs() {
           <p className={classes.content}>
             <BouncingText text="Cryptography" />
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                padding: 10,
-              }}
-            >
+            <div>
               <ToolsCard
                 title="HEX TO ASCII"
                 description_link="https://youtube.com"
