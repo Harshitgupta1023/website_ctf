@@ -43,7 +43,7 @@ export default function Showquestion(props) {
       apply
       answer
       width={600}
-      height={1000}
+      height={900}
       id={ques.id}
       category={ques.category}
       points={ques.points}

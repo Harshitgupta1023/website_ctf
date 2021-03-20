@@ -7,15 +7,50 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import {button} from "../data/constants"
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
-    height: 200,
+    width: 275,
+    height: 300,
+    padding: 10,
+    marginRight: 10,
   },
   title: {
-    fontSize: 14,
+    fontSize: "3rem",
+    fontWeight: "bolder",
+    color: "gold",
+    marginBottom: "18%"
+
   },
+
+  smallTitle:{
+    fontSize: "1.8rem",
+    color: "gold",
+    marginBottom: "15%"
+  },
+
+  buttonStyle:{
+    width: "100%",
+    display: "block",
+    fontSize: "1rem",
+    backgroundColor: button.buttonBackgroundColor,
+    border: "none",
+    color: "white",
+    padding: "8px 16px",
+    textAlign: "center",
+    margin: "2px 1px",
+    opacity: "1",
+    zIndex: "1",
+    transition: "0.3s",
+    "&:hover": {
+      backgroundColor: button.buttonHoverColor,
+    },
+  },
+
+  cardDiv:{
+    margin: "10% 0% 10% 10%",
+  }
 });
 
 export default function ToolsCard(props) {
@@ -28,31 +63,39 @@ export default function ToolsCard(props) {
   return (
     <div>
       <ReactCardFlip isFlipped={isflip} flipDirection="vertical">
-        <div>
-          <Card className={classes.root} style={{ backgroundColor: "blue" }}>
+        <div className={classes.cardDiv}>
+          <Card className={classes.root} style={{ backgroundColor: "#1A202C" }}>
             <CardContent>
-              <Typography variant="h5" component="h2">
-                {props.title}
+              <Typography  variant="h5" component="h2">
+                <center className={classes.title}>{props.title}</center>
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small" onClick={handleflip}>
+              <Button className={classes.buttonStyle} onClick={handleflip}>
                 Learn More
               </Button>
             </CardActions>
           </Card>
         </div>
-        <div style={{ backgroundColor: "red" }}>
+        <div className={classes.cardDiv}>
           <Card
             className={classes.root}
-            style={{ backgroundColor: "red" }}
+            style={{ backgroundColor: "#52668c" }}
             onClick={handleflip}
           >
+            <CardContent>
+              <Typography  variant="h5" component="h2">
+                <center className={classes.smallTitle}>{props.title}</center>
+              </Typography>
+            </CardContent>
             <CardActions>
-              <Button size="small" href={props.description_link}>
+              <Button className={classes.buttonStyle}  href={props.description_link}>
                 Description
+                
               </Button>
-              <Button size="small" href={props.usage_link}>
+            </CardActions>
+            <CardActions>
+            <Button className={classes.buttonStyle} href={props.usage_link}>
                 Lorem Ipsum
               </Button>
             </CardActions>
