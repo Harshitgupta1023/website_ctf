@@ -66,7 +66,7 @@ function App() {
                 path="/problems"
                 component={CreateProblem}
               />
-              <Route
+              <ProtectedRoute
                 exact
                 path="/:category/updateproblems/:id"
                 component={UpdateProblem}
@@ -80,7 +80,7 @@ function App() {
               <AuthRoute exact path="/forgotPass" component={ForgotPass} />
               {sectionData.map((data, index) => {
                 return (
-                  <Route
+                  <ProtectedRoute
                     exact
                     key={index}
                     path={`/${data}`}
