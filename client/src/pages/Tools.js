@@ -141,7 +141,11 @@ export default function VerticalTabs() {
                 padding: 10,
               }}
             >
-              <ToolsCard />
+              <ToolsCard
+                title="HEX TO ASCII"
+                description_link="https://youtube.com"
+                usage_link="https://youtube.com"
+              />
               <ToolsCard />
               <ToolsCard />
               <ToolsCard />
@@ -155,7 +159,7 @@ export default function VerticalTabs() {
         </TabPanel>
         <TabPanel value={value} index={2}>
           <p className={classes.content}>
-            <BouncingText text="Binanry Exploitation" />
+            <BouncingText text="Binary Exploitation" />
           </p>
         </TabPanel>
         <TabPanel value={value} index={3}>

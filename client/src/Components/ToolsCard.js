@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    //  change karlena sarthak
+    height: 200,
     padding: 10,
     marginRight: 10,
   },
@@ -28,13 +28,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ToolsCard() {
+export default function ToolsCard(props) {
   const [isflip, setFlip] = useState(false);
   const handleflip = () => {
     setFlip(!isflip);
   };
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <div>
@@ -42,23 +41,8 @@ export default function ToolsCard() {
         <div>
           <Card className={classes.root} style={{ backgroundColor: "blue" }}>
             <CardContent>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                Word of the Day
-              </Typography>
               <Typography variant="h5" component="h2">
-                be{bull}nev{bull}o{bull}lent
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                adjective
-              </Typography>
-              <Typography variant="body2" component="p">
-                well meaning and kindly.
-                <br />
-                {'"a benevolent smile"'}
+                {props.title}
               </Typography>
             </CardContent>
             <CardActions>
@@ -66,33 +50,20 @@ export default function ToolsCard() {
                 Learn More
               </Button>
             </CardActions>
-          </Card>{" "}
+          </Card>
         </div>
         <div style={{ backgroundColor: "red" }}>
-          <Card className={classes.root} style={{ backgroundColor: "red" }}>
-            <CardContent>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                Word of the Day
-              </Typography>
-              <Typography variant="h5" component="h2">
-                be{bull}nev{bull}o{bull}lent
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                adjective
-              </Typography>
-              <Typography variant="body2" component="p">
-                well meaning and kindly.
-                <br />
-                {'"a benevolent smile"'}
-              </Typography>
-            </CardContent>
+          <Card
+            className={classes.root}
+            style={{ backgroundColor: "red" }}
+            onClick={handleflip}
+          >
             <CardActions>
-              <Button size="small" onClick={handleflip}>
-                Learn More
+              <Button size="small" href={props.description_link}>
+                Description
+              </Button>
+              <Button size="small" href={props.usage_link}>
+                Lorem Ipsum
               </Button>
             </CardActions>
           </Card>{" "}
