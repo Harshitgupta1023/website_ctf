@@ -19,6 +19,7 @@ import Showquestion from "./testing/Showquestion";
 import { home } from ".//data/constants";
 import ForgotPass from "./pages/ForgotPass";
 import UpdateProblem from "./pages/UpdateProblem";
+import Profile from "./pages/Profile";
 
 const theme = createMuiTheme({
   palette: {
@@ -70,6 +71,7 @@ function App() {
                 path="/:category/updateproblems/:id"
                 component={UpdateProblem}
               />
+              <ProtectedRoute exact path="/user/profile" component={Profile} />
               <Route exact path="/user/verify" component={VerifyUser} />
               <AuthRoute path="/login" component={Login} />
               {/* Important for Callback */}

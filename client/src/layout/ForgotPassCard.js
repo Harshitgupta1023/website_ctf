@@ -147,11 +147,14 @@ function SignInSide(props) {
       setSeverity("success");
       setOpen(true);
     },
-    onError(err) {
-      console.log(err);
-      setMessage("There was an Error. Try Again.");
-      setSeverity("error");
-      setOpen(true);
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
     },
   });
 
@@ -160,11 +163,14 @@ function SignInSide(props) {
       context.updateUser(token);
       props.history.push("/getstarted");
     },
-    onError(err) {
-      console.log(err);
-      setMessage("There was an Error. Try Again.");
-      setSeverity("error");
-      setOpen(true);
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
     },
   });
 
