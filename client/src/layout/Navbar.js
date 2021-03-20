@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
   popper: {
     marginRight: "10px",
+    zIndex: 1,
   },
   image: {
     borderRadius: "30%",
-
     height: 50,
     width: 50,
   },

@@ -243,9 +243,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "2% 10%",
   },
   categorycard: {
-    // border: "70px solid transparent",
-    // padding: "15px",
-    // borderImage: `url(${border}) 10% `,
     border: "3px solid white",
     boxShadow: "5px 5px 10px 15px #888888",
   },
