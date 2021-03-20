@@ -54,7 +54,7 @@ module.exports = {
       if (req.userID != id && !req.isAdmin) {
         throw new Error("Unauthorized");
       }
-      let oldData = await (await User.findById(id)).toJSON();
+      let oldData = await User.findById(id);
       if (oldData) {
         let data = {};
         if (username) {
@@ -79,6 +79,9 @@ module.exports = {
         const validationresponse = await userValidator.validate(data);
         if (validationresponse.error) {
           throw validationresponse.error;
+        }
+        if (data["email"] !== oldData["email"]) {
+          data["verified"] = false;
         }
         if (image) {
           if (oldData["imageURL"]) {
