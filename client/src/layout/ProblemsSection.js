@@ -17,6 +17,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 function ProblemsSection(props) {
+  // console.log(props);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [ids, setIds] = React.useState("");
@@ -26,6 +27,7 @@ function ProblemsSection(props) {
   };
   const handleClose = () => {
     setOpen(false);
+    window.location.reload();
   };
   const { user } = useContext(AuthContext);
 
@@ -63,7 +65,7 @@ function ProblemsSection(props) {
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <Showquestion id={ids} />
+        <Showquestion location={props.location.pathname} id={ids} />
       </Dialog>
     </div>
   );

@@ -4,10 +4,28 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
-import { Divider } from "@material-ui/core";
+import { Button, Divider } from "@material-ui/core";
 import Answerpart from "./Answerpart";
 import Mainbody from "./Mainbody";
 import Tick from "../media/green_tick.svg";
+import { Link } from "react-router-dom";
+import { gql, useMutation } from "@apollo/client";
+
+const DELETE_PROBLEM = gql`
+  mutation deleteProblem($id: ID!) {
+    deleteProblem(id: $id) {
+      id
+      title
+      statement
+      solution
+      fileURL
+      points
+      hints
+      category
+    }
+  }
+`;
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 300,
@@ -41,6 +59,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function QuestionCard(props) {
   const classes = useStyles();
+  const id = props.id;
+  console.log(props.location);
+  const [removeProblem] = useMutation(DELETE_PROBLEM, {
+    onCompleted: (dat) => console.log(dat),
+  });
+
+  function handleDelete() {
+    removeProblem({ variables: { id } });
+    window.location.reload();
+
+    // props.history.push(`${props.location}`);
+  }
 
   return (
     <Card
@@ -63,6 +93,19 @@ export default function QuestionCard(props) {
           <Typography className={classes.questiontitle} variant="h4">
             {props.title}
           </Typography>
+          {props.answer && (
+            <Link
+              to={`${props.location}/updateproblems/${props.id}`}
+              className="links"
+            >
+              <Button variant="contained">Update</Button>
+            </Link>
+          )}
+          {props.answer && (
+            <Button variant="contained" onClick={handleDelete}>
+              Delete
+            </Button>
+          )}
           <Chip
             className={classes.pointss}
             color="secondary"
