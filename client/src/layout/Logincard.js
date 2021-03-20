@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,12 +15,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import { button } from "../data/constants";
 import hackingOAuth from "../media/hacking.jpg";
 import discordOAuth from "../media/discord.svg";
-import googleOAuth from "../media/google.svg";
 import useForm from "../customHooks/useForm";
 import Loading from "../Components/Loading";
 import { AuthContext } from "../context/auth";
 import { gql, useMutation } from "@apollo/client";
 import { withRouter } from "react-router-dom";
+import GoogleLogin from "react-google-login";
+import { GITHUB_CLIENT_ID, GOOGLE_CLIENT_ID } from "../config";
 
 function ConnectWith() {
   return (
@@ -30,10 +31,49 @@ function ConnectWith() {
   );
 }
 
-function Handles() {
-  return (
+function Handles({ history }) {
+  const { updateUser } = useContext(AuthContext);
+  const [googleLogin, { loading }] = useMutation(GOOGLE_LOGIN, {
+    onCompleted({ googleLogin: { token } }) {
+      updateUser(token);
+      console.log("Yo boi", token);
+      history.push("/getstarted");
+    },
+    onError(err) {
+      console.log(err);
+    },
+  });
+  const [githubLogin, { gitLoading }] = useMutation(GITHUB_LOGIN, {
+    onCompleted({ githubLogin: { token } }) {
+      updateUser(token);
+      console.log("Yo boi", token);
+      history.push("/getstarted");
+    },
+    onError(err) {
+      console.log(err);
+    },
+  });
+
+  useEffect(() => {
+    const url = window.location.href;
+    const hasCode = url.includes("?code=");
+
+    if (hasCode) {
+      const newUrl = url.split("?code=");
+      window.history.pushState({}, null, newUrl[0]);
+      githubLogin({ variables: { code: newUrl[1] } });
+    }
+  });
+
+  const handleGoogleLogin = ({ tokenId }) => {
+    console.log(tokenId);
+    googleLogin({ variables: { id_token: tokenId } });
+  };
+  return loading || gitLoading ? (
+    <Loading loading={loading || gitLoading} />
+  ) : (
     <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-      <a
+      {/* <a
         href="https://google.com"
         style={{
           marginLeft: "20%",
@@ -48,12 +88,26 @@ function Handles() {
             width: "50px",
           }}
         />
-      </a>
+      </a> */}
+      <div
+        style={{
+          marginLeft: "20%",
+          marginTop: "2%",
+        }}
+      >
+        <GoogleLogin
+          clientId={GOOGLE_CLIENT_ID}
+          buttonText="Login"
+          onSuccess={handleGoogleLogin}
+          onFailure={(res) => console.log("Login Failed!", res)}
+          theme="dark"
+        />
+      </div>
       <a
-        href="https://discord.com"
+        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`}
         style={{
           marginLeft: "45%",
-          marginTop: "2%",
+          marginTop: "10%",
           hover: "",
         }}
       >
@@ -119,13 +173,30 @@ const LOGIN_USER = gql`
   }
 `;
 
+const GOOGLE_LOGIN = gql`
+  mutation googleLogin($id_token: String!) {
+    googleLogin(id_token: $id_token) {
+      userID
+      token
+    }
+  }
+`;
+
+const GITHUB_LOGIN = gql`
+  mutation githubLogin($code: String!) {
+    githubLogin(code: $code) {
+      userID
+      token
+    }
+  }
+`;
+
 function SignInSide(props) {
   const classes = useStyles();
   const context = useContext(AuthContext);
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, { data: { login: userData } }) {
       context.login(userData);
-      console.log(userData);
       props.history.push("/getstarted");
     },
     onError(err) {
@@ -204,7 +275,7 @@ function SignInSide(props) {
             </Grid>
             <Box mt={5}>
               <ConnectWith />
-              <Handles />
+              <Handles history={props.history} />
             </Box>
           </form>
         </div>

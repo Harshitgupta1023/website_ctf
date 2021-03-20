@@ -104,15 +104,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const REGISTER_USER = gql`
-  mutation createUser($username: String!, $email: String!, $password: String!) {
-    createUser(username: $username, email: $email, password: $password) {
-      userID
-      token
-    }
-  }
-`;
-
 const SEND_FORGOTPASS_OTP = gql`
   mutation sendForgotPassOTP($username: String!, $email: String!) {
     sendForgotPassOTP(username: $username, email: $email) {

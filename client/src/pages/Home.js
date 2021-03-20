@@ -13,7 +13,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import EmailIcon from "@material-ui/icons/Email";
 import ColorfulText from "../animation/ColorfulText";
 import Carousel from "../layout/Carousel";
-import crypto from "../media/cryptography.jpg";
+import crypto from "../media/crypto-logo.jpg";
 import forensics from "../media/forensics.jpg";
 import reverseEngineering from "../media/reverse-engineering.jpg";
 import webExploitation from "../media/web-exploitation.jpg";
@@ -259,16 +259,20 @@ const useStyles = makeStyles((theme) => ({
 
   imageLayoutLeft: {
     width: "35%",
-    borderRadius: "50%",
+    height: "35%",
+    borderRadius: "20%",
     float: "left",
     marginRight: "30px",
+    border: "5px solid gold"
   },
 
   imageLayoutRight: {
     width: "35%",
-    borderRadius: "50%",
+    height: "35%",
+    borderRadius: "20%",
     float: "right",
     marginLeft: "30px",
+    border: "5px solid gold",
   },
 
   headingCategoriesSection: {

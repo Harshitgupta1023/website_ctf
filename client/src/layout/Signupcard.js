@@ -210,10 +210,10 @@ function SignInSide(props) {
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
+            {/* <Box mt={5}>
               <ConnectWith />
               <Handles />
-            </Box>
+            </Box> */}
           </form>
         </div>
       </Grid>
