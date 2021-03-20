@@ -48,10 +48,14 @@ export default function FormDialog(props) {
       setSeverity("success");
       setOpen(true);
     },
-    onError(err) {
-      setMessage("There was an Error. Try Again.");
-      setSeverity("error");
-      setOpen(true);
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
     },
   });
   const [verifyAccount, { loading }] = useMutation(VERIFY_ACCOUNT, {
@@ -62,11 +66,14 @@ export default function FormDialog(props) {
       updateUser(data.verifyAccount.token);
       props.setOpen(false);
     },
-    onError(err) {
-      setMessage("There was an Error. Try Again.");
-      setSeverity("error");
-      setOpen(true);
-      props.setOpen(false);
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
     },
   });
   const [open, setOpen] = React.useState(false);
