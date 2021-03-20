@@ -16,6 +16,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import { colors } from "./data/constants";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import Showquestion from "./testing/Showquestion";
+import {home} from ".//data/constants"
 
 const theme = createMuiTheme({
   palette: {
@@ -26,14 +27,14 @@ const theme = createMuiTheme({
       main: colors.textPrimary,
     },
     background: {
-      default: colors.backgroundSecondary,
-      paper: colors.backgroundPrimary,
+      default: home.backgroundSecondary,
+      paper: home.backgroundPrimary,
       // paper: "white"
     },
   },
   background: {
-    default: colors.backgroundSecondary,
-    paper: colors.backgroundPrimary,
+    default: home.backgroundSecondary,
+    paper: home.backgroundPrimary,
   },
 });
 
