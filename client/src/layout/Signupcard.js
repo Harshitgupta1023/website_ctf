@@ -18,7 +18,7 @@ import Loading from "../Components/Loading";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh",
+    height: "90vh",
   },
   image: {
     backgroundImage: `url(${hackingOAuth})`,

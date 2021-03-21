@@ -244,7 +244,7 @@ const useStyles = makeStyles((theme) => ({
   },
   categorycard: {
     border: "2px solid white",
-    boxShadow: "5px 5px 5px 3px grey",
+    boxShadow: "0px 0px 5px 3px grey",
   },
   carousel: {
     backgroundColor: home.backgroundPrimary,
@@ -276,7 +276,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "20%",
     float: "left",
     marginRight: "30px",
-    border: "2px solid gold",
+    padding: "3px",
+    background: "linear-gradient(to right, gold, green)",
   },
 
   imageLayoutRight: {
@@ -285,7 +286,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "20%",
     float: "right",
     marginLeft: "30px",
-    border: "2px solid gold",
+    padding: "3px",
+    background: "linear-gradient(to right, gold,green)",
   },
 
   headingCategoriesSection: {

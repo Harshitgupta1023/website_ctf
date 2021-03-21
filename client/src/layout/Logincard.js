@@ -80,17 +80,14 @@ function Handles({ history }) {
     <Loading loading={loading || gitLoading} />
   ) : (
     <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-    
       <div
         style={{
           marginLeft: "20%",
           marginTop: "4%",
-          width: "50%"
+          width: "50%",
         }}
       >
-        <div>
-          
-        </div>
+        <div></div>
 
         <GoogleLogin
           clientId={GOOGLE_CLIENT_ID}
@@ -101,33 +98,31 @@ function Handles({ history }) {
           className={classes.googleLink}
         />
         <a
-        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`}
-        style={{
-          marginTop: "4%",
-          marginLeft: "45%",
-          padding:"2%"
-        
-        }}
-      >
-   
-        <GitHubIcon style={{
-    height: "45px",
-    width: "45px",
-    color: "white",
-    paddingTop: "2%",
-  }}/>
- 
-        
-      </a>
+          href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`}
+          style={{
+            marginTop: "10%",
+            marginLeft: "45%",
+            padding: "2%",
+          }}
+        >
+          <GitHubIcon
+            style={{
+              height: "45px",
+              width: "45px",
+              color: "white",
+              paddingTop: "2%",
+              marginLeft: "7%",
+            }}
+          />
+        </a>
       </div>
-      
     </div>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "30vh",
+    height: "90vh",
   },
   image: {
     backgroundImage: `url(${hackingOAuth})`,
@@ -163,9 +158,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: button.buttonHoverColor,
     },
   },
-  googleLink:{
-    paddingTop: "0"
-  }
+  googleLink: {
+    paddingTop: "0",
+  },
 }));
 
 const LOGIN_USER = gql`

@@ -69,7 +69,11 @@ export default function Navbar(props) {
       <Link to="/" className="header_heading links">
         SeekhoCTF{" "}
       </Link>
-
+      {props.home && (
+        <Link to="/" className="header_links links">
+          <Button>Home</Button>
+        </Link>
+      )}
       {props.getStarted && (
         <Link to="/getstarted" className="header_links  links">
           <Button>
@@ -77,11 +81,7 @@ export default function Navbar(props) {
           </Button>
         </Link>
       )}
-      {props.home && (
-        <Link to="/" className="header_links links">
-          <Button>Home</Button>
-        </Link>
-      )}
+
       {props.tools && (
         <Link to="/tools" className="header_links header_tools links">
           <Button>Tools</Button>

@@ -82,7 +82,7 @@ export default function Answerpart(props) {
       <Grid container spacing={3} className={classes.answer}>
         <Grid item xs={12} className={classes.submissionstats}>
           <Typography variant="p">
-            submission : {subm} / accepted: {accep}
+            Accuracy : {Math.round((accep * 100) / subm === 0 ? 1 : subm)}%
           </Typography>
         </Grid>
         <Grid item xs={12}>
