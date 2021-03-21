@@ -4,7 +4,7 @@ import Navbar from "../layout/Navbar";
 export default function Login() {
   return (
     <div>
-      <Navbar />
+      <Navbar home getStarted tools />
       <Signupcard />
     </div>
   );

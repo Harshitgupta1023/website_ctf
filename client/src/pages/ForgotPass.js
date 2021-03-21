@@ -4,7 +4,7 @@ import Navbar from "../layout/Navbar";
 export default function ForgotPass() {
   return (
     <div>
-      <Navbar />
+      <Navbar home getStarted tools />
       <ForgotPassCard />
     </div>
   );

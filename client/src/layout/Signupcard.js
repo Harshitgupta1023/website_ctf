@@ -11,51 +11,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { button } from "../data/constants";
 import hackingOAuth from "../media/hacking.jpg";
-import discordOAuth from "../media/discord.svg";
-import googleOAuth from "../media/google.svg";
 import useForm from "../customHooks/useForm";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../context/auth";
 import Loading from "../Components/Loading";
-
-function ConnectWith() {
-  return (
-    <Typography variant="body2" color="primary" align="center">
-      {"or connect with"}
-    </Typography>
-  );
-}
-
-function Handles() {
-  return (
-    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-      <a href="www.google.com">
-        <img
-          alt="google"
-          src={googleOAuth}
-          style={{
-            marginLeft: "20%",
-            marginTop: "3%",
-            height: "50px",
-            width: "50px",
-          }}
-        />
-      </a>
-      <Link href="">
-        <img
-          alt="discord"
-          src={discordOAuth}
-          style={{
-            marginLeft: "40%",
-            marginTop: "3%",
-            height: "50px",
-            width: "50px",
-          }}
-        />
-      </Link>
-    </div>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -129,12 +88,6 @@ function SignInSide(props) {
     },
     () => {
       registerUser({ variables: formInputs });
-      // loginUser({
-      //   variables: {
-      //     username: formInputs.username,
-      //     password: formInputs.password,
-      //   },
-      // });
     }
   );
 
@@ -209,10 +162,6 @@ function SignInSide(props) {
                 </Link>
               </Grid>
             </Grid>
-            {/* <Box mt={5}>
-              <ConnectWith />
-              <Handles />
-            </Box> */}
           </form>
         </div>
       </Grid>

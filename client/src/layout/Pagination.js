@@ -26,16 +26,16 @@ export default function BasicPagination({
   return (
     <div className={classes.root}>
       <Grid container>
-        <Grid item xs={8} sm={8}>
+        <Grid item xs={8} sm={7}>
           <Pagination
-            style={{ position: "relative", marginLeft: 650 }}
+            style={{ position: "relative", marginLeft: 600 }}
             count={i}
             size="large"
             color="secondary"
             onChange={(event, page) => paginate(page)}
           />
         </Grid>
-        <Grid item xs={4} sm={2}>
+        <Grid item xs={2} sm={2}>
           <Typography
             variant="h4"
             color="primary"
@@ -51,7 +51,7 @@ export default function BasicPagination({
             Points: {points}
           </Typography>
         </Grid>
-        <Grid item xs={4} sm={2}>
+        <Grid item xs={2} sm={3}>
           <Typography
             variant="h4"
             color="primary"
