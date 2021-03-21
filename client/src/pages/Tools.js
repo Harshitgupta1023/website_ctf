@@ -10,6 +10,7 @@ import Navbar from "../layout/Navbar";
 import ToolsCard from "../Components/ToolsCard";
 import BouncingText from "../animation/BouncingText";
 import { Grid } from "@material-ui/core";
+import { technique } from "../data/techniques";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -85,7 +86,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function VerticalTabs() {
+export default function Tools() {
+  const {
+    cryptography_technique,
+    web_technique,
+    binary_technique,
+    forensics_technique,
+    reverse_technique,
+  } = technique;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -95,7 +103,7 @@ export default function VerticalTabs() {
 
   return (
     <div>
-      <div container component="main" className={classes.navbar}>
+      <div component="main" className={classes.navbar}>
         <Navbar home getStarted tools />
       </div>
       <hr className={classes.hr}></hr>
@@ -144,261 +152,120 @@ export default function VerticalTabs() {
             backgroundBlendMode: "multiply,multiply",
           }}
         >
-          <p className={classes.content}>
+          <div className={classes.content}>
             <BouncingText text="Cryptography" />
-          </p>
+          </div>
           <Grid container component="main">
-            <Grid item xs={4} md={4} sm={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-                paddingLeft="10%"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
+            {cryptography_technique.map((data, index) => (
+              <Grid item xs={4} md={4} sm={4} key={index}>
+                <ToolsCard
+                  title={data.title}
+                  description_link={data.description_link}
+                  usage_link={data.usage_link}
+                  paddingLeft="10%"
+                />
+              </Grid>
+            ))}
           </Grid>
         </TabPanel>
         <TabPanel
           value={value}
           index={1}
           style={{
-            backgroundImage:
-              "linear-gradient(120deg, #1a202c 0%, #334a71 100%)",
+            background:
+              "linear-gradient(to bottom, #112a5d 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, #2d3748 120%) #989898",
+            backgroundBlendMode: "multiply,multiply",
           }}
         >
-          <p className={classes.content}>
+          <div className={classes.content}>
             <BouncingText text="Web Exploitation" />
-          </p>
+          </div>
           <Grid container component="main">
-            <Grid item xs={4} md={4} sm={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-                paddingLeft="10%"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
+            {web_technique.map((data, index) => (
+              <Grid item xs={4} md={4} sm={4} key={index}>
+                <ToolsCard
+                  title={data.title}
+                  description_link={data.description_link}
+                  usage_link={data.usage_link}
+                  paddingLeft="10%"
+                />
+              </Grid>
+            ))}
           </Grid>
         </TabPanel>
-        <TabPanel value={value} index={2}>
-          <p className={classes.content}>
+        <TabPanel
+          value={value}
+          index={2}
+          style={{
+            background:
+              "linear-gradient(to bottom, #112a5d 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, #2d3748 120%) #989898",
+            backgroundBlendMode: "multiply,multiply",
+          }}
+        >
+          <div className={classes.content}>
             <BouncingText text="Binary Exploitation" />
-          </p>
-
+          </div>
           <Grid container component="main">
-            <Grid item xs={4} md={4} sm={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-                paddingLeft="10%"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
+            {binary_technique.map((data, index) => (
+              <Grid item xs={4} md={4} sm={4} key={index}>
+                <ToolsCard
+                  title={data.title}
+                  description_link={data.description_link}
+                  usage_link={data.usage_link}
+                  paddingLeft="10%"
+                />
+              </Grid>
+            ))}
           </Grid>
         </TabPanel>
-        <TabPanel value={value} index={3}>
-          <p className={classes.content}>
+        <TabPanel
+          value={value}
+          index={3}
+          style={{
+            background:
+              "linear-gradient(to bottom, #112a5d 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, #2d3748 120%) #989898",
+            backgroundBlendMode: "multiply,multiply",
+          }}
+        >
+          <div className={classes.content}>
             <BouncingText text="Forensics" />
-          </p>
+          </div>
           <Grid container component="main">
-            <Grid item xs={4} md={4} sm={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-                paddingLeft="10%"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
+            {forensics_technique.map((data, index) => (
+              <Grid item xs={4} md={4} sm={4} key={index}>
+                <ToolsCard
+                  title={data.title}
+                  description_link={data.description_link}
+                  usage_link={data.usage_link}
+                  paddingLeft="10%"
+                />
+              </Grid>
+            ))}
           </Grid>
         </TabPanel>
-        <TabPanel value={value} index={4}>
-          <p className={classes.content}>
+        <TabPanel
+          value={value}
+          index={4}
+          style={{
+            background:
+              "linear-gradient(to bottom, #112a5d 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, #2d3748 120%) #989898",
+            backgroundBlendMode: "multiply,multiply",
+          }}
+        >
+          <div className={classes.content}>
             <BouncingText text="Reverse Engineering" />
-          </p>
+          </div>
           <Grid container component="main">
-            <Grid item xs={4} md={4} sm={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-                paddingLeft="10%"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <ToolsCard
-                title="HEX TO ASCII"
-                description_link="https://youtube.com"
-                usage_link="https://youtube.com"
-              />
-            </Grid>
+            {reverse_technique.map((data, index) => (
+              <Grid item xs={4} md={4} sm={4} key={index}>
+                <ToolsCard
+                  title={data.title}
+                  description_link={data.description_link}
+                  usage_link={data.usage_link}
+                  paddingLeft="10%"
+                />
+              </Grid>
+            ))}
           </Grid>
         </TabPanel>
       </div>
