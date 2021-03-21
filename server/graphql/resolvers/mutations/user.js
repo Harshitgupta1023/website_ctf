@@ -57,19 +57,23 @@ module.exports = {
       let oldData = await User.findById(id);
       if (oldData) {
         let data = {};
-        if (username) {
+        if (username && username != oldData["username"]) {
           let userA = await User.findOne({ username: username });
           if (userA) {
-            throw new Error("User with same username already exists");
+            throw new Error(
+              "User with the requested new username already exists. Try Something else"
+            );
           }
           data["username"] = username;
         } else {
           data["username"] = oldData["username"];
         }
-        if (email) {
+        if (email && email != oldData["email"]) {
           let userB = await User.findOne({ email: email });
           if (userB) {
-            throw new Error("User with same email already exists");
+            throw new Error(
+              "User with the requested new email already exists. Try something else"
+            );
           }
           data["email"] = email;
         } else {
@@ -119,7 +123,7 @@ module.exports = {
       if (newPassword == "") {
         throw new Error("New password can't be empty");
       }
-      user.password = await bcrypt.hash(password, 12);
+      user.password = await bcrypt.hash(newPassword, 12);
       await user.save();
       const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
       return { userID: user.id, token: token, tokenExpiration: 1 };
