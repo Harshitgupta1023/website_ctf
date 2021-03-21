@@ -151,14 +151,14 @@ export default function Profile({ history }) {
         onSubmit={handleSubmit}
         className={classes.root}
         style={{
-          backgroundColor: "black",
+          backgroundColor: "#1A202C",
           position: "relative",
           left: "50%",
           transform: "translateX(-50%)",
         }}
       >
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={4} style={{ backgroundColor: "" }}>
+          <Grid item xs={12} sm={4}>
             <Avatar
               className={classes.image}
               alt={user.username}
