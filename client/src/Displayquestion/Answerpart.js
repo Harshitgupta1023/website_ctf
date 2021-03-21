@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 30,
   },
   answer: {
-    position: "absolute",
+    // position: "absolute",
     marginTop: 20,
     display: "flex",
     justifyContent: "space-between",

@@ -15,6 +15,7 @@ import { gql, useMutation } from "@apollo/client";
 import { admin_username } from "../config";
 import { AuthContext } from "../context/auth";
 import Alert from "@material-ui/lab/Alert";
+import "./Answer.css";
 const DELETE_PROBLEM = gql`
   mutation deleteProblem($id: ID!) {
     deleteProblem(id: $id) {
@@ -99,88 +100,92 @@ export default function QuestionCard(props) {
       }}
       variant="outlined"
     >
-      <CardContent>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 10,
-          }}
-        >
-          <Typography className={classes.questiontitle} variant="h4">
-            {props.title}
-          </Typography>
-          {props.answer && admin_username.includes(user.username) && (
-            <Link
-              to={`${props.location}/updateproblems/${props.id}`}
-              className="links"
+      <div className={props.cssapply && "module-border-wrap"}>
+        <div className={props.cssapply && "module"}>
+          <CardContent>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 10,
+              }}
             >
-              <Button variant="contained">Update</Button>
-            </Link>
-          )}
-          {props.answer && admin_username.includes(user.username) && (
-            <Button variant="contained" onClick={handleDelete}>
-              Delete
-            </Button>
-          )}
-          <Chip
-            className={classes.pointss}
-            color="secondary"
-            label={props.points}
-          />
+              <Typography className={classes.questiontitle} variant="h4">
+                {props.title}
+              </Typography>
+              {props.answer && admin_username.includes(user.username) && (
+                <Link
+                  to={`${props.location}/updateproblems/${props.id}`}
+                  className="links"
+                >
+                  <Button variant="contained">Update</Button>
+                </Link>
+              )}
+              {props.answer && admin_username.includes(user.username) && (
+                <Button variant="contained" onClick={handleDelete}>
+                  Delete
+                </Button>
+              )}
+              <Chip
+                className={classes.pointss}
+                color="secondary"
+                label={props.points}
+              />
+            </div>
+            <Divider />
+            <div className={classes.pos} color="textSecondary">
+              {props.category.map((c, ind) => (
+                <Chip
+                  key={ind}
+                  label={c}
+                  style={{
+                    margin: "3px",
+                    border: ".5px solid white",
+                  }}
+                />
+              ))}
+            </div>
+            {props.answer && <Divider />}
+            <br></br>
+            {props.solved && (
+              <div style={{ width: 130 }}>
+                <h2 style={{ display: "inline" }}>Solved</h2>
+                <img
+                  alt="tick"
+                  src={Tick}
+                  style={{
+                    float: "right",
+                    height: "38px",
+                    width: "30px",
+                  }}
+                />
+              </div>
+            )}
+            {props.answer && (
+              <Mainbody statement={props.statement} hints={props.hints} />
+            )}
+            {props.answer && (
+              <Answerpart
+                problemID={props.id}
+                fileURL={props.fileURL}
+                submissions={props.submissions}
+                accepted={props.accepted}
+                solution={props.solution}
+              />
+            )}
+          </CardContent>
+          <Snackbar
+            open={open}
+            autoHideDuration={6000}
+            onClose={() => setOpen(false)}
+          >
+            <Alert onClose={() => setOpen(false)} severity={severity}>
+              {message}
+            </Alert>
+          </Snackbar>
         </div>
-        <Divider />
-        <div className={classes.pos} color="textSecondary">
-          {props.category.map((c, ind) => (
-            <Chip
-              key={ind}
-              label={c}
-              style={{
-                margin: "3px",
-                border: ".5px solid white",
-              }}
-            />
-          ))}
-        </div>
-        {props.answer && <Divider />}
-        <br></br>
-        {props.solved && (
-          <div style={{ width: 130 }}>
-            <h2 style={{ display: "inline" }}>Solved</h2>
-            <img
-              alt="tick"
-              src={Tick}
-              style={{
-                float: "right",
-                height: "38px",
-                width: "30px",
-              }}
-            />
-          </div>
-        )}
-        {props.answer && (
-          <Mainbody statement={props.statement} hints={props.hints} />
-        )}
-        {props.answer && (
-          <Answerpart
-            problemID={props.id}
-            fileURL={props.fileURL}
-            submissions={props.submissions}
-            accepted={props.accepted}
-            solution={props.solution}
-          />
-        )}
-      </CardContent>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-      >
-        <Alert onClose={() => setOpen(false)} severity={severity}>
-          {message}
-        </Alert>
-      </Snackbar>
+      </div>
     </Card>
   );
 }

@@ -42,6 +42,7 @@ function ProblemsSection(props) {
           }}
         >
           <QuestionCard
+            cssapply
             onClick={() => handleClickOpen}
             width={350}
             solved={
