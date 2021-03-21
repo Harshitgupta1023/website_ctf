@@ -11,7 +11,7 @@ export default function Confeti() {
         style={{
           position: "absolute",
           bottom: "45%",
-          left: "27%",
+          left: "24%",
           fontSize: "1rem",
           fontFamily: "Sofia",
           color: "gold",
