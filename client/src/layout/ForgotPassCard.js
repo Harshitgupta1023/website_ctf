@@ -237,7 +237,9 @@ function SignInSide(props) {
               style={{ paddingTop: 10 }}
               onClick={handleSendOTP}
             >
-              <Grid item>Send OTP to Email</Grid>
+              <Grid item>
+                <Button variant="contained">Send OTP to Email</Button>
+              </Grid>
             </Button>
             <TextField
               variant="outlined"

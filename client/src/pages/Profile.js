@@ -137,8 +137,15 @@ export default function Profile({ history }) {
   ) : (
     <div>
       <Navbar tools getStarted home />
-      <h1 style={{ color: "white", textAlign: "center", marginBottom: "10px" }}>
-        Update User Profile
+      <h1
+        style={{
+          color: "gold",
+          textAlign: "center",
+          marginBottom: "10px",
+          fontFamily: "'Roboto',sans-serif",
+        }}
+      >
+        UPDATE USER PROFILE
       </h1>
       <form
         onSubmit={handleSubmit}
@@ -198,19 +205,20 @@ export default function Profile({ history }) {
               label={user.username}
               name="username"
               style={{ margin: 8 }}
-              placeholder="Required"
               helperText="Enter the new UserName Here"
               onChange={handleInputChange}
               fullWidth
               value={formInputs.username}
               margin="normal"
             />
+            <Button variant="contained" type="submit" color="secondary">
+              Update Username
+            </Button>
             <TextField
               label={user.email}
               name="email"
               type="email"
               style={{ margin: 8 }}
-              placeholder="Required"
               helperText="Enter the new Email Here"
               onChange={handleInputChange}
               value={formInputs.email}
@@ -218,7 +226,7 @@ export default function Profile({ history }) {
               margin="normal"
             />
             <Button variant="contained" type="submit" color="secondary">
-              Update
+              Update Email
             </Button>
 
             <TextField
@@ -226,7 +234,6 @@ export default function Profile({ history }) {
               name="oldPassword"
               type="password"
               style={{ margin: 8 }}
-              placeholder="Required"
               helperText="Enter the Existing Password Here"
               onChange={handleInputChange}
               value={formInputs.oldPassword}
