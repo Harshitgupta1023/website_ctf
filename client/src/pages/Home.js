@@ -53,7 +53,7 @@ function CategoriesSection() {
           borderStyle: "dotted none none",
           width: "5%",
           borderWidth: "10px",
-          borderColor: "#EAF6F6",
+          borderColor: "grey",
         }}
       />
       <div xs={12} sm={8} md={5} className={classes.categoriesRow}>
@@ -179,7 +179,7 @@ function Handles() {
     <div>
       <a
         className={classes.handlesLinks}
-        href="https://google.com"
+        href="mailto: seekhoCTF@gmail.com"
         style={{
           marginLeft: "15%",
           marginRight: "18.5%",
@@ -217,7 +217,7 @@ function Handles() {
 const useStyles = makeStyles((theme) => ({
   navbar: {
     backgroundColor: home.backgroundPrimary,
-    height: "10vh",
+    height: "12vh",
   },
 
   hr: {
@@ -239,24 +239,21 @@ const useStyles = makeStyles((theme) => ({
   },
   categoriesSection: {
     backgroundColor: home.backgroundSecondary,
-    height: "310vh",
+    height: "285vh",
     padding: "2% 10%",
   },
   categorycard: {
-    // border: "70px solid transparent",
-    // padding: "15px",
-    // borderImage: `url(${border}) 10% `,
-    border: "3px solid white",
-    boxShadow: "5px 5px 10px 15px #888888",
+    border: "2px solid white",
+    boxShadow: "5px 5px 5px 3px grey",
   },
   carousel: {
     backgroundColor: home.backgroundPrimary,
     height: "100h",
   },
   handleSec: {
-    padding: "2% 38%",
+    padding: "2% 41.5%",
     backgroundColor: home.backgroundSecondary,
-    height: "35vh",
+    height: "25vh",
   },
   footer: {
     backgroundColor: home.backgroundPrimary,
@@ -279,7 +276,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "20%",
     float: "left",
     marginRight: "30px",
-    border: "5px solid gold",
+    border: "2px solid gold",
   },
 
   imageLayoutRight: {
@@ -288,12 +285,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "20%",
     float: "right",
     marginLeft: "30px",
-    border: "5px solid gold",
+    border: "2px solid gold",
   },
 
   headingCategoriesSection: {
     color: "gold",
-    marginBottom: "5%",
+    marginBottom: "3%",
     fontSize: "2.5rem",
     fontFamily: "'Cormorant Unicase', serif",
   },

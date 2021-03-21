@@ -36,6 +36,7 @@ function Item(props) {
             fontWeight: "bolder",
             fontSize: "4rem",
             color: "gold",
+            marginBottom: "5%"
           }}
         >
           {props.item.name}

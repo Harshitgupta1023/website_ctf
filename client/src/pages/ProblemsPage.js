@@ -5,7 +5,10 @@ import Navbar from "../layout/Navbar";
 
 export default function ProblemsPage({ category }) {
     return (
-        <div>
+        <div style={{
+            minHeight: "120vh",
+            backgroundImage: "radial-gradient(circle, #063d8f, #040D21 )"
+        }}>
             <Navbar createProblems tools home />
             <Slidebar
                 // add links
