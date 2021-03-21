@@ -38,6 +38,7 @@ function Alert(props) {
 }
 
 function Handles({ history }) {
+  const classes = useStyles();
   const { updateUser } = useContext(AuthContext);
   const [googleLogin, { loading }] = useMutation(GOOGLE_LOGIN, {
     onCompleted({ googleLogin: { token } }) {
@@ -79,53 +80,54 @@ function Handles({ history }) {
     <Loading loading={loading || gitLoading} />
   ) : (
     <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-      {/* <a
-        href="https://google.com"
-        style={{
-          marginLeft: "20%",
-          marginTop: "2%",
-        }}
-      >
-        <img
-          alt="google"
-          src={googleOAuth}
-          style={{
-            height: "50px",
-            width: "50px",
-          }}
-        />
-      </a> */}
+    
       <div
         style={{
           marginLeft: "20%",
-          marginTop: "2%",
+          marginTop: "4%",
+          width: "50%"
         }}
       >
+        <div>
+          
+        </div>
+
         <GoogleLogin
           clientId={GOOGLE_CLIENT_ID}
           buttonText="Login"
           onSuccess={handleGoogleLogin}
           onFailure={(res) => console.log("Login Failed!", res)}
           theme="dark"
+          className={classes.googleLink}
         />
-      </div>
-      <a
+        <a
         href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`}
         style={{
+          marginTop: "4%",
           marginLeft: "45%",
-          marginTop: "10%",
-          hover: "",
+          padding:"2%"
+        
         }}
       >
-        <GitHubIcon />
+   
+        <GitHubIcon style={{
+    height: "45px",
+    width: "45px",
+    color: "white",
+    paddingTop: "2%",
+  }}/>
+ 
+        
       </a>
+      </div>
+      
     </div>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh",
+    height: "30vh",
   },
   image: {
     backgroundImage: `url(${hackingOAuth})`,
@@ -161,6 +163,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: button.buttonHoverColor,
     },
   },
+  googleLink:{
+    paddingTop: "0"
+  }
 }));
 
 const LOGIN_USER = gql`
