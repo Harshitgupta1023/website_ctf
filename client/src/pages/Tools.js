@@ -96,7 +96,7 @@ export default function VerticalTabs() {
   return (
     <div>
       <div container component="main" className={classes.navbar}>
-        <Navbar home getStarted />
+        <Navbar home getStarted tools />
       </div>
       <hr className={classes.hr}></hr>
       <div className={classes.root}>
@@ -135,7 +135,15 @@ export default function VerticalTabs() {
           />
         </Tabs>
 
-        <TabPanel value={value} index={0}>
+        <TabPanel
+          value={value}
+          index={0}
+          style={{
+            background:
+              "linear-gradient(to bottom, #112a5d 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, #2d3748 120%) #989898",
+            backgroundBlendMode: "multiply,multiply",
+          }}
+        >
           <p className={classes.content}>
             <BouncingText text="Cryptography" />
           </p>
@@ -185,7 +193,14 @@ export default function VerticalTabs() {
             </Grid>
           </Grid>
         </TabPanel>
-        <TabPanel value={value} index={1}>
+        <TabPanel
+          value={value}
+          index={1}
+          style={{
+            backgroundImage:
+              "linear-gradient(120deg, #1a202c 0%, #334a71 100%)",
+          }}
+        >
           <p className={classes.content}>
             <BouncingText text="Web Exploitation" />
           </p>

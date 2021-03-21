@@ -16,7 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { button } from "../data/constants";
 import hackingOAuth from "../media/hacking.jpg";
-import discordOAuth from "../media/discord.svg";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import useForm from "../customHooks/useForm";
 import Loading from "../Components/Loading";
 import { AuthContext } from "../context/auth";
@@ -117,14 +117,7 @@ function Handles({ history }) {
           hover: "",
         }}
       >
-        <img
-          alt="discord"
-          src={discordOAuth}
-          style={{
-            height: "50px",
-            width: "50px",
-          }}
-        />
+        <GitHubIcon />
       </a>
     </div>
   );

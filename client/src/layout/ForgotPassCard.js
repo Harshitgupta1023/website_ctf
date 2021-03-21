@@ -5,15 +5,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import { Link, withRouter } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { button } from "../data/constants";
 import hackingOAuth from "../media/hacking.jpg";
-import discordOAuth from "../media/discord.svg";
-import googleOAuth from "../media/google.svg";
 import useForm from "../customHooks/useForm";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../context/auth";
@@ -23,45 +20,6 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
-function ConnectWith() {
-  return (
-    <Typography variant="body2" color="primary" align="center">
-      {"or connect with"}
-    </Typography>
-  );
-}
-
-function Handles() {
-  return (
-    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-      <a href="www.google.com">
-        <img
-          alt="google"
-          src={googleOAuth}
-          style={{
-            marginLeft: "20%",
-            marginTop: "3%",
-            height: "50px",
-            width: "50px",
-          }}
-        />
-      </a>
-      <Link href="">
-        <img
-          alt="discord"
-          src={discordOAuth}
-          style={{
-            marginLeft: "40%",
-            marginTop: "3%",
-            height: "50px",
-            width: "50px",
-          }}
-        />
-      </Link>
-    </div>
-  );
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -237,7 +195,9 @@ function SignInSide(props) {
               style={{ paddingTop: 10 }}
               onClick={handleSendOTP}
             >
-              <Grid item>Send OTP to Email</Grid>
+              <Grid item>
+                <Button variant="contained">Send OTP to Email</Button>
+              </Grid>
             </Button>
             <TextField
               variant="outlined"
@@ -284,10 +244,6 @@ function SignInSide(props) {
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
-              <ConnectWith />
-              <Handles />
-            </Box>
           </form>
           <Snackbar
             open={open}
