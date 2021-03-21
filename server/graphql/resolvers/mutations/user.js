@@ -123,7 +123,7 @@ module.exports = {
       if (newPassword == "") {
         throw new Error("New password can't be empty");
       }
-      user.password = await bcrypt.hash(password, 12);
+      user.password = await bcrypt.hash(newPassword, 12);
       await user.save();
       const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
       return { userID: user.id, token: token, tokenExpiration: 1 };
