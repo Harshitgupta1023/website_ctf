@@ -57,5 +57,6 @@ module.exports = gql`
     googleLogin(id_token: String!): AuthData!
     githubLogin(code: String!): AuthData!
     makeSubmission(id: ID!, problemID: ID!, submission: String): AuthData!
+    logOut(id: ID!): String!
   }
 `;

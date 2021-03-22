@@ -9,13 +9,14 @@ const axios = require("axios");
 const upload = require("../../upload/upload");
 const bcrypt = require("bcryptjs");
 const sendMail = require("../../../middleware/sendGrid"); //Now using Send Grid, replaced Gmail API
-
+const redis = require("../../../middleware/redis");
 const {
   GMAIL_CLIENT_ID,
   GITHUB_CLIENT_ID,
   GITHUB_CLIENT_SECRET,
 } = require("../../../config");
 const { OAuth2Client } = require("google-auth-library");
+const client = require("../../../middleware/redis");
 
 module.exports = {
   Mutation: {
@@ -32,11 +33,27 @@ module.exports = {
       }
       let userA = await User.findOne({ username: username });
       if (userA) {
-        throw new Error("User with same username already exists");
+        var cr = new Date(userA.createdAt);
+        if (
+          userA.verified ||
+          cr.getTime() + 7 * 3600 * 24 * 1000 > Date.now()
+        ) {
+          throw new Error("User with same username already exists");
+        } else {
+          await User.findOneAndRemove({ username: username });
+        }
       }
       let userB = await User.findOne({ email: email });
       if (userB) {
-        throw new Error("User with same email already exists");
+        var cr = new Date(userB.createdAt);
+        if (
+          userB.verified ||
+          cr.getTime() + 7 * 3600 * 24 * 1000 > Date.now()
+        ) {
+          throw new Error("User with same email already exists");
+        } else {
+          await User.findOneAndRemove({ email: email });
+        }
       }
       if (image) {
         data["imageURL"] = await upload(image, "images");
@@ -53,6 +70,9 @@ module.exports = {
       let { id, username, email, image } = args;
       if (req.userID != id && !req.isAdmin) {
         throw new Error("Unauthorized");
+      }
+      if ((await checkRedis(req.oldTok)) === "BlackListed") {
+        throw new Error("Token Expired");
       }
       let oldData = await User.findById(id);
       if (oldData) {
@@ -100,6 +120,8 @@ module.exports = {
         const token = jwt.sign({ userData: oldData }, JWT_KEY, {
           expiresIn: "1h",
         });
+        //Blacklisting oldToken using Redis
+        redis.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
         return { userID: oldData.id, token: token, tokenExpiration: 1 };
       } else {
         throw new error("User Not Found");
@@ -112,6 +134,9 @@ module.exports = {
       let { id, oldPassword, newPassword } = args;
       if (req.userID != id && !req.isAdmin) {
         throw new Error("Unauthorized");
+      }
+      if ((await checkRedis(req.oldTok)) === "BlackListed") {
+        throw new Error("Token Expired");
       }
       let user = await User.findById(id);
       if (!user) {
@@ -126,6 +151,8 @@ module.exports = {
       user.password = await bcrypt.hash(newPassword, 12);
       await user.save();
       const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
+      //Blacklisting oldToken using Redis
+      redis.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
       return { userID: user.id, token: token, tokenExpiration: 1 };
     },
     deleteUser: async (root, args, { req }, info) => {
@@ -248,6 +275,9 @@ module.exports = {
       if (req.userID != id && !req.isAdmin) {
         throw new Error("Unauthorized");
       }
+      if ((await checkRedis(req.oldTok)) === "BlackListed") {
+        throw new Error("Token Expired");
+      }
       let user = await User.findById(id);
       if (user.verified) {
         throw new Error("Already Verified");
@@ -269,6 +299,12 @@ module.exports = {
           const token = jwt.sign({ userData: user }, JWT_KEY, {
             expiresIn: "1h",
           });
+          //Blacklisting oldToken using Redis
+          redis.SETEX(
+            req.oldTok,
+            Math.round(req.expTime / 1000),
+            "BlackListed"
+          );
           return { userID: user.id, token: token, tokenExpiration: 1 };
         }
       }
@@ -416,6 +452,9 @@ module.exports = {
       if (req.userID != id && !req.isAdmin) {
         throw new Error("Unauthorized");
       }
+      if ((await checkRedis(req.oldTok)) === "BlackListed") {
+        throw new Error("Token Expired");
+      }
       let user = await User.findById(id);
       if (!user.verified) {
         throw new Error(
@@ -437,7 +476,21 @@ module.exports = {
         throw new Error("Wrong Answer");
       }
       const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
+      //Blacklisting oldToken using Redis
+      redis.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
       return { userID: user.id, token: token, tokenExpiration: 1 };
+    },
+    logOut: async (root, args, { req }, info) => {
+      if (!req.isAuth) {
+        throw new Error("Unauthenticated! Please Login");
+      }
+      let { id } = args;
+      if (req.userID != id && !req.isAdmin) {
+        throw new Error("Unauthorized");
+      }
+      //Blacklisting oldToken using Redis
+      redis.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
+      return "Successfully Logged Out";
     },
   },
 };
@@ -467,3 +520,7 @@ function generateRandomString(length) {
   }
   return result;
 }
+
+// Redis Client to check token in REDIS database
+const { promisify } = require("util");
+const checkRedis = promisify(client.GET).bind(client);

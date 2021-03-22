@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.17",
     "nodemailer": "^6.5.0",
+    "redis": "^3.0.2",
     "yarn": "^1.22.10"
   },
   "scripts": {
