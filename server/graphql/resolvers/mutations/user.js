@@ -480,6 +480,18 @@ module.exports = {
       redis.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
       return { userID: user.id, token: token, tokenExpiration: 1 };
     },
+    logOut: async (root, args, { req }, info) => {
+      if (!req.isAuth) {
+        throw new Error("Unauthenticated! Please Login");
+      }
+      let { id } = args;
+      if (req.userID != id && !req.isAdmin) {
+        throw new Error("Unauthorized");
+      }
+      //Blacklisting oldToken using Redis
+      redis.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
+      return "Successfully Logged Out";
+    },
   },
 };
 
