@@ -33,27 +33,27 @@ module.exports = {
       }
       let userA = await User.findOne({ username: username });
       if (userA) {
-        throw new Error("User with same username already exists");
-        // var cr = new Date(userA.createdAt);
-        // if (
-        //   userA.verified ||
-        //   cr.getTime() + 7 * 3600 * 24 * 1000 > Date.now()
-        // ) {
-        // } else {
-        //   await User.findOneAndRemove({ username: username });
-        // }
+        var cr = new Date(userA.createdAt);
+        if (
+          userA.verified ||
+          cr.getTime() + 7 * 3600 * 24 * 1000 > Date.now()
+        ) {
+          throw new Error("User with same username already exists");
+        } else {
+          await User.findOneAndRemove({ username: username });
+        }
       }
       let userB = await User.findOne({ email: email });
       if (userB) {
-        throw new Error("User with same email already exists");
-        // var cr = new Date(userB.createdAt);
-        // if (
-        //   userB.verified ||
-        //   cr.getTime() + 7 * 3600 * 24 * 1000 > Date.now()
-        // ) {
-        // } else {
-        //   await User.findOneAndRemove({ email: email });
-        // }
+        var cr = new Date(userB.createdAt);
+        if (
+          userB.verified ||
+          cr.getTime() + 7 * 3600 * 24 * 1000 > Date.now()
+        ) {
+          throw new Error("User with same email already exists");
+        } else {
+          await User.findOneAndRemove({ email: email });
+        }
       }
       if (image) {
         data["imageURL"] = await upload(image, "images");
