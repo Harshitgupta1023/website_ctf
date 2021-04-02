@@ -9,7 +9,6 @@ const axios = require("axios");
 const upload = require("../../upload/upload");
 const bcrypt = require("bcryptjs");
 const sendMail = require("../../../middleware/sendGrid"); //Now using Send Grid, replaced Gmail API
-const redis = require("../../../middleware/redis");
 const {
   GMAIL_CLIENT_ID,
   GITHUB_CLIENT_ID,
@@ -121,7 +120,7 @@ module.exports = {
           expiresIn: "1h",
         });
         //Blacklisting oldToken using Redis
-        redis.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
+        client.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
         return { userID: oldData.id, token: token, tokenExpiration: 1 };
       } else {
         throw new error("User Not Found");
@@ -152,7 +151,7 @@ module.exports = {
       await user.save();
       const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
       //Blacklisting oldToken using Redis
-      redis.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
+      client.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
       return { userID: user.id, token: token, tokenExpiration: 1 };
     },
     deleteUser: async (root, args, { req }, info) => {
@@ -300,7 +299,7 @@ module.exports = {
             expiresIn: "1h",
           });
           //Blacklisting oldToken using Redis
-          redis.SETEX(
+          client.SETEX(
             req.oldTok,
             Math.round(req.expTime / 1000),
             "BlackListed"
@@ -477,7 +476,7 @@ module.exports = {
       }
       const token = jwt.sign({ userData: user }, JWT_KEY, { expiresIn: "1h" });
       //Blacklisting oldToken using Redis
-      redis.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
+      client.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
       return { userID: user.id, token: token, tokenExpiration: 1 };
     },
     logOut: async (root, args, { req }, info) => {
@@ -489,7 +488,7 @@ module.exports = {
         throw new Error("Unauthorized");
       }
       //Blacklisting oldToken using Redis
-      redis.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
+      client.SETEX(req.oldTok, Math.round(req.expTime / 1000), "BlackListed");
       return "Successfully Logged Out";
     },
   },
