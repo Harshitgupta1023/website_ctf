@@ -1,7 +1,7 @@
 const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
 const mongoose = require("mongoose");
-
+const cookieParser = require("cookie-parser");
 const { MONGO_URL } = require("./config");
 const problem = require("./graphql/typeDefs/problem");
 const user = require("./graphql/typeDefs/user");
@@ -16,6 +16,7 @@ const server = new ApolloServer({
   context: ({ req, res }) => ({ req, res }),
 });
 const app = express();
+app.use(cookieParser());
 app.use("/uploads", express.static(__dirname));
 app.use(isAuth);
 server.applyMiddleware({ app });

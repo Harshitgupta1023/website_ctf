@@ -1,4 +1,3 @@
-const { boolean } = require("joi");
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
@@ -17,6 +16,10 @@ const userSchema = new Schema(
     },
     imageURL: String,
     points: {
+      type: Number,
+      default: 0,
+    },
+    tokenVersion: {
       type: Number,
       default: 0,
     },
