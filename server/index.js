@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 const server = new ApolloServer({
   typeDefs: [problem, user],
   resolvers,
-  context: ({ req }) => ({ req: req }),
+  context: ({ req, res }) => ({ req, res }),
 });
 const app = express();
 app.use("/uploads", express.static(__dirname));
