@@ -1,7 +1,7 @@
 export const technique = {
   cryptography_technique: [
     {
-      title: "HEX TO ASCII",
+      title: "HEX To ASCII",
       description_link: "https://youtube.com",
       usage_link: "https://youtube.com",
     },

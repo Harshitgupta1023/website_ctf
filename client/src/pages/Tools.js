@@ -146,13 +146,11 @@ export default function Tools() {
         <TabPanel
           value={value}
           index={0}
-          style={
-            {
-              // background:
-              //   "linear-gradient(to bottom, #112a5d 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, #2d3748 120%) #989898",
-              // backgroundBlendMode: "multiply,multiply",
-            }
-          }
+          style={{
+            background:
+              "linear-gradient(to bottom, #112a5d 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, #2d3748 120%) #989898",
+            backgroundBlendMode: "multiply,multiply",
+          }}
         >
           <div className={classes.content}>
             <BouncingText text="Cryptography" />
