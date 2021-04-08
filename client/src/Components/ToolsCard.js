@@ -12,19 +12,19 @@ import { button } from "../data/constants";
 const useStyles = makeStyles({
   root: {
     width: 275,
-    height: 300,
+    height: 250,
     padding: 10,
     marginRight: 10,
   },
   title: {
-    fontSize: "3.5rem",
-    fontFamily: "'Redressed', cursive",
+    fontSize: "2.5rem",
+    fontFamily: "'Roboto', cursive",
     color: "gold",
     marginBottom: "10%",
   },
 
   smallTitle: {
-    fontFamily: "'Redressed', cursive",
+    fontFamily: "'Roboto', cursive",
     fontSize: "1.8rem",
     color: "gold",
     marginBottom: "15%",
@@ -90,6 +90,7 @@ export default function ToolsCard(props) {
             </CardContent>
             <CardActions>
               <Button
+                target="_blank"
                 className={classes.buttonStyle}
                 href={props.description_link}
               >
@@ -97,8 +98,10 @@ export default function ToolsCard(props) {
               </Button>
             </CardActions>
             <CardActions>
-              <Button className={classes.buttonStyle} href={props.usage_link}>
-                Lorem Ipsum
+              <Button target="_blank" 
+              className={classes.buttonStyle} 
+              href={props.usage_link}>
+                Info
               </Button>
             </CardActions>
           </Card>{" "}

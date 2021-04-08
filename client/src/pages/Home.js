@@ -294,7 +294,7 @@ const useStyles = makeStyles((theme) => ({
     color: "gold",
     marginBottom: "3%",
     fontSize: "2.5rem",
-    fontFamily: "'Cormorant Unicase', serif",
+    fontFamily: "'Roboto', serif",
   },
 
   paraCategoriesSection: {
