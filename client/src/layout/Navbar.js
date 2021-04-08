@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
     height: 50,
     width: 50,
   },
+  text: {
+    fontSize: "1.25rem"
+  }
 }));
 
 export default function Navbar(props) {
@@ -71,12 +74,12 @@ export default function Navbar(props) {
       </Link>
       {props.home && (
         <Link to="/" className="header_links links">
-          <Button>Home</Button>
+          <Button >Home</Button>
         </Link>
       )}
       {props.getStarted && (
         <Link to="/getstarted" className="header_links  links">
-          <Button>
+          <Button >
             <center>Get started</center>
           </Button>
         </Link>
@@ -84,12 +87,12 @@ export default function Navbar(props) {
 
       {props.tools && (
         <Link to="/tools" className="header_links header_tools links">
-          <Button>Tools</Button>
+          <Button >Tools</Button>
         </Link>
       )}
       {props.createProblems && admin_username.includes(user.username) && (
         <Link to="/problems" className="header_links   links">
-          <Button>Create Problem</Button>
+          <Button >Create Problem</Button>
         </Link>
       )}
       {user ? (

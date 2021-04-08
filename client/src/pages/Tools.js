@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: "1.7rem",
     fontWeight: "bolder",
-    fontFamily: "'Cormorant Unicase', serif",
+    fontFamily: "'Roboto', serif",
     padding: "0% 8%",
     color: "gold",
     marginTop: "10%",
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   content: {
-    fontFamily: "'Dancing Script', cursive",
+    fontFamily: "'Roboto', cursive",
     margin: "3%",
     // fontWeight: "bolder",
     fontSize: "4rem",
