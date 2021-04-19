@@ -12,13 +12,18 @@ module.exports = gql`
     forgotPassOTP: OTP
     solvedProblems: [String]
   }
+  type AuthData {
+    user: User!
+    token: String!
+    tokenExpiration: Int!
+  }
   type OTP {
     code: Int
     count: Int
     expTime: Int
   }
   type Query {
-    login(username: String, password: String!): User!
+    getUserById(id: ID!): User!
   }
   type Mutation {
     createUser(
@@ -26,10 +31,10 @@ module.exports = gql`
       email: String!
       password: String!
       image: Upload
-    ): User!
+    ): AuthData!
     updateUser(id: ID!, username: String, email: String, image: Upload): User!
     updatePassword(id: ID!, oldPassword: String!, newPassword: String!): User!
-    login(username: String, password: String!): User!
+    login(username: String, password: String!): AuthData!
     sendForgotPassOTP(username: String!, email: String!): User!
     sendVerificationOTP(id: ID!): User!
     forgotPassword(
@@ -40,8 +45,8 @@ module.exports = gql`
     ): User!
     verifyAccount(id: ID!, OTP: Int!): User!
     deleteUser(id: ID!): User
-    googleLogin(id_token: String!): User!
-    githubLogin(code: String!): User!
+    googleLogin(id_token: String!): AuthData!
+    githubLogin(code: String!): AuthData!
     makeSubmission(id: ID!, problemID: ID!, submission: String): User!
     logOut(id: ID!): String!
   }

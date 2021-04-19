@@ -2,6 +2,11 @@ const User = require("../../../models/User");
 const Problem = require("../../../models/Problem");
 const jwt = require("jsonwebtoken");
 const { JWT_ACCESS_KEY, JWT_REFRESH_KEY } = require("../../../config");
+const {
+  createAccessToken,
+  createRefreshToken,
+  sendRefreshToken,
+} = require("../../../utils/auth");
 const userValidator = require("../../validators/userValidators");
 const path = require("path");
 const fs = require("fs");
@@ -15,6 +20,7 @@ const {
   GITHUB_CLIENT_SECRET,
 } = require("../../../config");
 const { OAuth2Client } = require("google-auth-library");
+
 module.exports = {
   Mutation: {
     createUser: async (root, args, { req, res }, info) => {
@@ -57,21 +63,14 @@ module.exports = {
       }
       const user = new User(data);
       user.save();
-      res.cookie(
-        "accessToken",
-        jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
-        { httpOnly: true }
-      );
-      res.cookie(
-        "refreshToken",
-        jwt.sign(
-          { userID: user._id, tokenVersion: user.tokenVersion },
-          JWT_REFRESH_KEY,
-          { expiresIn: "7d" }
-        ),
-        { httpOnly: true }
-      );
-      return user;
+      // res.cookie(
+      //   "accessToken",
+      //   jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
+      //   { httpOnly: true }
+      // );
+      const accessToken = createAccessToken(user);
+      sendRefreshToken(res, createRefreshToken(user));
+      return { user, token: accessToken, tokenExpiration: 15 * 60 };
     },
     updateUser: async (root, args, { req, res }, info) => {
       if (!req.isAuth) {
@@ -178,21 +177,14 @@ module.exports = {
       if (!isAuth) {
         throw new Error("Password Incorrect!");
       }
-      res.cookie(
-        "accessToken",
-        jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
-        { httpOnly: true }
-      );
-      res.cookie(
-        "refreshToken",
-        jwt.sign(
-          { userID: user._id, tokenVersion: user.tokenVersion },
-          JWT_REFRESH_KEY,
-          { expiresIn: "7d" }
-        ),
-        { httpOnly: true }
-      );
-      return user;
+      // res.cookie(
+      //   "accessToken",
+      //   jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
+      //   { httpOnly: true }
+      // );
+      const accessToken = createAccessToken(user);
+      sendRefreshToken(res, createRefreshToken(user));
+      return { user, token: accessToken, tokenExpiration: 15 * 60 };
     },
     sendVerificationOTP: async (root, args, { req, res }, info) => {
       if (!req.isAuth) {
@@ -395,21 +387,14 @@ module.exports = {
             user.save();
           }
         }
-        res.cookie(
-          "accessToken",
-          jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
-          { httpOnly: true }
-        );
-        res.cookie(
-          "refreshToken",
-          jwt.sign(
-            { userID: user._id, tokenVersion: user.tokenVersion },
-            JWT_REFRESH_KEY,
-            { expiresIn: "7d" }
-          ),
-          { httpOnly: true }
-        );
-        return user;
+        // res.cookie(
+        //   "accessToken",
+        //   jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
+        //   { httpOnly: true }
+        // );
+        const accessToken = createAccessToken(user);
+        sendRefreshToken(res, createRefreshToken(user));
+        return { user, token: accessToken, tokenExpiration: 15 * 60 };
       }
     },
     githubLogin: async (root, args, { req, res }, info) => {
@@ -456,21 +441,14 @@ module.exports = {
         user = new User(userDetails);
         await user.save();
       }
-      res.cookie(
-        "accessToken",
-        jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
-        { httpOnly: true }
-      );
-      res.cookie(
-        "refreshToken",
-        jwt.sign(
-          { userID: user._id, tokenVersion: user.tokenVersion },
-          JWT_REFRESH_KEY,
-          { expiresIn: "7d" }
-        ),
-        { httpOnly: true }
-      );
-      return user;
+      // res.cookie(
+      //   "accessToken",
+      //   jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
+      //   { httpOnly: true }
+      // );
+      const accessToken = createAccessToken(user);
+      sendRefreshToken(res, createRefreshToken(user));
+      return { user, token: accessToken, tokenExpiration: 15 * 60 };
     },
     makeSubmission: async (root, args, { req, res }, info) => {
       if (!req.isAuth) {
@@ -525,6 +503,7 @@ const generateOTP = (length) => {
   }
   return out;
 };
+
 const removeFile = (filePath) => {
   if (filePath[0] == "h") {
     return; //Since, the paths beginning with https are on google servers. So, no need to unlink them
