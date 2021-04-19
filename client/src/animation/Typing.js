@@ -8,17 +8,17 @@ export default function Typing(props) {
           color: "white",
           fontWeight: "bolder",
           fontSize: "3.75rem",
-          fontFamily: "'Cormorant Unicase', serif",
+          fontFamily: "'Roboto', serif",
           marginTop: "10%",
         }}
       >
         A website for CTF
       </p>
-      <h1 style={{ fontFamily: "'Cormorant Unicase', serif" }}>
+      <h1 style={{ fontFamily: "'Roboto', serif" }}>
         <Typical loop={Infinity} wrapper="b" steps={props.words} />
       </h1>
       <h2
-        style={{ marginTop: "15%", fontFamily: "'Cormorant Unicase', serif" }}
+        style={{ marginTop: "15%", fontFamily: "'Roboto', serif" }}
       >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit
       </h2>

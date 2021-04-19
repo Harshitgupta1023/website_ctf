@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Confeti from "./Confeti";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../context/auth";
-
+import MessagePopup from "../Components/MessagePopup";
 const SUBMIT_ANSWER = gql`
   mutation makeSubmission($id: ID!, $problemID: ID!, $submission: String) {
     makeSubmission(id: $id, problemID: $problemID, submission: $submission) {
@@ -54,14 +54,24 @@ export default function Answerpart(props) {
   const [subm, setSubm] = useState(props.submissions);
   const [accep, setAccep] = useState(props.accepted);
   const [show, setShow] = useState(false);
-  const [submitProblem] = useMutation(SUBMIT_ANSWER, {
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [severity, setSeverity] = React.useState("success");
+
+  const [submitProblem, { loading }] = useMutation(SUBMIT_ANSWER, {
     onCompleted(data) {
       setShow(true);
       setAccep(accep + 1);
       updateUser(data.makeSubmission.token);
     },
-    onError(err) {
-      console.log(err);
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
     },
   });
   const { user, updateUser } = useContext(AuthContext);
@@ -129,6 +139,13 @@ export default function Answerpart(props) {
           </form>
         </CardActions>
       </Grid>
+      <MessagePopup
+        open={open}
+        message={message}
+        severity={severity}
+        setOpen={setOpen}
+        loading={loading}
+      />
     </div>
   );
 }

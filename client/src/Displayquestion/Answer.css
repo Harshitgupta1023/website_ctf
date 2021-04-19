@@ -2,7 +2,8 @@
   width: 100%;
   height: 250px;
   padding: 3px;
-  background: linear-gradient(to right, green, skyblue);
+  background: linear-gradient(to right, #ebdad0, #952c99a2);
+  /* background: linear-gradient(to right, #da70d6, #ffa500); */
 }
 
 .module {
