@@ -1,15 +1,9 @@
 import React, { useReducer, createContext } from "react";
-import jwtDecode from "jwt-decode";
+import { setAccessToken } from "../data/authToken.js";
 
 const initialState = {
   user: null,
 };
-
-if (localStorage.getItem("jwtToken")) {
-  const decodedToken = jwtDecode(localStorage.getItem("jwtToken"));
-  if (decodedToken.exp * 1000 < Date.now()) localStorage.removeItem("jwtToken");
-  else initialState.user = decodedToken.userData;
-}
 
 const AuthContext = createContext({
   user: null,
@@ -43,35 +37,35 @@ const authReducer = (state, action) => {
 function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  function login({ token }) {
-    const decodedToken = jwtDecode(token);
-    const userData = decodedToken.userData;
-    localStorage.setItem("jwtToken", token);
+  function login({ accessToken, user }) {
+    setAccessToken(accessToken);
     dispatch({
       type: "LOGIN",
-      payload: userData,
+      payload: user,
     });
   }
 
-  function updateUser(token) {
-    const decodedToken = jwtDecode(token);
-    const userData = decodedToken.userData;
-    localStorage.removeItem("jwtToken");
-    localStorage.setItem("jwtToken", token);
+  function updateUser(user) {
     dispatch({
       type: "UPDATE_USER",
-      payload: userData,
+      payload: user,
     });
   }
 
   function logout() {
-    localStorage.removeItem("jwtToken");
     dispatch({ type: "LOGOUT" });
+    setAccessToken("");
   }
 
   return (
     <AuthContext.Provider
-      value={{ user: state.user, login, logout, updateUser }}
+      value={{
+        user: state.user,
+        accessToken: state.accessToken,
+        login,
+        logout,
+        updateUser,
+      }}
       {...props}
     />
   );

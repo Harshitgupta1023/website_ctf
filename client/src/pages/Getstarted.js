@@ -16,7 +16,6 @@ function Alert(props) {
 
 function Getstarted() {
   const { user } = useContext(AuthContext);
-  console.log(user);
   const [open, setOpen] = useState(false);
   return (
     <div>

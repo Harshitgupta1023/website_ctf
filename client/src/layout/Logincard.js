@@ -24,6 +24,7 @@ import { gql, useMutation } from "@apollo/client";
 import { withRouter } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import { GITHUB_CLIENT_ID, GOOGLE_CLIENT_ID } from "../config";
+import { setAccessToken } from "../data/authToken";
 
 function ConnectWith() {
   return (
@@ -41,9 +42,10 @@ function Handles({ history }) {
   const classes = useStyles();
   const { updateUser } = useContext(AuthContext);
   const [googleLogin, { loading }] = useMutation(GOOGLE_LOGIN, {
-    onCompleted({ googleLogin: { token } }) {
-      updateUser(token);
-      console.log("Yo boi", token);
+    onCompleted({ googleLogin: { user, token } }) {
+      updateUser(user);
+      setAccessToken(token);
+      console.log("Yo boi", user);
       history.push("/getstarted");
     },
     onError(err) {
@@ -166,7 +168,15 @@ const useStyles = makeStyles((theme) => ({
 const LOGIN_USER = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password) {
-      userID
+      user {
+        id
+        username
+        email
+        imageURL
+        points
+        verified
+        solvedProblems
+      }
       token
     }
   }
@@ -175,7 +185,15 @@ const LOGIN_USER = gql`
 const GOOGLE_LOGIN = gql`
   mutation googleLogin($id_token: String!) {
     googleLogin(id_token: $id_token) {
-      userID
+      user {
+        id
+        username
+        email
+        imageURL
+        points
+        verified
+        solvedProblems
+      }
       token
     }
   }
@@ -184,7 +202,15 @@ const GOOGLE_LOGIN = gql`
 const GITHUB_LOGIN = gql`
   mutation githubLogin($code: String!) {
     githubLogin(code: $code) {
-      userID
+      user {
+        id
+        username
+        email
+        imageURL
+        points
+        verified
+        solvedProblems
+      }
       token
     }
   }
