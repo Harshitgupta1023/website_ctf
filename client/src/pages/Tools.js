@@ -23,7 +23,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -103,7 +103,7 @@ export default function Tools() {
 
   return (
     <div>
-      <div component="main" className={classes.navbar}>
+      <div className={classes.navbar}>
         <Navbar home getStarted tools />
       </div>
       <hr className={classes.hr}></hr>
@@ -155,7 +155,7 @@ export default function Tools() {
           <div className={classes.content}>
             <BouncingText text="Cryptography" />
           </div>
-          <Grid container component="main">
+          <Grid container>
             {cryptography_technique.map((data, index) => (
               <Grid item xs={4} md={4} sm={4} key={index}>
                 <ToolsCard
@@ -180,7 +180,7 @@ export default function Tools() {
           <div className={classes.content}>
             <BouncingText text="Web Exploitation" />
           </div>
-          <Grid container component="main">
+          <Grid container>
             {web_technique.map((data, index) => (
               <Grid item xs={4} md={4} sm={4} key={index}>
                 <ToolsCard
@@ -205,7 +205,7 @@ export default function Tools() {
           <div className={classes.content}>
             <BouncingText text="Binary Exploitation" />
           </div>
-          <Grid container component="main">
+          <Grid container>
             {binary_technique.map((data, index) => (
               <Grid item xs={4} md={4} sm={4} key={index}>
                 <ToolsCard
@@ -230,7 +230,7 @@ export default function Tools() {
           <div className={classes.content}>
             <BouncingText text="Forensics" />
           </div>
-          <Grid container component="main">
+          <Grid container>
             {forensics_technique.map((data, index) => (
               <Grid item xs={4} md={4} sm={4} key={index}>
                 <ToolsCard
@@ -255,7 +255,7 @@ export default function Tools() {
           <div className={classes.content}>
             <BouncingText text="Reverse Engineering" />
           </div>
-          <Grid container component="main">
+          <Grid container>
             {reverse_technique.map((data, index) => (
               <Grid item xs={4} md={4} sm={4} key={index}>
                 <ToolsCard

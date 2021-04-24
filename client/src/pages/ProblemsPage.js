@@ -3,7 +3,7 @@ import Slidebar from "../layout/Slidebar";
 import Allquestion from "../layout/Allquestion";
 import Navbar from "../layout/Navbar";
 
-export default function ProblemsPage({ category }) {
+export default function ProblemsPage({ category, location }) {
   return (
     <div
     // style={{
@@ -17,7 +17,7 @@ export default function ProblemsPage({ category }) {
         style={{}}
       />
       <div style={{ marginLeft: 100, marginTop: 40 }}>
-        <Allquestion category={category} />
+        <Allquestion category={location.pathname.substr(1)} />
       </div>
     </div>
   );

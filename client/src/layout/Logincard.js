@@ -8,8 +8,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
@@ -25,6 +23,7 @@ import { withRouter } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import { GITHUB_CLIENT_ID, GOOGLE_CLIENT_ID } from "../config";
 import { setAccessToken } from "../data/authToken";
+import MessagePopup from "../Components/MessagePopup";
 
 function ConnectWith() {
   return (
@@ -34,32 +33,42 @@ function ConnectWith() {
   );
 }
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
 function Handles({ history }) {
   const classes = useStyles();
-  const { updateUser } = useContext(AuthContext);
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [severity, setSeverity] = React.useState("success");
+  const { login, updateUser } = useContext(AuthContext);
   const [googleLogin, { loading }] = useMutation(GOOGLE_LOGIN, {
-    onCompleted({ googleLogin: { user, token } }) {
-      updateUser(user);
-      setAccessToken(token);
-      console.log("Yo boi", user);
+    onCompleted({ googleLogin: loginData }) {
+      login(loginData);
+      console.log("Yo boi", loginData);
       history.push("/getstarted");
     },
-    onError(err) {
-      console.log(err);
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
     },
   });
   const [githubLogin, { gitLoading }] = useMutation(GITHUB_LOGIN, {
-    onCompleted({ githubLogin: { token } }) {
-      updateUser(token);
-      console.log("Yo boi", token);
+    onCompleted({ githubLogin: { user, token } }) {
+      updateUser(user);
+      setAccessToken(token);
       history.push("/getstarted");
     },
-    onError(err) {
-      console.log(err);
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
     },
   });
 
@@ -75,7 +84,6 @@ function Handles({ history }) {
   });
 
   const handleGoogleLogin = ({ tokenId }) => {
-    console.log(tokenId);
     googleLogin({ variables: { id_token: tokenId } });
   };
   return loading || gitLoading ? (
@@ -118,6 +126,13 @@ function Handles({ history }) {
           />
         </a>
       </div>
+      <MessagePopup
+        open={open}
+        message={message}
+        severity={severity}
+        setOpen={setOpen}
+        loading={loading}
+      />
     </div>
   );
 }
@@ -227,10 +242,14 @@ function SignInSide(props) {
       context.login(userData);
       props.history.push("/getstarted");
     },
-    onError(err) {
-      setMessage("Credentials Incorrect!!");
-      setSeverity("error");
-      setOpen(true);
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
     },
   });
   const { formInputs, handleInputChange, handleSubmit } = useForm(
@@ -310,15 +329,13 @@ function SignInSide(props) {
           </form>
         </div>
       </Grid>
-      <Snackbar
+      <MessagePopup
         open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-      >
-        <Alert onClose={() => setOpen(false)} severity={severity}>
-          {message}
-        </Alert>
-      </Snackbar>
+        message={message}
+        severity={severity}
+        setOpen={setOpen}
+        loading={loading}
+      />
     </Grid>
   );
 }

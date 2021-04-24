@@ -37,8 +37,8 @@ const authReducer = (state, action) => {
 function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  function login({ accessToken, user }) {
-    setAccessToken(accessToken);
+  function login({ token, user }) {
+    setAccessToken(token);
     dispatch({
       type: "LOGIN",
       payload: user,

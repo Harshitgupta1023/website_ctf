@@ -42,7 +42,7 @@ module.exports = gql`
       email: String!
       OTP: Int!
       newPassword: String!
-    ): User!
+    ): AuthData!
     verifyAccount(id: ID!, OTP: Int!): User!
     deleteUser(id: ID!): User
     googleLogin(id_token: String!): AuthData!

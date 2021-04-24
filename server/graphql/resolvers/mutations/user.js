@@ -69,7 +69,10 @@ module.exports = {
       //   { httpOnly: true }
       // );
       const accessToken = createAccessToken(user);
-      sendRefreshToken(res, createRefreshToken(user));
+      res.cookie("refreshToken", createRefreshToken(user), {
+        httpOnly: true,
+        path: "/refresh_token",
+      });
       return { user, token: accessToken, tokenExpiration: 15 * 60 };
     },
     updateUser: async (root, args, { req, res }, info) => {
@@ -183,7 +186,10 @@ module.exports = {
       //   { httpOnly: true }
       // );
       const accessToken = createAccessToken(user);
-      sendRefreshToken(res, createRefreshToken(user));
+      res.cookie("refreshToken", createRefreshToken(user), {
+        httpOnly: true,
+        path: "/refresh_token",
+      });
       return { user, token: accessToken, tokenExpiration: 15 * 60 };
     },
     sendVerificationOTP: async (root, args, { req, res }, info) => {
@@ -322,10 +328,12 @@ module.exports = {
           user.forgotPassOTP.code = null;
           user.forgotPassOTP.expTime = null;
           await user.save();
-          const token = jwt.sign({ userData: user }, JWT_KEY, {
-            expiresIn: "1h",
+          const accessToken = createAccessToken(user);
+          res.cookie("refreshToken", createRefreshToken(user), {
+            httpOnly: true,
+            path: "/refresh_token",
           });
-          return { userID: user.id, token: token, tokenExpiration: 1 };
+          return { user, token: accessToken, tokenExpiration: 15 * 60 };
         }
       }
       throw new Error("OTP doesn't match");
@@ -393,7 +401,10 @@ module.exports = {
         //   { httpOnly: true }
         // );
         const accessToken = createAccessToken(user);
-        sendRefreshToken(res, createRefreshToken(user));
+        res.cookie("refreshToken", createRefreshToken(user), {
+          httpOnly: true,
+          path: "/refresh_token",
+        });
         return { user, token: accessToken, tokenExpiration: 15 * 60 };
       }
     },
@@ -447,7 +458,10 @@ module.exports = {
       //   { httpOnly: true }
       // );
       const accessToken = createAccessToken(user);
-      sendRefreshToken(res, createRefreshToken(user));
+      res.cookie("refreshToken", createRefreshToken(user), {
+        httpOnly: true,
+        path: "/refresh_token",
+      });
       return { user, token: accessToken, tokenExpiration: 15 * 60 };
     },
     makeSubmission: async (root, args, { req, res }, info) => {
@@ -491,6 +505,10 @@ module.exports = {
       const user = await User.findById(id);
       user.tokenVersion += 1;
       await user.save();
+      res.cookie("refreshToken", "", {
+        httpOnly: true,
+        path: "/refresh_token",
+      });
       return "Successfully Logged Out";
     },
   },

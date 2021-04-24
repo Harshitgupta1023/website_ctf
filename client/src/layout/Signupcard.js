@@ -15,6 +15,7 @@ import useForm from "../customHooks/useForm";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../context/auth";
 import Loading from "../Components/Loading";
+import MessagePopup from "../Components/MessagePopup";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,7 +60,15 @@ const useStyles = makeStyles((theme) => ({
 const REGISTER_USER = gql`
   mutation createUser($username: String!, $email: String!, $password: String!) {
     createUser(username: $username, email: $email, password: $password) {
-      userID
+      user {
+        id
+        username
+        email
+        imageURL
+        points
+        verified
+        solvedProblems
+      }
       token
     }
   }
@@ -68,6 +77,9 @@ const REGISTER_USER = gql`
 function SignInSide(props) {
   const classes = useStyles();
   const context = useContext(AuthContext);
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [severity, setSeverity] = React.useState("success");
 
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     onCompleted({ createUser: userData }) {
@@ -75,8 +87,14 @@ function SignInSide(props) {
       context.login(userData);
       props.history.push("/getstarted");
     },
-    onError(err) {
-      console.log(err);
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
     },
   });
 
@@ -165,6 +183,13 @@ function SignInSide(props) {
           </form>
         </div>
       </Grid>
+      <MessagePopup
+        open={open}
+        message={message}
+        severity={severity}
+        setOpen={setOpen}
+        loading={loading}
+      />
     </Grid>
   );
 }

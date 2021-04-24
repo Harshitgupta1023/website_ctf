@@ -6,6 +6,7 @@ import Showquestion from "../testing/Showquestion";
 import { Dialog } from "@material-ui/core";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth";
+
 const useStyles = makeStyles(() => ({
   topppp: {
     transition: "all 0.2s ease-in-out",
@@ -16,17 +17,18 @@ const useStyles = makeStyles(() => ({
     },
   },
 }));
+
 function ProblemsSection(props) {
   // console.log(props);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [ids, setIds] = React.useState("");
-
-  const handleClickOpen = (a) => {
+  const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+    props.history.push({ pathname: `${props.location.pathname}` });
   };
   const { user } = useContext(AuthContext);
 
@@ -39,6 +41,12 @@ function ProblemsSection(props) {
           onClick={(e) => {
             setIds(question.id);
             handleClickOpen();
+            props.history.push({
+              pathname: `${props.location.pathname}`,
+              search:
+                "?" +
+                new URLSearchParams({ questionId: question.id }).toString(),
+            });
           }}
         >
           <QuestionCard

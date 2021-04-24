@@ -11,14 +11,21 @@ import Confeti from "./Confeti";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../context/auth";
 import MessagePopup from "../Components/MessagePopup";
+
 const SUBMIT_ANSWER = gql`
   mutation makeSubmission($id: ID!, $problemID: ID!, $submission: String) {
     makeSubmission(id: $id, problemID: $problemID, submission: $submission) {
-      userID
-      token
+      id
+      username
+      email
+      imageURL
+      points
+      verified
+      solvedProblems
     }
   }
 `;
+
 const useStyles = makeStyles((theme) => ({
   textfield: {
     width: "80%",
@@ -59,10 +66,10 @@ export default function Answerpart(props) {
   const [severity, setSeverity] = React.useState("success");
 
   const [submitProblem, { loading }] = useMutation(SUBMIT_ANSWER, {
-    onCompleted(data) {
+    onCompleted({ makeSubmission: user }) {
+      updateUser(user);
       setShow(true);
       setAccep(accep + 1);
-      updateUser(data.makeSubmission.token);
     },
     onError({ graphQLErrors }) {
       if (graphQLErrors) {
@@ -75,7 +82,7 @@ export default function Answerpart(props) {
     },
   });
   const { user, updateUser } = useContext(AuthContext);
-  const [ans, setAns] = useState(props.answer);
+  const [ans, setAns] = useState("");
   function handlechange(event) {
     setAns(event.target.value);
   }
@@ -83,15 +90,15 @@ export default function Answerpart(props) {
     e.preventDefault();
     setSubm(subm + 1);
     submitProblem({
-      variables: { problemID: props.problemID, submission: ans, id: user._id },
+      variables: { problemID: props.problemID, submission: ans, id: user.id },
     });
   };
   return (
     <div>
-      {show ? <Confeti /> : null}
+      {show ? <Confeti setShow={setShow} /> : null}
       <Grid container spacing={3} className={classes.answer}>
         <Grid item xs={12} className={classes.submissionstats}>
-          <Typography variant="p">
+          <Typography>
             Accuracy : {Math.round((accep * 100) / subm === 0 ? 1 : subm)}%
           </Typography>
         </Grid>

@@ -7,14 +7,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Loading from "../Components/Loading";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../context/auth";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import MessagePopup from "../Components/MessagePopup";
 
 const SEND_VERIFICATION_OTP = gql`
   mutation sendVerificationOTP($id: ID!) {
@@ -33,8 +28,13 @@ const SEND_VERIFICATION_OTP = gql`
 const VERIFY_ACCOUNT = gql`
   mutation verifyAccount($id: ID!, $OTP: Int!) {
     verifyAccount(id: $id, OTP: $OTP) {
-      userID
-      token
+      id
+      username
+      email
+      imageURL
+      points
+      verified
+      solvedProblems
     }
   }
 `;
@@ -59,11 +59,11 @@ export default function FormDialog(props) {
     },
   });
   const [verifyAccount, { loading }] = useMutation(VERIFY_ACCOUNT, {
-    onCompleted: (data) => {
+    onCompleted: ({ verifyAccount: newUser }) => {
       setMessage("Your Email has been verified.");
       setSeverity("success");
       setOpen(true);
-      updateUser(data.verifyAccount.token);
+      updateUser(newUser);
       props.setOpen(false);
     },
     onError({ graphQLErrors }) {
@@ -79,20 +79,17 @@ export default function FormDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const [severity, setSeverity] = React.useState("success");
-  const handleClickOpen = () => {
-    props.setOpen(true);
-  };
 
   const handleClose = () => {
     props.setOpen(false);
   };
 
   const handleSendOTP = () => {
-    sendVerificationOTP({ variables: { id: user._id } });
+    sendVerificationOTP({ variables: { id: user.id } });
   };
 
   const handleVerifyOTP = () => {
-    verifyAccount({ variables: { id: user._id, OTP: parseInt(otp) } });
+    verifyAccount({ variables: { id: user.id, OTP: parseInt(otp) } });
   };
 
   return loading ? (
@@ -136,15 +133,13 @@ export default function FormDialog(props) {
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
+      <MessagePopup
         open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-      >
-        <Alert onClose={() => setOpen(false)} severity={severity}>
-          {message}
-        </Alert>
-      </Snackbar>
+        message={message}
+        severity={severity}
+        setOpen={setOpen}
+        loading={loading}
+      />
     </div>
   );
 }

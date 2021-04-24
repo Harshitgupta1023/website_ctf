@@ -50,7 +50,6 @@ export default function Allquestion({ category }) {
   const currentPosts = questions.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
   return (
     <div>
       <div className="pagination">

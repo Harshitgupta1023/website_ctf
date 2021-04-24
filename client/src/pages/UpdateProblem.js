@@ -12,6 +12,8 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import Navbar from "../layout/Navbar";
+import MessagePopup from "../Components/MessagePopup";
+import Loading from "../Components/Loading";
 
 const GET_PROBLEM = gql`
   query getProblem($id: ID!) {
@@ -114,9 +116,25 @@ export default function UpdateProblem(props) {
   const { data } = useQuery(GET_PROBLEM, {
     variables: { id },
   });
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [severity, setSeverity] = React.useState("success");
   //   console.log(props);
-  const [submitProblem] = useMutation(UPDATE_PROBLEM, {
-    onCompleted: (dat) => console.log(dat),
+  const [submitProblem, { loading }] = useMutation(UPDATE_PROBLEM, {
+    onCompleted() {
+      setMessage("Problem Created Successfully!");
+      setSeverity("success");
+      setOpen(true);
+    },
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
+    },
   });
   const { formInputs, handleInputChange, handleSubmit } = useForm(
     {
@@ -145,7 +163,7 @@ export default function UpdateProblem(props) {
     }
   );
   const classes = useStyles();
-
+  if (loading) return <Loading loading={loading} />;
   return (
     <div className="home" style={{ color: "white" }}>
       <Navbar />
@@ -261,6 +279,13 @@ export default function UpdateProblem(props) {
           </Button>
         </div>
       </form>
+      <MessagePopup
+        open={open}
+        message={message}
+        severity={severity}
+        setOpen={setOpen}
+        loading={loading}
+      />
     </div>
   );
 }

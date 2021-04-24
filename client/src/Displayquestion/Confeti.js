@@ -1,12 +1,19 @@
-import React from "react";
+import { Button } from "@material-ui/core";
+import React, { useEffect } from "react";
 import Confetti from "react-confetti";
 import Typing from "../animation/Congratulations";
 
-export default function Confeti() {
+export default function Confeti({ setShow }) {
+  // Sets the time for how long the Confetti is Displayed
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(false);
+    }, 15000);
+  }, [setShow]);
   return (
     <div>
       <Confetti width={600} height={600} />
-      <p
+      <div
         style={{
           position: "absolute",
           bottom: "45%",
@@ -20,7 +27,10 @@ export default function Confeti() {
         <Typing words={["🎉Congrats ", 2500, "You solved It", 2500]} />
 
         {/* 🎉 Congratulations {" "} */}
-      </p>
+      </div>
+      <Button style={{ position: "absolute", border: "1px solid red" }}>
+        Close
+      </Button>
     </div>
   );
 }

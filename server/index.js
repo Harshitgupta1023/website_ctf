@@ -2,32 +2,34 @@ const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const { MONGO_URL, REFRESH_TOKEN_SECRET } = require("./config");
+const { MONGO_URL, JWT_REFRESH_KEY } = require("./config");
 const problem = require("./graphql/typeDefs/problem");
 const user = require("./graphql/typeDefs/user");
 const resolvers = require("./graphql/resolvers/index");
 const isAuth = require("./middleware/is-auth");
 const cors = require("cors");
-const { sendRefreshToken, createAccessToken } = require("./utils/auth");
+const User = require("./models/User");
+const {
+  sendRefreshToken,
+  createAccessToken,
+  createRefreshToken,
+} = require("./utils/auth");
+const { verify } = require("jsonwebtoken");
 
 const PORT = process.env.PORT || 5000;
 
-const server = new ApolloServer({
-  typeDefs: [problem, user],
-  resolvers,
-  context: ({ req, res }) => ({ req, res }),
-});
 const app = express();
+
 app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname));
 app.use(isAuth);
-server.applyMiddleware({ app, cors: false });
 
 app.post("/refresh_token", async (req, res) => {
   const token = req.cookies["refreshToken"];
@@ -37,14 +39,14 @@ app.post("/refresh_token", async (req, res) => {
 
   let payload;
   try {
-    payload = verify(token, REFRESH_TOKEN_SECRET);
+    payload = verify(token, JWT_REFRESH_KEY);
   } catch (err) {
     console.log(err);
     return res.send({ ok: false, accessToken: "" });
   }
 
   // valid token, hence send Access Token
-  const user = await User.findOne({ id: payload.userID });
+  const user = await User.findById(payload.userID);
 
   if (!user) {
     return res.send({ ok: false, accessToken: "" });
@@ -53,11 +55,21 @@ app.post("/refresh_token", async (req, res) => {
   if (user.tokenVersion !== payload.tokenVersion) {
     return res.send({ ok: false, accessToken: "" });
   }
-
-  sendRefreshToken(res, createRefreshToken(user));
-
+  // sendRefreshToken(res, createRefreshToken(user));
+  res.cookie("refreshToken", createRefreshToken(user), {
+    httpOnly: true,
+    path: "/refresh_token",
+  });
   return res.send({ ok: true, accessToken: createAccessToken(user) });
 });
+
+const server = new ApolloServer({
+  typeDefs: [problem, user],
+  resolvers,
+  context: ({ req, res }) => ({ req, res }),
+});
+
+server.applyMiddleware({ app, cors: false });
 
 mongoose
   .connect(MONGO_URL, {

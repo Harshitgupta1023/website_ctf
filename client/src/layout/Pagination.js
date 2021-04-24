@@ -41,8 +41,9 @@ export default function BasicPagination({
             color="primary"
             style={{
               position: "relative",
+              right: "0",
               marginLeft: 40,
-              fontSize: "2.25rem",
+              fontSize: "2rem",
               color: "gold",
               fontWeight: "bolder",
               fontFamily: "'Roboto', sans-serif",
@@ -58,8 +59,10 @@ export default function BasicPagination({
             style={{
               position: "relative",
               marginLeft: 40,
-              fontSize: "2.25rem",
+              right: "0",
+              fontSize: "2rem",
               color: "gold",
+              backgroundOpacity: "0.4",
               fontWeight: "bolder",
               fontFamily: "'Roboto', sans-serif",
             }}

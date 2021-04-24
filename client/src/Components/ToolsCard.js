@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     fontFamily: "'Roboto', cursive",
     color: "gold",
     marginBottom: "10%",
+    textAlign: "center",
   },
 
   smallTitle: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
     fontSize: "1.8rem",
     color: "gold",
     marginBottom: "15%",
+    textAlign: "center",
   },
 
   buttonStyle: {
@@ -66,9 +68,7 @@ export default function ToolsCard(props) {
         <div className={classes.cardDiv}>
           <Card className={classes.root} style={{ backgroundColor: "#1A202C" }}>
             <CardContent>
-              <Typography variant="h5" component="h2">
-                <center className={classes.title}>{props.title}</center>
-              </Typography>
+              <Typography className={classes.title}>{props.title}</Typography>
             </CardContent>
             <CardActions>
               <Button className={classes.buttonStyle} onClick={handleflip}>
@@ -84,8 +84,8 @@ export default function ToolsCard(props) {
             onClick={handleflip}
           >
             <CardContent>
-              <Typography variant="h5" component="h2">
-                <center className={classes.smallTitle}>{props.title}</center>
+              <Typography className={classes.smallTitle}>
+                {props.title}
               </Typography>
             </CardContent>
             <CardActions>
@@ -98,9 +98,11 @@ export default function ToolsCard(props) {
               </Button>
             </CardActions>
             <CardActions>
-              <Button target="_blank" 
-              className={classes.buttonStyle} 
-              href={props.usage_link}>
+              <Button
+                target="_blank"
+                className={classes.buttonStyle}
+                href={props.usage_link}
+              >
                 Info
               </Button>
             </CardActions>

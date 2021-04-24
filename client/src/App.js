@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from "./pages/Home";
 import Getstarted from "./pages/Getstarted";
 import Tools from "./pages/Tools";
@@ -16,11 +16,28 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import { colors } from "./data/constants";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import Showquestion from "./testing/Showquestion";
-import { home } from ".//data/constants";
+import { home } from "./data/constants";
 import ForgotPass from "./pages/ForgotPass";
 import UpdateProblem from "./pages/UpdateProblem";
 import Profile from "./pages/Profile";
 import Loading from "./Components/Loading";
+import { gql, useLazyQuery } from "@apollo/client";
+import jwtDecode from "jwt-decode";
+import { AuthContext } from "./context/auth";
+
+const FETCH_USER = gql`
+  query getUserById($id: ID!) {
+    getUserById(id: $id) {
+      id
+      username
+      email
+      imageURL
+      points
+      verified
+      solvedProblems
+    }
+  }
+`;
 
 const theme = createMuiTheme({
   palette: {
@@ -51,8 +68,21 @@ const sectionData = [
   "forensics",
 ];
 
-function App() {
+function App(props) {
   const [loading, setLoading] = useState(true);
+  const { updateUser } = useContext(AuthContext);
+  const [fetchUser] = useLazyQuery(FETCH_USER, {
+    onCompleted: ({ getUserById: user }) => {
+      updateUser(user);
+      setLoading(false);
+    },
+    onError() {
+      console.log("Fetch User failed");
+      setAccessToken("");
+      setLoading(false);
+    },
+  });
+
   useEffect(() => {
     fetch("http://localhost:5000/refresh_token", {
       method: "POST",
@@ -60,10 +90,16 @@ function App() {
     }).then(async (x) => {
       const { accessToken } = await x.json();
       setAccessToken(accessToken);
-      setLoading(false);
+      if (accessToken) {
+        const { userID } = jwtDecode(accessToken);
+        fetchUser({
+          variables: { id: userID },
+        });
+      } else {
+        setLoading(false);
+      }
     });
-    console.log("yo");
-  }, []);
+  }, [fetchUser]);
 
   if (loading) <Loading loading={loading} />;
   return (
@@ -83,7 +119,7 @@ function App() {
             />
             <ProtectedRoute exact path="/user/profile" component={Profile} />
             <Route exact path="/user/verify" component={VerifyUser} />
-            <AuthRoute path="/login" component={Login} />
+            <AuthRoute exact path="/login" component={Login} />
             {/* Important for Callback */}
             <AuthRoute exact path="/callback" component={Login} />
             <AuthRoute exact path="/signup" component={Signup} />
@@ -94,7 +130,7 @@ function App() {
                   exact
                   key={index}
                   path={`/${data}`}
-                  component={() => <ProblemsPage category={data} />}
+                  component={ProblemsPage}
                 />
               );
             })}

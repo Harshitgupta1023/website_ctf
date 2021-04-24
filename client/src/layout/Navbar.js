@@ -11,6 +11,9 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
+import { gql, useMutation } from "@apollo/client";
+import MessagePopup from "../Components/MessagePopup";
+import Loading from "../Components/Loading";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,18 +33,49 @@ const useStyles = makeStyles((theme) => ({
     width: 50,
   },
   text: {
-    fontSize: "1.25rem"
-  }
+    fontSize: "1.25rem",
+  },
 }));
+
+const LOGOUT_USER = gql`
+  mutation logOut($id: ID!) {
+    logOut(id: $id)
+  }
+`;
 
 export default function Navbar(props) {
   const { user, logout } = useContext(AuthContext);
+  const [openNow, setOpenNow] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [severity, setSeverity] = React.useState("success");
+  const [logoutUser, { loading }] = useMutation(LOGOUT_USER, {
+    onCompleted(message) {
+      setMessage(message);
+      setSeverity("success");
+      setOpenNow(true);
+      window.location.reload();
+      logout();
+    },
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpenNow(true);
+        });
+      }
+    },
+  });
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleLogout = () => {
+    logoutUser({ variables: { id: user.id } });
   };
 
   const handleClose = (event) => {
@@ -67,6 +101,7 @@ export default function Navbar(props) {
 
     prevOpen.current = open;
   }, [open]);
+  if (loading) return <Loading loading={loading} />;
   return (
     <div className="header">
       <Link to="/" className="header_heading links">
@@ -74,12 +109,12 @@ export default function Navbar(props) {
       </Link>
       {props.home && (
         <Link to="/" className="header_links links">
-          <Button >Home</Button>
+          <Button>Home</Button>
         </Link>
       )}
       {props.getStarted && (
         <Link to="/getstarted" className="header_links  links">
-          <Button >
+          <Button>
             <center>Get started</center>
           </Button>
         </Link>
@@ -87,12 +122,12 @@ export default function Navbar(props) {
 
       {props.tools && (
         <Link to="/tools" className="header_links header_tools links">
-          <Button >Tools</Button>
+          <Button>Tools</Button>
         </Link>
       )}
-      {props.createProblems && admin_username.includes(user.username) && (
+      {user && props.createProblems && admin_username.includes(user.username) && (
         <Link to="/problems" className="header_links   links">
-          <Button >Create Problem</Button>
+          <Button>Create Problem</Button>
         </Link>
       )}
       {user ? (
@@ -103,11 +138,13 @@ export default function Navbar(props) {
             aria-haspopup="true"
             onClick={handleToggle}
           >
-            <Avatar
-              className={classes.image}
-              alt={user.username}
-              src={`http://localhost:5000/uploads/${user.imageURL}`}
-            />
+            {user && (
+              <Avatar
+                className={classes.image}
+                alt={user.username}
+                src={`http://localhost:5000/uploads/${user.imageURL}`}
+              />
+            )}
           </Button>
           <Popper
             open={open}
@@ -137,7 +174,7 @@ export default function Navbar(props) {
                       </Link>
 
                       <Link to="/login" className="header_links  links">
-                        <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
                       </Link>
                     </MenuList>
                   </ClickAwayListener>
@@ -147,10 +184,19 @@ export default function Navbar(props) {
           </Popper>
         </div>
       ) : (
-        <Link to="/login" className="header_links  links">
-          <Button>Login</Button>
-        </Link>
+        !props.noLogin && (
+          <Link to="/login" className="header_links  links">
+            <Button>Login</Button>
+          </Link>
+        )
       )}
+      <MessagePopup
+        open={openNow}
+        message={message}
+        severity={severity}
+        setOpen={setOpenNow}
+        loading={loading}
+      />
     </div>
   );
 }
