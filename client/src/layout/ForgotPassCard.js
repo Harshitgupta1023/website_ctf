@@ -15,12 +15,7 @@ import useForm from "../customHooks/useForm";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../context/auth";
 import Loading from "../Components/Loading";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import MessagePopup from "../Components/MessagePopup";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -85,8 +80,16 @@ const FORGOT_PASSWORD = gql`
       OTP: $OTP
       newPassword: $newPassword
     ) {
-      userID
       token
+      user {
+        id
+        username
+        email
+        imageURL
+        points
+        verified
+        solvedProblems
+      }
     }
   }
 `;
@@ -117,8 +120,8 @@ function SignInSide(props) {
   });
 
   const [forgotPass, { loading }] = useMutation(FORGOT_PASSWORD, {
-    onCompleted({ forgotPassword: { token } }) {
-      context.updateUser(token);
+    onCompleted({ forgotPassword: loginData }) {
+      context.login(loginData);
       props.history.push("/getstarted");
     },
     onError({ graphQLErrors }) {
@@ -245,15 +248,13 @@ function SignInSide(props) {
               </Grid>
             </Grid>
           </form>
-          <Snackbar
+          <MessagePopup
             open={open}
-            autoHideDuration={6000}
-            onClose={() => setOpen(false)}
-          >
-            <Alert onClose={() => setOpen(false)} severity={severity}>
-              {message}
-            </Alert>
-          </Snackbar>
+            message={message}
+            severity={severity}
+            setOpen={setOpen}
+            loading={loading}
+          />
         </div>
       </Grid>
     </Grid>

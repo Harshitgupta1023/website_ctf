@@ -1,19 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
-
-import { AuthContext } from "../context/auth";
+import { getAccessToken } from "../data/authToken";
 
 function ProtectedRoute({ component: Component, ...rest }) {
-    const { user } = useContext(AuthContext);
-
-    return (
-        <Route
-            {...rest}
-            render={(props) =>
-                !user ? <Redirect to="/login" /> : <Component {...props} />
-            }
-        />
-    );
+  const accessToken = getAccessToken();
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        return !accessToken ? (
+          <Redirect to="/login" />
+        ) : (
+          <Component {...props} />
+        );
+      }}
+    />
+  );
 }
 
 export default ProtectedRoute;

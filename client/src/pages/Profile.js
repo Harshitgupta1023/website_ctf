@@ -3,21 +3,15 @@ import { gql, useMutation } from "@apollo/client";
 import { makeStyles } from "@material-ui/core/styles";
 import useForm from "../customHooks/useForm";
 import TextField from "@material-ui/core/TextField";
-import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import Navbar from "../layout/Navbar";
 import { AuthContext } from "../context/auth";
 import Loading from "../Components/Loading";
 import Avatar from "@material-ui/core/Avatar";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import { Grid } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import MessagePopup from "../Components/MessagePopup";
 
 const UPDATE_USER = gql`
   mutation updateUser(
@@ -27,8 +21,13 @@ const UPDATE_USER = gql`
     $image: Upload
   ) {
     updateUser(id: $id, username: $username, email: $email, image: $image) {
-      userID
-      token
+      id
+      username
+      email
+      imageURL
+      points
+      verified
+      solvedProblems
     }
   }
 `;
@@ -44,8 +43,13 @@ const UPDATE_PASSWORD = gql`
       oldPassword: $oldPassword
       newPassword: $newPassword
     ) {
-      userID
-      token
+      id
+      username
+      email
+      imageURL
+      points
+      verified
+      solvedProblems
     }
   }
 `;
@@ -78,8 +82,8 @@ export default function Profile({ history }) {
   const [severity, setSeverity] = React.useState("success");
 
   const [updateUserProfile, { loading }] = useMutation(UPDATE_USER, {
-    onCompleted({ updateUser: { token } }) {
-      updateUser(token);
+    onCompleted({ updateUser: user }) {
+      updateUser(user);
       setMessage("User Profile Updated!!");
       setSeverity("success");
       setOpen(true);
@@ -95,11 +99,12 @@ export default function Profile({ history }) {
     },
   });
   const [updatePassword, { loadingPass }] = useMutation(UPDATE_PASSWORD, {
-    onCompleted({ updatePassword: { token } }) {
-      updateUser(token);
+    onCompleted({ updatePassword: user }) {
+      updateUser(user);
       setMessage("Updated User Password !!");
       setSeverity("success");
       setOpen(true);
+      resetFields();
     },
     onError({ graphQLErrors }) {
       if (graphQLErrors) {
@@ -111,7 +116,7 @@ export default function Profile({ history }) {
       }
     },
   });
-  const { formInputs, handleInputChange, handleSubmit } = useForm(
+  const { formInputs, handleInputChange, handleSubmit, resetFields } = useForm(
     {
       email: "",
       username: "",
@@ -122,7 +127,7 @@ export default function Profile({ history }) {
     () => {
       updateUserProfile({
         variables: {
-          id: user._id,
+          id: user.id,
           email: formInputs.email,
           username: formInputs.username,
           image: formInputs.file,
@@ -166,30 +171,31 @@ export default function Profile({ history }) {
             />
             <div style={{ marginTop: 20, marginRight: 30 }}>
               <input
-                style={{ display: "none " }}
+                style={{ display: "none" }}
                 id="icon-button-file"
                 type="file"
                 name="file"
                 onChange={handleInputChange}
               />
-              <label htmlFor="icon-button-file">
+
+              <label htmlFor="icon-button-file" style={{ color: "white" }}>
                 <IconButton aria-label="upload picture" component="span">
                   <PhotoCamera color="primary" fontSize="large" />
-                  {console.log(formInputs.file)}
                 </IconButton>
+                Upload
               </label>
-              <input
+              {/* <input
                 style={{ display: "none " }}
                 accept="image/*"
                 id="contained-button-file"
                 multiple
                 type="file"
-              />
-              <label htmlFor="contained-button-file">
+              /> */}
+              {/* <label htmlFor="contained-button-file">
                 <Button variant="contained" color="primary" component="span">
                   Upload
                 </Button>
-              </label>
+              </label> */}
             </div>
             <Button
               variant="contained"
@@ -257,7 +263,7 @@ export default function Profile({ history }) {
               onClick={() =>
                 updatePassword({
                   variables: {
-                    id: user._id,
+                    id: user.id,
                     oldPassword: formInputs.oldPassword,
                     newPassword: formInputs.newPassword,
                   },
@@ -271,15 +277,13 @@ export default function Profile({ history }) {
         </Grid>
       </form>
 
-      <Snackbar
+      <MessagePopup
         open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-      >
-        <Alert onClose={() => setOpen(false)} severity={severity}>
-          {message}
-        </Alert>
-      </Snackbar>
+        message={message}
+        severity={severity}
+        setOpen={setOpen}
+        loading={loading}
+      />
     </div>
   );
 }

@@ -1,19 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
-
-import { AuthContext } from "../context/auth";
+import { getAccessToken } from "../data/authToken";
 
 function AuthRoute({ component: Component, ...rest }) {
-    const { user } = useContext(AuthContext);
-
-    return (
-        <Route
-            {...rest}
-            render={(props) =>
-                user ? <Redirect to="/" /> : <Component {...props} />
-            }
-        />
-    );
+  const accessToken = getAccessToken();
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        accessToken ? (
+          <Redirect to={`${props.history.goBack()}`} />
+        ) : (
+          <Component {...props} />
+        )
+      }
+    />
+  );
 }
 
 export default AuthRoute;

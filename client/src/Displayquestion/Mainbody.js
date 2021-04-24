@@ -24,7 +24,7 @@ export default function Mainbody(props) {
         <Grid item xs={4} sm={4}>
           <Typography variant="h6">HINTS</Typography>
           {props.hints.map((dat, index) => (
-            <Hints number={index + 1} statement={dat} />
+            <Hints key={index} number={index + 1} statement={dat} />
           ))}
         </Grid>
       </Grid>

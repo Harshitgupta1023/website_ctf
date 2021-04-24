@@ -18,7 +18,7 @@ import forensics from "../media/forensics.jpg";
 import reverseEngineering from "../media/reverse-engineering.jpg";
 import webExploitation from "../media/web-exploitation.jpg";
 import binaryExploitation from "../media/binary-exploitation.jpg";
-import border from "../media/border.jpg";
+
 function Copyright() {
   return (
     <div>

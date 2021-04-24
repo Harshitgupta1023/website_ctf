@@ -4,6 +4,7 @@ import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 import Loading from "../Components/Loading";
 import QuestionCard from "../Displayquestion/QuestionCard";
+
 const GET_PROBLEM = gql`
   query getProblem($id: ID!) {
     getProblem(id: $id) {
@@ -36,7 +37,6 @@ export default function Showquestion(props) {
     );
   }
   if (loading) return <Loading loading={loading} />;
-  // console.log(props);
   const ques = data.getProblem;
   return (
     <QuestionCard

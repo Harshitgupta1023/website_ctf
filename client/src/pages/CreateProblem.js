@@ -12,6 +12,8 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import Navbar from "../layout/Navbar";
+import MessagePopup from "../Components/MessagePopup";
+import Loading from "../Components/Loading";
 
 const CREATE_PROBLEM = gql`
   mutation createProblem(
@@ -94,8 +96,25 @@ const categories = [
 ];
 
 export default function CreateProblem({ history }) {
-  const [submitProblem] = useMutation(CREATE_PROBLEM, {
-    onCompleted: (data) => console.log(data),
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [severity, setSeverity] = React.useState("success");
+
+  const [submitProblem, { loading }] = useMutation(CREATE_PROBLEM, {
+    onCompleted() {
+      setMessage("Problem Created Successfully!");
+      setSeverity("success");
+      setOpen(true);
+    },
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
+    },
   });
   const { formInputs, handleInputChange, handleSubmit } = useForm(
     {
@@ -113,7 +132,7 @@ export default function CreateProblem({ history }) {
     }
   );
   const classes = useStyles();
-
+  if (loading) return <Loading loading={loading} />;
   return (
     <div className="home" style={{ color: "white" }}>
       <Navbar />
@@ -233,6 +252,13 @@ export default function CreateProblem({ history }) {
           </Button>
         </div>
       </form>
+      <MessagePopup
+        open={open}
+        message={message}
+        severity={severity}
+        setOpen={setOpen}
+        loading={loading}
+      />
     </div>
   );
 }

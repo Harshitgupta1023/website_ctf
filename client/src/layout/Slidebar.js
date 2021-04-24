@@ -100,8 +100,8 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {sectionData.map((data) => (
-            <Link to={data.link} className="links">
-              <ListItem button key={data.id}>
+            <Link to={data.link} key={data.id} className="links">
+              <ListItem button>
                 <ListItemIcon>
                   {data.id % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>{" "}

@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import Snackbar from "@material-ui/core/Snackbar";
 import Answerpart from "./Answerpart";
 import Mainbody from "./Mainbody";
 import Tick from "../media/green_tick.svg";
@@ -14,8 +13,10 @@ import { Link } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import { admin_username } from "../config";
 import { AuthContext } from "../context/auth";
-import Alert from "@material-ui/lab/Alert";
 import "./Answer.css";
+import MessagePopup from "../Components/MessagePopup";
+import Loading from "../Components/Loading";
+
 const DELETE_PROBLEM = gql`
   mutation deleteProblem($id: ID!) {
     deleteProblem(id: $id) {
@@ -65,21 +66,23 @@ const useStyles = makeStyles((theme) => ({
 export default function QuestionCard(props) {
   const classes = useStyles();
   const id = props.id;
-  console.log(props.location);
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const [severity, setSeverity] = React.useState("success");
-  const [removeProblem] = useMutation(DELETE_PROBLEM, {
+  const [removeProblem, { loading }] = useMutation(DELETE_PROBLEM, {
     onCompleted(dat) {
       setMessage("Problem Deleted Successfully");
       setSeverity("success");
       setOpen(true);
     },
-    onError(err) {
-      console.log(err);
-      setMessage("There was an Error. Try Again.");
-      setSeverity("error");
-      setOpen(true);
+    onError({ graphQLErrors }) {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message }) => {
+          setMessage(message);
+          setSeverity("error");
+          setOpen(true);
+        });
+      }
     },
   });
   const { user } = useContext(AuthContext);
@@ -90,7 +93,7 @@ export default function QuestionCard(props) {
 
     // props.history.push(`${props.location}`);
   }
-
+  if (loading) return <Loading loading={loading} />;
   return (
     <Card
       className={props.apply ? "" : classes.root}
@@ -172,18 +175,17 @@ export default function QuestionCard(props) {
                 submissions={props.submissions}
                 accepted={props.accepted}
                 solution={props.solution}
+                solved={props.solved}
               />
             )}
           </CardContent>
-          <Snackbar
+          <MessagePopup
             open={open}
-            autoHideDuration={6000}
-            onClose={() => setOpen(false)}
-          >
-            <Alert onClose={() => setOpen(false)} severity={severity}>
-              {message}
-            </Alert>
-          </Snackbar>
+            message={message}
+            severity={severity}
+            setOpen={setOpen}
+            loading={loading}
+          />
         </div>
       </div>
     </Card>

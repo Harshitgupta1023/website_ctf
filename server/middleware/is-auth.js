@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
-const { JWT_KEY, ADMIN_USERNAMES } = require("../config");
-module.exports = (req, res, next) => {
+const User = require("../models/User");
+const { JWT_ACCESS_KEY, ADMIN_IDS, JWT_REFRESH_KEY } = require("../config");
+
+module.exports = async (req, res, next) => {
   const authHeader = req.get("Authorization");
   req.isAdmin = false;
   if (!authHeader) {
@@ -14,21 +16,15 @@ module.exports = (req, res, next) => {
   }
   let decodedToken;
   try {
-    decodedToken = jwt.verify(token, JWT_KEY);
+    decodedToken = jwt.verify(token, JWT_ACCESS_KEY);
   } catch (err) {
     req.isAuth = false;
     return next();
   }
-  if (!decodedToken) {
-    req.isAuth = false;
-    return next();
-  }
-  if (ADMIN_USERNAMES.includes(decodedToken.userData.username)) {
+  if (ADMIN_IDS.includes(decodedToken.userID)) {
     req.isAdmin = true;
   }
   req.isAuth = true;
-  req.userID = decodedToken.userData._id;
-  req.oldTok = token;
-  req.expTime = decodedToken.exp;
+  req.userID = decodedToken.userID;
   return next();
 };
