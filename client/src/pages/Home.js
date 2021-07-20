@@ -66,15 +66,15 @@ function CategoriesSection() {
         <h1 className={classes.headingCategoriesSection}>Cryptography</h1>
 
         <p className={classes.paraCategoriesSection}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor
-          vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt.
-          Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique
-          tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris
-          pellentesque ultricies. Phasellus eget tortor ac orci aliquam
-          bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in.
-          Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio,
-          ut vestibulum enim lectus vitae ante. Integer at erat euismod,
-          lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+          We can utilise banking apps, send sensitive information over the
+          internet, and secure our privacy in general thanks to cryptography.
+          However, a substantial portion of CTFs entails decrypting widely used
+          encryption algorithms that have been implemented incorrectly. Although
+          the math may appear intimidating, a basic understanding of the
+          fundamental principles will usually allow you to uncover flaws and
+          crack the code. The term "cryptography" refers to the practise of
+          writing codes. When it comes to digital forensics, it's a technique
+          for figuring out how data is put together for your investigation.
         </p>
       </div>
 
@@ -88,15 +88,13 @@ function CategoriesSection() {
         <h1 className={classes.headingCategoriesSection}>Web Exploitation</h1>
 
         <p className={classes.paraCategoriesSection}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor
-          vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt.
-          Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique
-          tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris
-          pellentesque ultricies. Phasellus eget tortor ac orci aliquam
-          bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in.
-          Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio,
-          ut vestibulum enim lectus vitae ante. Integer at erat euismod,
-          lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+          Various programming languages are used to create websites all around
+          the world. While each programming language has its own set of
+          vulnerabilities that developers should be aware of, there are some
+          issues that are universal to the internet and can appear independently
+          of the language or framework used. These flaws frequently appear in
+          CTFs as web security challenges, in which the user must exploit a flaw
+          to obtain access to a higher degree of privilege.
         </p>
       </div>
 
@@ -112,15 +110,12 @@ function CategoriesSection() {
         </h1>
 
         <p className={classes.paraCategoriesSection}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor
-          vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt.
-          Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique
-          tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris
-          pellentesque ultricies. Phasellus eget tortor ac orci aliquam
-          bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in.
-          Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio,
-          ut vestibulum enim lectus vitae ante. Integer at erat euismod,
-          lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+          Binaries, often known as executables, are computer programmes. The
+          majority of the binaries you'll see in CTFs are Linux ELF files, with
+          the occasional Windows executable thrown in for good measure. Binary
+          Exploitation is a broad issue in Cyber Security that boils down to
+          identifying a program's vulnerability and exploiting it to acquire
+          control of a shell or change the program's functions.
         </p>
       </div>
 
@@ -134,15 +129,12 @@ function CategoriesSection() {
         <h1 className={classes.headingCategoriesSection}>Forensics</h1>
 
         <p className={classes.paraCategoriesSection}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor
-          vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt.
-          Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique
-          tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris
-          pellentesque ultricies. Phasellus eget tortor ac orci aliquam
-          bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in.
-          Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio,
-          ut vestibulum enim lectus vitae ante. Integer at erat euismod,
-          lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+          File format analysis, steganography, memory dump analysis, and network
+          packet capture analysis are examples of "forensics" challenges in a
+          CTF. Any challenge involving the examination and processing of
+          concealed data from static data files (rather than executable
+          programmes or distant servers) could be classified as a forensics
+          challenge.
         </p>
       </div>
 
@@ -158,15 +150,11 @@ function CategoriesSection() {
         </h1>
 
         <p className={classes.paraCategoriesSection}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor
-          vehicula felis id ornare. Nulla tristique nibh in iaculis tincidunt.
-          Suspendisse velit elit, dictum ornare dui vel, vestibulum tristique
-          tellus. Aliquam sit amet aliquam eros. Nulla ut felis faucibus mauris
-          pellentesque ultricies. Phasellus eget tortor ac orci aliquam
-          bibendum. Sed posuere sagittis nulla, vel cursus leo ullamcorper in.
-          Phasellus mattis, mauris quis ornare pretium, ante sem convallis odio,
-          ut vestibulum enim lectus vitae ante. Integer at erat euismod,
-          lobortis nibh at, commodo orci. Nulla vitae sollicitudin purus.
+          In a CTF, reverse engineering is the process of translating a compiled
+          (machine code, bytecode) programme back into a more human readable
+          version. The purpose of a reverse engineering task is frequently to
+          understand the functionality of a given software so that deeper faults
+          can be identified.
         </p>
       </div>
     </div>
