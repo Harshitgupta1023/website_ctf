@@ -40,7 +40,7 @@ export const client = new ApolloClient({
         }
       },
       fetchAccessToken: () => {
-        return fetch("http://localhost:5000/refresh_token", {
+        return fetch(`${process.env.REACT_APP_SERVER_URL}/refresh_token`, {
           method: "POST",
           credentials: "include",
         });
@@ -59,20 +59,10 @@ export const client = new ApolloClient({
     }),
     authLink,
     createUploadLink({
-      uri: "http://localhost:5000/graphql",
+      uri: `${process.env.REACT_APP_SERVER_URL}/graphql`,
       fetch,
       credentials: "include",
     }),
   ]),
   cache: new InMemoryCache(),
 });
-
-// export const client = new ApolloClient({
-//   cache: new InMemoryCache(),
-//   link: authLink.concat(
-//     createUploadLink({
-//       uri: "http://localhost:5000/graphql",
-//       credentials: "include",
-//     })
-//   ),
-// });

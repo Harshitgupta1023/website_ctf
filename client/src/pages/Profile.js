@@ -167,7 +167,7 @@ export default function Profile({ history }) {
             <Avatar
               className={classes.image}
               alt={user.username}
-              src={`http://localhost:5000/uploads/${user.imageURL}`}
+              src={`${process.env.REACT_APP_SERVER_URL}/uploads/${user.imageURL}`}
             />
             <div style={{ marginTop: 20, marginRight: 30 }}>
               <input

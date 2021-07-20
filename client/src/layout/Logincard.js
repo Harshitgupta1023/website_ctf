@@ -21,7 +21,6 @@ import { AuthContext } from "../context/auth";
 import { gql, useMutation } from "@apollo/client";
 import { withRouter } from "react-router-dom";
 import GoogleLogin from "react-google-login";
-import { GITHUB_CLIENT_ID, GOOGLE_CLIENT_ID } from "../config";
 import { setAccessToken } from "../data/authToken";
 import MessagePopup from "../Components/MessagePopup";
 
@@ -100,7 +99,7 @@ function Handles({ history }) {
         <div></div>
 
         <GoogleLogin
-          clientId={GOOGLE_CLIENT_ID}
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           buttonText="Login"
           onSuccess={handleGoogleLogin}
           onFailure={(res) => console.log("Login Failed!", res)}
@@ -108,7 +107,7 @@ function Handles({ history }) {
           className={classes.googleLink}
         />
         <a
-          href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`}
+          href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`}
           style={{
             marginTop: "10%",
             marginLeft: "45%",
