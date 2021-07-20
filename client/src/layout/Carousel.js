@@ -9,12 +9,10 @@ var items = [
   {
     name: "About Us",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "Our main motivation behind making this site was to solve the problem that we were facing while doing CTF and that was there was not a single site that contained both the questions and the information or sources to study CTF techniques, so we had to search on different sites that was very cumbersome process. So we took this initiative to develop a site that will contain both the questions and the sources so one can find all the things needed to start CTF at a single place.",
   },
   {
     name: "Our Team",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
   },
   {
     name: "Upcoming Contests",
