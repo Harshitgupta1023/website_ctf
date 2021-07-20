@@ -103,7 +103,7 @@ export default function ToolsCard(props) {
                 className={classes.buttonStyle}
                 href={props.usage_link}
               >
-                Info
+                Tool
               </Button>
             </CardActions>
           </Card>{" "}
