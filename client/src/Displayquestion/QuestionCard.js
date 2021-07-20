@@ -15,6 +15,8 @@ import { AuthContext } from "../context/auth";
 import "./Answer.css";
 import MessagePopup from "../Components/MessagePopup";
 import Loading from "../Components/Loading";
+import dotenv from "dotenv";
+dotenv.config();
 
 const DELETE_PROBLEM = gql`
   mutation deleteProblem($id: ID!) {
