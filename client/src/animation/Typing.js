@@ -17,10 +17,8 @@ export default function Typing(props) {
       <h1 style={{ fontFamily: "'Roboto', serif" }}>
         <Typical loop={Infinity} wrapper="b" steps={props.words} />
       </h1>
-      <h2
-        style={{ marginTop: "15%", fontFamily: "'Roboto', serif" }}
-      >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit
+      <h2 style={{ marginTop: "15%", fontFamily: "'Roboto', serif" }}>
+        A fun & engaging way to dive into the domain of CTF.
       </h2>
     </div>
   );

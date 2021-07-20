@@ -227,7 +227,6 @@ const useStyles = makeStyles((theme) => ({
   },
   categoriesSection: {
     backgroundColor: home.backgroundSecondary,
-    height: "285vh",
     padding: "2% 10%",
   },
   categorycard: {

@@ -3,6 +3,7 @@ import Carousel from "react-material-ui-carousel";
 import Paper from "@material-ui/core/Paper";
 // import Contacts from "../Components/Contacts";
 import FiberManualRecordTwoToneIcon from "@material-ui/icons/FiberManualRecordTwoTone";
+import TeamCard from "../Components/TeamCard";
 
 var items = [
   {
@@ -17,17 +18,16 @@ var items = [
   },
   {
     name: "Upcoming Contests",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: "To be Announced Later ...",
   },
 ];
 
 function Item(props) {
   return (
-    <Paper style={{ width: "100%", height: 650, backgroundColor: "#1A202C" }}>
+    <Paper style={{ width: "100%", height: 550, backgroundColor: "#1A202C" }}>
       <div
         style={{
-          padding: "7% 30% 0%",
+          padding: "6% 30% 0%",
         }}
       >
         <p
@@ -56,9 +56,9 @@ export default function Carousell() {
       <Carousel
         IndicatorIcon={<FiberManualRecordTwoToneIcon fontSize="small" />}
       >
-        {items.map((item, i) => (
-          <Item key={i} item={item} />
-        ))}
+        {items.map((item, i) =>
+          i !== 1 ? <Item key={i} item={item} /> : <TeamCard />
+        )}
       </Carousel>
     </div>
   );
