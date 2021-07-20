@@ -1,133 +1,143 @@
 export const technique = {
   cryptography_technique: [
     {
-      title: "Hex To ASCII",
+      title: "XOR",
+      description_link: "https://ctf101.org/cryptography/what-is-xor/",
+    },
+    {
+      title: "Substitution Cipher",
       description_link:
-        "https://www.tutorialspoint.com/hex-to-ascii-conversion-in-8051#:~:text=When%20the%20number%20is%20in,the%20number%20to%2041H%20onwards",
+        "https://ctf101.org/cryptography/what-is-a-substitution-cipher/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Vigenere Cipher",
+      description_link:
+        "https://ctf101.org/cryptography/what-is-a-vigenere-cipher/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Hashing Functions",
+      description_link:
+        "https://ctf101.org/cryptography/what-are-hashing-functions/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Block Ciphers",
+      description_link:
+        "https://ctf101.org/cryptography/what-are-block-ciphers/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
-    },
-    {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "RSA",
+      description_link: "https://ctf101.org/cryptography/what-is-rsa/",
     },
   ],
   web_technique: [
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "SQL Injection",
+      description_link:
+        "https://ctf101.org/web-exploitation/sql-injection/what-is-sql-injection/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Command Injection",
+      description_link:
+        "https://ctf101.org/web-exploitation/command-injection/what-is-command-injection/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Directory Traversal",
+      description_link:
+        "https://ctf101.org/web-exploitation/directory-traversal/what-is-directory-traversal/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Cross Site Request Forgery",
+      description_link:
+        "https://ctf101.org/web-exploitation/cross-site-request-forgery/what-is-cross-site-request-forgery/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Cross Site Scripting",
+      description_link:
+        "https://ctf101.org/web-exploitation/cross-site-scripting/what-is-cross-site-scripting/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Server Side Request Forgery ",
+      description_link:
+        "https://ctf101.org/web-exploitation/server-side-request-forgery/what-is-server-side-request-forgery/",
     },
   ],
   binary_technique: [
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Registers",
+      description_link:
+        "https://ctf101.org/binary-exploitation/what-are-registers/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Stacks",
+      description_link:
+        "https://ctf101.org/binary-exploitation/what-is-the-stack/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Calling Conventions",
+      description_link:
+        "https://ctf101.org/binary-exploitation/what-are-calling-conventions/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Global Offset Table",
+      description_link:
+        "https://ctf101.org/binary-exploitation/what-is-the-got/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Buffer-Overflow",
+      description_link:
+        "https://ctf101.org/binary-exploitation/buffer-overflow/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Heap-Exploitation",
+      description_link:
+        "https://ctf101.org/binary-exploitation/heap-exploitation/",
     },
   ],
   forensics_technique: [
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "File Formats",
+      description_link: "https://ctf101.org/forensics/what-are-file-formats/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "EXIF Data",
+      description_link: "https://ctf101.org/forensics/what-is-metadata/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Wireshark",
+      description_link: "https://ctf101.org/forensics/what-is-wireshark/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Stegonography",
+      description_link: "https://ctf101.org/forensics/what-is-stegonagraphy/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
-    },
-    {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Disk Imaging",
+      description_link: "https://ctf101.org/forensics/what-is-disk-imaging/",
     },
   ],
   reverse_technique: [
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Machine Code",
+      description_link:
+        "https://ctf101.org/reverse-engineering/what-is-assembly-machine-code/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "C Programming Language",
+      description_link: "https://ctf101.org/reverse-engineering/what-is-c/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Disassemblers",
+      description_link:
+        "https://ctf101.org/reverse-engineering/what-are-disassemblers/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "GDB Debugger",
+      description_link: "https://ctf101.org/reverse-engineering/what-is-gdb/",
     },
     {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
-    },
-    {
-      title: "Lorem Ipsum",
-      description_link: "https://www.google.com/",
+      title: "Decompilers",
+      description_link:
+        "https://ctf101.org/reverse-engineering/what-are-decompilers/",
     },
   ],
 };

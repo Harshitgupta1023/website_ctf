@@ -24,7 +24,8 @@ import Loading from "./Components/Loading";
 import { gql, useLazyQuery } from "@apollo/client";
 import jwtDecode from "jwt-decode";
 import { AuthContext } from "./context/auth";
-
+import dotenv from "dotenv";
+dotenv.config();
 const FETCH_USER = gql`
   query getUserById($id: ID!) {
     getUserById(id: $id) {
@@ -99,6 +100,7 @@ function App(props) {
         setLoading(false);
       }
     });
+    console.log(process.env.SERVER_URL);
   }, [fetchUser]);
 
   if (loading) <Loading loading={loading} />;
