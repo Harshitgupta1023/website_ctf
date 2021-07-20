@@ -42,7 +42,7 @@ export const sectionData = [
     image: "general-skills.jpg",
     link: "/general-skills",
     details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+      "Challenges to improve your General Problem Solving ability.This Category requires Knowledge about Shell.",
   },
   {
     id: 2,
@@ -52,7 +52,7 @@ export const sectionData = [
     link: "/cryptography",
 
     details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+      "The term cryptography refers to the practise of writing codes. When it comes to digital forensics, it's a technique for figuring out how data is put together for your investigation.",
   },
   {
     id: 3,
@@ -61,7 +61,7 @@ export const sectionData = [
     image: "web-exploitation.jpg",
     link: "/web-exploitation",
     details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+      "Each programming language has its own set of vulnerabilities that developers should be aware of, there are some issues that are universal to the internet and can appear independently of the language or framework used.",
   },
   {
     id: 4,
@@ -70,7 +70,7 @@ export const sectionData = [
     image: "binary-exploitation.jpg",
     link: "/binary-exploitation",
     details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+      "The majority of the binaries you'll see in CTFs are Linux ELF files, with the occasional Windows executable thrown in for good measure.",
   },
   {
     id: 5,
@@ -79,7 +79,7 @@ export const sectionData = [
     image: "forensics.jpg",
     link: "/forensics",
     details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+      "Any challenge involving the examination and processing of concealed data from static data files.",
   },
   {
     id: 6,
@@ -88,6 +88,6 @@ export const sectionData = [
     image: "reverse-engineering.jpg",
     link: "/reverse-engineering",
     details:
-      "Generate Lorem Ipsum placeholder text. Select the number of characters, words,",
+      "The purpose of a reverse engineering task is frequently to understand the functionality of a given software so that deeper faults can be identified.",
   },
 ];

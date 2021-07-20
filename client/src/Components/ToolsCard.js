@@ -84,9 +84,7 @@ export default function ToolsCard(props) {
             onClick={handleflip}
           >
             <CardContent>
-              <Typography className={classes.smallTitle}>
-                {props.title}
-              </Typography>
+              <Typography className={classes.title}>{props.title}</Typography>
             </CardContent>
             <CardActions>
               <Button
@@ -95,15 +93,6 @@ export default function ToolsCard(props) {
                 href={props.description_link}
               >
                 Description
-              </Button>
-            </CardActions>
-            <CardActions>
-              <Button
-                target="_blank"
-                className={classes.buttonStyle}
-                href={props.usage_link}
-              >
-                Info
               </Button>
             </CardActions>
           </Card>{" "}
