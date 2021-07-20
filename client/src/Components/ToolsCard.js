@@ -97,16 +97,7 @@ export default function ToolsCard(props) {
                 Description
               </Button>
             </CardActions>
-            <CardActions>
-              <Button
-                target="_blank"
-                className={classes.buttonStyle}
-                href={props.usage_link}
-              >
-                Tool
-              </Button>
-            </CardActions>
-          </Card>{" "}
+          </Card>
         </div>
       </ReactCardFlip>
     </div>

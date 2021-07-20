@@ -106,7 +106,7 @@ export default function Answerpart(props) {
           <Divider />
           {props.fileURL && (
             <a
-              href={`http://localhost:5000/uploads/${props.fileURL}`}
+              href={`${process.env.SERVER_URL}/uploads/${props.fileURL}`}
               className="links"
             >
               <Button

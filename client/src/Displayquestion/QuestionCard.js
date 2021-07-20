@@ -11,11 +11,12 @@ import Mainbody from "./Mainbody";
 import Tick from "../media/green_tick.svg";
 import { Link } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
-import { admin_username } from "../config";
 import { AuthContext } from "../context/auth";
 import "./Answer.css";
 import MessagePopup from "../Components/MessagePopup";
 import Loading from "../Components/Loading";
+import dotenv from "dotenv";
+dotenv.config();
 
 const DELETE_PROBLEM = gql`
   mutation deleteProblem($id: ID!) {
@@ -117,19 +118,21 @@ export default function QuestionCard(props) {
               <Typography className={classes.questiontitle} variant="h4">
                 {props.title}
               </Typography>
-              {props.answer && admin_username.includes(user.username) && (
-                <Link
-                  to={`${props.location}/updateproblems/${props.id}`}
-                  className="links"
-                >
-                  <Button variant="contained">Update</Button>
-                </Link>
-              )}
-              {props.answer && admin_username.includes(user.username) && (
-                <Button variant="contained" onClick={handleDelete}>
-                  Delete
-                </Button>
-              )}
+              {props.answer &&
+                process.env.admin_username.includes(user.username) && (
+                  <Link
+                    to={`${props.location}/updateproblems/${props.id}`}
+                    className="links"
+                  >
+                    <Button variant="contained">Update</Button>
+                  </Link>
+                )}
+              {props.answer &&
+                process.env.admin_username.includes(user.username) && (
+                  <Button variant="contained" onClick={handleDelete}>
+                    Delete
+                  </Button>
+                )}
               <Chip
                 className={classes.pointss}
                 color="secondary"

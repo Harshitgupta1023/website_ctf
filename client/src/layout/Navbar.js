@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { AuthContext } from "../context/auth";
-import { admin_username } from "../config";
 import Avatar from "@material-ui/core/Avatar";
 import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -14,6 +13,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { gql, useMutation } from "@apollo/client";
 import MessagePopup from "../Components/MessagePopup";
 import Loading from "../Components/Loading";
+import dotenv from "dotenv";
+dotenv.config();
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -125,11 +126,13 @@ export default function Navbar(props) {
           <Button>Tools</Button>
         </Link>
       )}
-      {user && props.createProblems && admin_username.includes(user.username) && (
-        <Link to="/problems" className="header_links   links">
-          <Button>Create Problem</Button>
-        </Link>
-      )}
+      {user &&
+        props.createProblems &&
+        process.env.admin_username.includes(user.username) && (
+          <Link to="/problems" className="header_links   links">
+            <Button>Create Problem</Button>
+          </Link>
+        )}
       {user ? (
         <div className={classes.root}>
           <Button
@@ -142,7 +145,7 @@ export default function Navbar(props) {
               <Avatar
                 className={classes.image}
                 alt={user.username}
-                src={`http://localhost:5000/uploads/${user.imageURL}`}
+                src={`${process.env.SERVER_URL}/uploads/${user.imageURL}`}
               />
             )}
           </Button>

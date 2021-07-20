@@ -12,6 +12,8 @@ import { Grid } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import MessagePopup from "../Components/MessagePopup";
+import dotenv from "dotenv";
+dotenv.config();
 
 const UPDATE_USER = gql`
   mutation updateUser(
@@ -167,7 +169,7 @@ export default function Profile({ history }) {
             <Avatar
               className={classes.image}
               alt={user.username}
-              src={`http://localhost:5000/uploads/${user.imageURL}`}
+              src={`${process.env.SERVER_URL}/uploads/${user.imageURL}`}
             />
             <div style={{ marginTop: 20, marginRight: 30 }}>
               <input
