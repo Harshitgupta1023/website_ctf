@@ -1,19 +1,17 @@
 const { google } = require("googleapis");
 const nodeMailer = require("nodemailer");
 
-const {
-  GMAIL_CLIENT_SECRET,
-  GMAIL_CLIENT_ID,
-  OAUTH_REFRESH_TOKEN,
-} = require("../config");
+const dotenv = require("dotenv");
+dotenv.config();
+
 const REDIRECT_URI = "https://developers.google.com/oauthplayground/";
 
 const oAuth2Client = new google.auth.OAuth2(
-  GMAIL_CLIENT_ID,
-  GMAIL_CLIENT_SECRET,
+  process.env.GMAIL_CLIENT_ID,
+  process.env.GMAIL_CLIENT_SECRET,
   REDIRECT_URI
 );
-oAuth2Client.setCredentials({ refresh_token: OAUTH_REFRESH_TOKEN });
+oAuth2Client.setCredentials({ refresh_token: process.env.OAUTH_REFRESH_TOKEN });
 
 module.exports = async (to, subject, body) => {
   try {
@@ -23,9 +21,9 @@ module.exports = async (to, subject, body) => {
       auth: {
         type: "OAuth2",
         user: "seekhoctf@gmail.com",
-        clientId: GMAIL_CLIENT_ID,
-        clientSecret: GMAIL_CLIENT_SECRET,
-        refreshToken: OAUTH_REFRESH_TOKEN,
+        clientId: process.env.GMAIL_CLIENT_ID,
+        clientSecret: process.env.GMAIL_CLIENT_SECRET,
+        refreshToken: process.env.OAUTH_REFRESH_TOKEN,
         accessToken: accessToken,
       },
     });
