@@ -95,7 +95,7 @@ export default function ToolsCard(props) {
                 Description
               </Button>
             </CardActions>
-          </Card>{" "}
+          </Card>
         </div>
       </ReactCardFlip>
     </div>
