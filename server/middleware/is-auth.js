@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const { JWT_ACCESS_KEY, ADMIN_IDS, JWT_REFRESH_KEY } = require("../config");
+const dotenv = require("dotenv");
+dotenv.config();
 
 module.exports = async (req, res, next) => {
   const authHeader = req.get("Authorization");
@@ -16,12 +17,12 @@ module.exports = async (req, res, next) => {
   }
   let decodedToken;
   try {
-    decodedToken = jwt.verify(token, JWT_ACCESS_KEY);
+    decodedToken = jwt.verify(token, process.env.JWT_ACCESS_KEY);
   } catch (err) {
     req.isAuth = false;
     return next();
   }
-  if (ADMIN_IDS.includes(decodedToken.userID)) {
+  if (process.env.ADMIN_IDS.includes(decodedToken.userID)) {
     req.isAdmin = true;
   }
   req.isAuth = true;

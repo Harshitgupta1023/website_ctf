@@ -2,19 +2,16 @@ const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const { MONGO_URL, JWT_REFRESH_KEY } = require("./config");
 const problem = require("./graphql/typeDefs/problem");
 const user = require("./graphql/typeDefs/user");
 const resolvers = require("./graphql/resolvers/index");
 const isAuth = require("./middleware/is-auth");
 const cors = require("cors");
 const User = require("./models/User");
-const {
-  sendRefreshToken,
-  createAccessToken,
-  createRefreshToken,
-} = require("./utils/auth");
+const { createAccessToken, createRefreshToken } = require("./utils/auth");
 const { verify } = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
@@ -39,7 +36,7 @@ app.post("/refresh_token", async (req, res) => {
 
   let payload;
   try {
-    payload = verify(token, JWT_REFRESH_KEY);
+    payload = verify(token, process.env.JWT_REFRESH_KEY);
   } catch (err) {
     console.log(err);
     return res.send({ ok: false, accessToken: "" });
@@ -55,7 +52,6 @@ app.post("/refresh_token", async (req, res) => {
   if (user.tokenVersion !== payload.tokenVersion) {
     return res.send({ ok: false, accessToken: "" });
   }
-  // sendRefreshToken(res, createRefreshToken(user));
   res.cookie("refreshToken", createRefreshToken(user), {
     httpOnly: true,
     path: "/refresh_token",
@@ -72,7 +68,7 @@ const server = new ApolloServer({
 server.applyMiddleware({ app, cors: false });
 
 mongoose
-  .connect(MONGO_URL, {
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

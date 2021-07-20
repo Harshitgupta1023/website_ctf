@@ -1,7 +1,6 @@
 const User = require("../../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { JWT_ACCESS_KEY, JWT_REFRESH_KEY } = require("../../../config");
 
 module.exports = {
   Query: {

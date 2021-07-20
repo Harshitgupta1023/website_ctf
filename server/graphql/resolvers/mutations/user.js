@@ -1,7 +1,6 @@
 const User = require("../../../models/User");
 const Problem = require("../../../models/Problem");
 const jwt = require("jsonwebtoken");
-const { JWT_ACCESS_KEY, JWT_REFRESH_KEY } = require("../../../config");
 const {
   createAccessToken,
   createRefreshToken,
@@ -14,12 +13,9 @@ const axios = require("axios");
 const upload = require("../../upload/upload");
 const bcrypt = require("bcryptjs");
 const sendMail = require("../../../middleware/sendGrid"); //Now using Send Grid, replaced Gmail API
-const {
-  GMAIL_CLIENT_ID,
-  GITHUB_CLIENT_ID,
-  GITHUB_CLIENT_SECRET,
-} = require("../../../config");
 const { OAuth2Client } = require("google-auth-library");
+const dotenv = require("dotenv");
+dotenv.config();
 
 module.exports = {
   Mutation: {
@@ -343,10 +339,10 @@ module.exports = {
         throw new Error("User Already Logged In");
       }
       const { id_token } = args;
-      const client = new OAuth2Client(GMAIL_CLIENT_ID);
+      const client = new OAuth2Client(process.env.GMAIL_CLIENT_ID);
       const ticket = await client.verifyIdToken({
         idToken: id_token,
-        audience: GMAIL_CLIENT_ID,
+        audience: process.env.GMAIL_CLIENT_ID,
       });
       const payload = ticket.getPayload();
       if (payload) {
@@ -357,7 +353,7 @@ module.exports = {
         ) {
           throw new Error("Malicious Request");
         }
-        if (aud !== GMAIL_CLIENT_ID) {
+        if (aud !== process.env.GMAIL_CLIENT_ID) {
           throw new Error("Malicious Request");
         }
         if (exp > Date.now()) {
@@ -414,8 +410,8 @@ module.exports = {
       }
       const { code } = args;
       const body = {
-        client_id: GITHUB_CLIENT_ID,
-        client_secret: GITHUB_CLIENT_SECRET,
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
         code: code,
       };
       const opts = { headers: { accept: "application/json" } };
