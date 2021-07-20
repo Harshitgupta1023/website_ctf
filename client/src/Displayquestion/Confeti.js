@@ -28,9 +28,6 @@ export default function Confeti({ setShow }) {
 
         {/* 🎉 Congratulations {" "} */}
       </div>
-      <Button style={{ position: "absolute", border: "1px solid red" }}>
-        Close
-      </Button>
     </div>
   );
 }

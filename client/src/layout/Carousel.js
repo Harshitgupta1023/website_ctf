@@ -16,7 +16,7 @@ var items = [
   },
   {
     name: "Upcoming Contests",
-    description: "To be Announced Later ...",
+    description: "Yet to be Announced ...",
   },
 ];
 
