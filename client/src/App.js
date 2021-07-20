@@ -84,7 +84,7 @@ function App(props) {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/refresh_token", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/refresh_token`, {
       method: "POST",
       credentials: "include",
     }).then(async (x) => {
