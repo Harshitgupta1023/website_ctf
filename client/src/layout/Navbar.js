@@ -13,8 +13,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { gql, useMutation } from "@apollo/client";
 import MessagePopup from "../Components/MessagePopup";
 import Loading from "../Components/Loading";
-import dotenv from "dotenv";
-dotenv.config();
 
 const useStyles = makeStyles((theme) => ({
   root: {

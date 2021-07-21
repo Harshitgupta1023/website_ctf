@@ -12,8 +12,6 @@ import { Grid } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import MessagePopup from "../Components/MessagePopup";
-import dotenv from "dotenv";
-dotenv.config();
 
 const UPDATE_USER = gql`
   mutation updateUser(

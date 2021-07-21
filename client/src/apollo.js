@@ -6,8 +6,6 @@ import { ApolloLink } from "apollo-link";
 import { setContext } from "@apollo/client/link/context";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode from "jwt-decode";
-import dotenv from "dotenv";
-dotenv.config();
 
 const authLink = setContext((_, { headers }) => {
   const accessToken = getAccessToken();
