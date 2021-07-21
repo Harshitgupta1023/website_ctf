@@ -59,15 +59,12 @@ module.exports = {
       }
       const user = new User(data);
       user.save();
-      // res.cookie(
-      //   "accessToken",
-      //   jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
-      //   { httpOnly: true }
-      // );
       const accessToken = createAccessToken(user);
       res.cookie("refreshToken", createRefreshToken(user), {
         httpOnly: true,
         path: "/refresh_token",
+        sameSite: "none",
+        secure: true,
       });
       return { user, token: accessToken, tokenExpiration: 15 * 60 };
     },
@@ -176,15 +173,12 @@ module.exports = {
       if (!isAuth) {
         throw new Error("Password Incorrect!");
       }
-      // res.cookie(
-      //   "accessToken",
-      //   jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
-      //   { httpOnly: true }
-      // );
       const accessToken = createAccessToken(user);
       res.cookie("refreshToken", createRefreshToken(user), {
         httpOnly: true,
         path: "/refresh_token",
+        sameSite: "none",
+        secure: true,
       });
       return { user, token: accessToken, tokenExpiration: 15 * 60 };
     },
@@ -328,6 +322,8 @@ module.exports = {
           res.cookie("refreshToken", createRefreshToken(user), {
             httpOnly: true,
             path: "/refresh_token",
+            sameSite: "none",
+            secure: true,
           });
           return { user, token: accessToken, tokenExpiration: 15 * 60 };
         }
@@ -391,15 +387,12 @@ module.exports = {
             user.save();
           }
         }
-        // res.cookie(
-        //   "accessToken",
-        //   jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
-        //   { httpOnly: true }
-        // );
         const accessToken = createAccessToken(user);
         res.cookie("refreshToken", createRefreshToken(user), {
           httpOnly: true,
           path: "/refresh_token",
+          sameSite: "none",
+          secure: true,
         });
         return { user, token: accessToken, tokenExpiration: 15 * 60 };
       }
@@ -448,15 +441,12 @@ module.exports = {
         user = new User(userDetails);
         await user.save();
       }
-      // res.cookie(
-      //   "accessToken",
-      //   jwt.sign({ userID: user._id }, JWT_ACCESS_KEY, { expiresIn: "15m" }),
-      //   { httpOnly: true }
-      // );
       const accessToken = createAccessToken(user);
       res.cookie("refreshToken", createRefreshToken(user), {
         httpOnly: true,
         path: "/refresh_token",
+        sameSite: "none",
+        secure: true,
       });
       return { user, token: accessToken, tokenExpiration: 15 * 60 };
     },
@@ -504,6 +494,8 @@ module.exports = {
       res.cookie("refreshToken", "", {
         httpOnly: true,
         path: "/refresh_token",
+        sameSite: "none",
+        secure: true,
       });
       return "Successfully Logged Out";
     },

@@ -55,6 +55,8 @@ app.post("/refresh_token", async (req, res) => {
   res.cookie("refreshToken", createRefreshToken(user), {
     httpOnly: true,
     path: "/refresh_token",
+    sameSite: "none",
+    secure: true,
   });
   return res.send({ ok: true, accessToken: createAccessToken(user) });
 });
