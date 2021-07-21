@@ -1,0 +1,23 @@
+name: CD
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set remote Server
+        run: |
+          git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_SERVER_NAME }}.git
+      - name: Deploy to Server Heroku
+        run: |
+          git subtree push --prefix server heroku main
+      - name: Set remote Client
+        run: |
+          git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_CLIENT_NAME }}.git
+      - name: Deploy to Client Heroku
+        run: |
+          git subtree push --prefix client heroku main
