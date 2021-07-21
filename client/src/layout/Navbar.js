@@ -108,12 +108,12 @@ export default function Navbar(props) {
       </Link>
       {props.home && (
         <Link to="/" className="header_links links">
-          <Button>Home</Button>
+          <Button style={{ fontSize: 20 }}>Home</Button>
         </Link>
       )}
       {props.getStarted && (
         <Link to="/getstarted" className="header_links  links">
-          <Button>
+          <Button style={{ fontSize: 20 }}>
             <center>Get started</center>
           </Button>
         </Link>
@@ -121,14 +121,14 @@ export default function Navbar(props) {
 
       {props.tools && (
         <Link to="/tools" className="header_links header_tools links">
-          <Button>Tools</Button>
+          <Button style={{ fontSize: 20 }}>Tools</Button>
         </Link>
       )}
       {user &&
         props.createProblems &&
         process.env.REACT_APP_ADMIN_USERNAMES.includes(user.username) && (
           <Link to="/problems" className="header_links   links">
-            <Button>Create Problem</Button>
+            <Button style={{ fontSize: 20 }}>Create Problem</Button>
           </Link>
         )}
       {user ? (
@@ -187,7 +187,7 @@ export default function Navbar(props) {
       ) : (
         !props.noLogin && (
           <Link to="/login" className="header_links  links">
-            <Button>Login</Button>
+            <Button style={{ fontSize: 20 }}>Login</Button>
           </Link>
         )
       )}
