@@ -75,7 +75,7 @@ body {
   height: 90%;
   margin-left: 3%;
   font-family: "ZCOOL KuaiLe", cursive;
-  color: #66bfbf;
+  /* color: #66bfbf; */
   font-size: 3.5rem;
   flex: 2.5;
 }
