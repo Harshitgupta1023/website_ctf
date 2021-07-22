@@ -9,52 +9,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { button } from "../data/constants";
 
-const useStyles = makeStyles({
-  root: {
-    width: 275,
-    height: 250,
-    padding: 10,
-    marginRight: 10,
-  },
-  title: {
-    fontSize: "2.5rem",
-    fontFamily: "'Roboto', cursive",
-    color: "gold",
-    marginBottom: "10%",
-    textAlign: "center",
-  },
-
-  smallTitle: {
-    fontFamily: "'Roboto', cursive",
-    fontSize: "1.8rem",
-    color: "gold",
-    marginBottom: "15%",
-    textAlign: "center",
-  },
-
-  buttonStyle: {
-    width: "100%",
-    display: "block",
-    fontSize: "1rem",
-    backgroundColor: button.buttonBackgroundColor,
-    border: "none",
-    color: "white",
-    padding: "8px 16px",
-    textAlign: "center",
-    margin: "2px 1px",
-    opacity: "1",
-    zIndex: "1",
-    transition: "0.3s",
-    "&:hover": {
-      backgroundColor: button.buttonHoverColor,
-    },
-  },
-
-  cardDiv: {
-    margin: "10% 0% 10% 10%",
-  },
-});
-
 export default function ToolsCard(props) {
   const [isflip, setFlip] = useState(false);
   const handleflip = () => {
@@ -70,7 +24,7 @@ export default function ToolsCard(props) {
             <CardContent>
               <Typography className={classes.title}>{props.title}</Typography>
             </CardContent>
-            <CardActions>
+            <CardActions className={classes.buttonContainer}>
               <Button className={classes.buttonStyle} onClick={handleflip}>
                 Learn More
               </Button>
@@ -86,7 +40,7 @@ export default function ToolsCard(props) {
             <CardContent>
               <Typography className={classes.title}>{props.title}</Typography>
             </CardContent>
-            <CardActions>
+            <CardActions className={classes.buttonContainer}>
               <Button
                 target="_blank"
                 className={classes.buttonStyle}
@@ -101,3 +55,38 @@ export default function ToolsCard(props) {
     </div>
   );
 }
+
+const useStyles = makeStyles({
+  root: {
+    width: "100%",
+    height: 200,
+  },
+  title: {
+    fontSize: "2rem",
+    fontFamily: "'Roboto', cursive",
+    color: "gold",
+    textAlign: "center",
+  },
+  buttonContainer: {
+    position: "absolute",
+    bottom: 25,
+    right: 30,
+    width: "80%",
+  },
+  buttonStyle: {
+    width: "100%",
+    display: "block",
+    fontSize: "1rem",
+    backgroundColor: button.buttonBackgroundColor,
+    color: "white",
+    padding: "8px 16px",
+    textAlign: "center",
+    "&:hover": {
+      backgroundColor: button.buttonHoverColor,
+    },
+  },
+
+  cardDiv: {
+    padding: 20,
+  },
+});

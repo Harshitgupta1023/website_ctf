@@ -1,5 +1,5 @@
 export const technique = {
-  cryptography_technique: [
+  Cryptography: [
     {
       title: "XOR",
       description_link: "https://ctf101.org/cryptography/what-is-xor/",
@@ -29,7 +29,7 @@ export const technique = {
       description_link: "https://ctf101.org/cryptography/what-is-rsa/",
     },
   ],
-  web_technique: [
+  "Web Exploitation": [
     {
       title: "SQL Injection",
       description_link:
@@ -61,7 +61,7 @@ export const technique = {
         "https://ctf101.org/web-exploitation/server-side-request-forgery/what-is-server-side-request-forgery/",
     },
   ],
-  binary_technique: [
+  "Binary Exploitation": [
     {
       title: "Registers",
       description_link:
@@ -93,7 +93,7 @@ export const technique = {
         "https://ctf101.org/binary-exploitation/heap-exploitation/",
     },
   ],
-  forensics_technique: [
+  Forensics: [
     {
       title: "File Formats",
       description_link: "https://ctf101.org/forensics/what-are-file-formats/",
@@ -115,7 +115,7 @@ export const technique = {
       description_link: "https://ctf101.org/forensics/what-is-disk-imaging/",
     },
   ],
-  reverse_technique: [
+  "Reverse Engineering": [
     {
       title: "Machine Code",
       description_link:
