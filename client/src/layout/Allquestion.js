@@ -41,7 +41,7 @@ export default function Allquestion({ category }) {
       </Alert>
     );
   }
-  if (loading) return <Loading loading={loading} />;
+  if (loading || !user) return <Loading loading={loading || !user} />;
 
   const questions = data.getProblemsByCategory;
   // adding pagination
