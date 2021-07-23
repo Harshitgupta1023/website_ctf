@@ -86,16 +86,8 @@ function Handles({ history }) {
   return loading || gitLoading ? (
     <Loading loading={loading || gitLoading} />
   ) : (
-    <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-      <div
-        style={{
-          marginLeft: "20%",
-          marginTop: "4%",
-          width: "50%",
-        }}
-      >
-        <div></div>
-
+    <div className={classes.handleContainer}>
+      <div className={classes.subHandleContainer}>
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           buttonText="Login"
@@ -106,21 +98,8 @@ function Handles({ history }) {
         />
         <a
           href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`}
-          style={{
-            marginTop: "10%",
-            marginLeft: "45%",
-            padding: "2%",
-          }}
         >
-          <GitHubIcon
-            style={{
-              height: "45px",
-              width: "45px",
-              color: "white",
-              paddingTop: "2%",
-              marginLeft: "7%",
-            }}
-          />
+          <GitHubIcon className={classes.githubIconStyle} />
         </a>
       </div>
       <MessagePopup
@@ -174,6 +153,24 @@ const useStyles = makeStyles((theme) => ({
   },
   googleLink: {
     paddingTop: "0",
+  },
+  handleContainer: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: 20,
+    width: "90%",
+  },
+  subHandleContainer: {
+    width: "50%",
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  githubIconStyle: {
+    height: "45px",
+    width: "45px",
+    color: "white",
+    paddingTop: "2%",
   },
 }));
 

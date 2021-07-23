@@ -106,6 +106,7 @@ export default function Answerpart(props) {
               href={`${process.env.REACT_APP_SERVER_URL}/uploads/${props.fileURL}`}
               className="links"
               target="_blank"
+              rel="noreferrer"
             >
               <Button variant="contained" size="large">
                 <GetAppIcon fontSize="small" /> File
