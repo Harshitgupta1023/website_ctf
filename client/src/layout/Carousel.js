@@ -55,7 +55,7 @@ export default function Carousell() {
         IndicatorIcon={<FiberManualRecordTwoToneIcon fontSize="small" />}
       >
         {items.map((item, i) =>
-          i !== 1 ? <Item key={i} item={item} /> : <TeamCard />
+          i !== 1 ? <Item key={i} item={item} /> : <TeamCard key={i} />
         )}
       </Carousel>
     </div>

@@ -92,13 +92,16 @@ export default function QuestionCard(props) {
 
     // props.history.push(`${props.location}`);
   }
+
   if (loading) return <Loading loading={loading} />;
+
   return (
     <Card
       className={props.apply ? "" : classes.root}
       style={{
-        width: props.width ? props.width : "100%",
+        width: props.width ? props.width : "95%",
         height: props.height,
+        overflow: props.scroll ? "auto" : "",
       }}
       variant="outlined"
     >

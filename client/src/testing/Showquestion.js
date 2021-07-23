@@ -41,6 +41,7 @@ export default function Showquestion(props) {
   return (
     <QuestionCard
       apply
+      scroll
       answer
       location={props.location}
       width={600}

@@ -7,8 +7,19 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import EmailIcon from "@material-ui/icons/Email";
 
 const useStyles = makeStyles({
-  root: {
-    width: "18%",
+  mainContainer: {
+    padding: "4% 3% 0%",
+    display: "flex",
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+  text: {
+    fontFamily: "'Playfair Display', serif",
+    fontWeight: "bolder",
+    fontSize: "4rem",
+    color: "gold",
   },
   cardContainer: {
     border: "1px solid white",
@@ -72,36 +83,13 @@ export default function TeamCard() {
 
   return (
     <Paper style={{ width: "100%", height: 500, backgroundColor: "#1A202C" }}>
-      <div
-        style={{
-          marginTop: "5%",
-          textAlign: "center",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontWeight: "bolder",
-            fontSize: "4rem",
-            color: "gold",
-          }}
-        >
-          Our Team
-        </p>
+      <div style={{ marginTop: "5%", textAlign: "center" }}>
+        <p className={classes.text}>Our Team</p>
       </div>
-      <div
-        style={{
-          padding: "4% 3% 0%",
-          display: "flex",
-          width: "100%",
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-        }}
-      >
-        {List.map((dat) => {
+      <div className={classes.mainContainer}>
+        {List.map((dat, idx) => {
           return (
-            <div className={classes.cardContainer}>
+            <div className={classes.cardContainer} key={idx}>
               <div className={classes.nameContainer}>
                 <Typography gutterBottom variant="h5" component="h2">
                   {dat.name}

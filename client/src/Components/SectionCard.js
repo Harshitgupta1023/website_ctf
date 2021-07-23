@@ -13,8 +13,6 @@ const useStyles = makeStyles({
     maxWidth: 370,
     marginBottom: 80,
     opacity: 0.7,
-    // transition: "all .3s ease-in-out",
-    // "&:hover": { transform: "scale3d(1.1, 1.1, 1.1)", opacity: 1 },
   },
   categoriesHeading: {
     fontFamily: "'Cormorant Unicase', serif",

@@ -33,26 +33,24 @@ const useStyles = makeStyles((theme) => ({
   buttonfield: {
     marginLeft: 30,
   },
-  answer: {
-    // position: "absolute",
-    marginTop: 20,
-    display: "flex",
-    justifyContent: "space-between",
-    width: "90%",
-  },
-  body: {
-    flexGrow: 1,
-  },
-  submissionstats: {
-    width: "100%",
-    marginLeft: 12,
-    backgroundColor: "gray",
-  },
   answercontainer: {
-    marginTop: 10,
     display: "flex",
-    // justifyContent:"center",
     width: "100%",
+  },
+  fileContainer: {
+    marginLeft: 12,
+    width: "50%",
+    display: "flex",
+    alignItems: "center",
+  },
+  accuracy: {
+    border: "1px solid white",
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.2)",
+    padding: "5px 10px",
+  },
+  downloadFileCOntainer: {
+    marginLeft: 30,
   },
 }));
 
@@ -96,29 +94,27 @@ export default function Answerpart(props) {
   return (
     <div>
       {show ? <Confeti setShow={setShow} /> : null}
-      <Grid container spacing={3} className={classes.answer}>
-        <Grid item xs={12} className={classes.submissionstats}>
-          <Typography>
+      <div className={classes.fileContainer}>
+        <div className={classes.accuracyContainer}>
+          <Typography className={classes.accuracy}>
             Accuracy : {Math.round((accep * 100) / subm === 0 ? 1 : subm)}%
           </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Divider />
+        </div>
+        <div className={classes.downloadFileCOntainer}>
           {props.fileURL && (
             <a
               href={`${process.env.REACT_APP_SERVER_URL}/uploads/${props.fileURL}`}
               className="links"
             >
-              <Button
-                variant="contained"
-                size="small"
-                style={{ marginTop: 10 }}
-              >
+              <Button variant="contained" size="large">
                 <GetAppIcon fontSize="small" /> File
               </Button>
             </a>
           )}
-        </Grid>
+        </div>
+      </div>
+      <Divider style={{ marginTop: 20, marginBottom: 20 }} />
+      <Grid container spacing={3} className={classes.answer}>
         <CardActions style={{ width: 600 }}>
           <form
             className={classes.answercontainer}
@@ -140,6 +136,7 @@ export default function Answerpart(props) {
               className={classes.buttonfield}
               type="submit"
               variant="contained"
+              size="large"
             >
               Submit
             </Button>

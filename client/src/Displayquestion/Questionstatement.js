@@ -5,7 +5,8 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexDirection: "row",
-    height: 300,
+    height: 200,
+    overflow: "auto",
   },
 }));
 
@@ -14,9 +15,7 @@ export default function Questionstatement(props) {
 
   return (
     <div className={classes.container}>
-      <div className="center-col">
-        <p>{props.statement} </p>
-      </div>
+      <p>{props.statement} </p>
     </div>
   );
 }
