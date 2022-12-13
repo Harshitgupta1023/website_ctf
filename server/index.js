@@ -19,7 +19,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "*",
+    origin: "https://backend-bhna.onrender.com",
     credentials: false,
   })
 );
