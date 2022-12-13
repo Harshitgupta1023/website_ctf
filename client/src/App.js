@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useContext, useEffect, useState } from "react";
-import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from "./pages/Home";
 import Getstarted from "./pages/Getstarted";
 import Tools from "./pages/Tools";
@@ -25,144 +25,124 @@ import { gql, useLazyQuery } from "@apollo/client";
 import jwtDecode from "jwt-decode";
 import { AuthContext } from "./context/auth";
 const FETCH_USER = gql`
-    query getUserById($id: ID!) {
-        getUserById(id: $id) {
-            id
-            username
-            email
-            imageURL
-            points
-            verified
-            solvedProblems
-        }
+  query getUserById($id: ID!) {
+    getUserById(id: $id) {
+      id
+      username
+      email
+      imageURL
+      points
+      verified
+      solvedProblems
     }
+  }
 `;
 
 const theme = createMuiTheme({
-    palette: {
-        type: "dark",
-        primary: {
-            dark: colors.primaryDark,
-            light: colors.purple,
-            main: colors.textPrimary,
-        },
-        background: {
-            default: home.backgroundSecondary,
-            paper: home.backgroundPrimary,
-            // paper: "white"
-        },
+  palette: {
+    type: "dark",
+    primary: {
+      dark: colors.primaryDark,
+      light: colors.purple,
+      main: colors.textPrimary,
     },
     background: {
-        default: home.backgroundSecondary,
-        paper: home.backgroundPrimary,
+      default: home.backgroundSecondary,
+      paper: home.backgroundPrimary,
+      // paper: "white"
     },
+  },
+  background: {
+    default: home.backgroundSecondary,
+    paper: home.backgroundPrimary,
+  },
 });
 
 const sectionData = [
-    "general-skills",
-    "cryptography",
-    "web-exploitation",
-    "reverse-engineering",
-    "binary-exploitation",
-    "forensics",
+  "general-skills",
+  "cryptography",
+  "web-exploitation",
+  "reverse-engineering",
+  "binary-exploitation",
+  "forensics",
 ];
 
 function App(props) {
-    const [loading, setLoading] = useState(true);
-    const { updateUser } = useContext(AuthContext);
-    const [fetchUser] = useLazyQuery(FETCH_USER, {
-        onCompleted: ({ getUserById: user }) => {
-            updateUser(user);
-            setLoading(false);
-        },
-        onError() {
-            console.log("Fetch User failed");
-            setAccessToken("");
-            setLoading(false);
-        },
-    });
+  const [loading, setLoading] = useState(true);
+  const { updateUser } = useContext(AuthContext);
+  const [fetchUser] = useLazyQuery(FETCH_USER, {
+    onCompleted: ({ getUserById: user }) => {
+      updateUser(user);
+      setLoading(false);
+    },
+    onError() {
+      console.log("Fetch User failed");
+      setAccessToken("");
+      setLoading(false);
+    },
+  });
 
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/refresh_token`, {
-            method: "POST",
-            credentials: "include",
-        }).then(async (x) => {
-            const { accessToken } = await x.json();
-            setAccessToken(accessToken);
-            if (accessToken) {
-                const { userID } = jwtDecode(accessToken);
-                fetchUser({
-                    variables: { id: userID },
-                });
-            } else {
-                setLoading(false);
-            }
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/refresh_token`, {
+      method: "POST",
+      credentials: "include",
+    }).then(async (x) => {
+      const { accessToken } = await x.json();
+      setAccessToken(accessToken);
+      if (accessToken) {
+        const { userID } = jwtDecode(accessToken);
+        fetchUser({
+          variables: { id: userID },
         });
-    }, [fetchUser]);
+      } else {
+        setLoading(false);
+      }
+    });
+  }, [fetchUser]);
 
-    if (loading) <Loading loading={loading} />;
-    return (
-        <MuiThemeProvider theme={theme}>
-            <div className="App">
-                <BackgroundVideo />
-                <Router>
-                    <Routes>
-                        <Route exact path="/" component={Home} />
-                        <Route
-                            exact
-                            path="/getstarted"
-                            component={Getstarted}
-                        />
-                        <Route exact path="/tools" component={Tools} />
-                        <ProtectedRoute
-                            exact
-                            path="/problems"
-                            component={CreateProblem}
-                        />
-                        <ProtectedRoute
-                            exact
-                            path="/:category/updateproblems/:id"
-                            component={UpdateProblem}
-                        />
-                        <ProtectedRoute
-                            exact
-                            path="/user/profile"
-                            component={Profile}
-                        />
-                        <Route
-                            exact
-                            path="/user/verify"
-                            component={VerifyUser}
-                        />
-                        <AuthRoute exact path="/login" component={Login} />
-                        {/* Important for Callback */}
-                        <AuthRoute exact path="/callback" component={Login} />
-                        <AuthRoute exact path="/signup" component={Signup} />
-                        <AuthRoute
-                            exact
-                            path="/forgotPass"
-                            component={ForgotPass}
-                        />
-                        {sectionData.map((data, index) => {
-                            return (
-                                <ProtectedRoute
-                                    exact
-                                    key={index}
-                                    path={`/${data}`}
-                                    component={ProblemsPage}
-                                />
-                            );
-                        })}
-                        <ProtectedRoute
-                            exact
-                            path="/:category/:id"
-                            component={Showquestion}
-                        />
-                    </Routes>
-                </Router>
-            </div>
-        </MuiThemeProvider>
-    );
+  if (loading) <Loading loading={loading} />;
+  return (
+    <MuiThemeProvider theme={theme}>
+      <div className="App">
+        <BackgroundVideo />
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/getstarted" component={Getstarted} />
+            <Route exact path="/tools" component={Tools} />
+            <ProtectedRoute exact path="/problems" component={CreateProblem} />
+            <ProtectedRoute
+              exact
+              path="/:category/updateproblems/:id"
+              component={UpdateProblem}
+            />
+            <ProtectedRoute exact path="/user/profile" component={Profile} />
+            <Route exact path="/user/verify" component={VerifyUser} />
+            <AuthRoute exact path="/login" component={Login} />
+            {/* Important for Callback */}
+            <AuthRoute exact path="/callback" component={Login} />
+            <AuthRoute exact path="/signup" component={Signup} />
+            <AuthRoute exact path="/forgotPass" component={ForgotPass} />
+            {sectionData.map((data, index) => {
+              return (
+                <ProtectedRoute
+                  exact
+                  key={index}
+                  path={`/${data}`}
+                  component={ProblemsPage}
+                />
+              );
+            })}
+            <ProtectedRoute
+              exact
+              path="/:category/:id"
+              component={Showquestion}
+            />
+          </Switch>
+        </Router>
+      </div>
+    </MuiThemeProvider>
+  );
 }
 
 export default App;
