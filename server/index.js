@@ -19,7 +19,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: "https://backend-bhna.onrender.com",
+		origin: "https://backend-bhna.onrender.com/graphql",
 		credentials: true,
 	})
 );
