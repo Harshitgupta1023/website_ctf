@@ -19,8 +19,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://backend-bhna.onrender.com",
-    credentials: false,
+    origin: "https://seekhoctf.onrender.com",
+    credentials: true,
   })
 );
 
