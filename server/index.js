@@ -19,7 +19,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: "https://seekhoctf.herokuapp.com",
+		origin: "https://seekhoctf.onrender.com/",
 		credentials: true,
 	})
 );
